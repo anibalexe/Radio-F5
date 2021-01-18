@@ -1,0 +1,9 @@
+{
+  "name": "servidor",
+  "version": "1.0.0",
+  "description": "Backend de Radio F5",
+  "main": "index.js",
+  "repository": "https://github.com/carlos-ebm/radiof5",
+  "author": "Brito-Ordenes-Ramos",
+  "license": "MIT"
+}
