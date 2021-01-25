@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Form, Input } from "antd";
-import { Button } from 'antd';
+import { Button } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import {signInApi} from "../../../api/admin";
+import { signInApi } from "../../../api/admin";
 
-import "./LoginForm.scss";
+//import "./LoginForm.scss";
 
 export default function LoginForm() {
   const [inputs, setInputs] = useState({
@@ -22,13 +22,13 @@ export default function LoginForm() {
 
   const login = (/*e*/) => {
     //e.preventDefault();
+    //console.log(inputs);
     signInApi(inputs);
   };
 
   return (
-    
     <Form className="login-form" onChange={changeForm} onFinish={login}>
-      <Form.Item>
+      <Form.Item> 
         <Input
           prefix={<UserOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
           type="email"

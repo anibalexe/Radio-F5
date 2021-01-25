@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt-nodejs");
 const Admin = require("../models/admin");
+const jwt = require("../services/jwt");
 
 function signIn(req, res) {
   const params = req.body;
@@ -26,7 +27,10 @@ function signIn(req, res) {
             } else {
               res
                 .status(200)
-                .send({ message: "Aqui deberian estar los tokens." });
+                .send({
+                  accessToken: jwt.createAccessToken(adminStored),
+                  refreshToken: jwt.createRefreshToken(adminStored)
+                });
             }
           }
         });

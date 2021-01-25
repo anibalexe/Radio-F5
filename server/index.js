@@ -9,7 +9,7 @@ mongoose.set("useFindAndModify", false);
 
 //Establece la conexion con la base de datos.
 mongoose.connect(
-  `mongodb://${IP_SERVER}:${PORT_DB}/database`,
+  `mongodb://${IP_SERVER}:${PORT_DB}/radiof5`,
   { useNewUrlParser: true, useUnifiedTopology: true },
   (err, res) => {
     if (err) {

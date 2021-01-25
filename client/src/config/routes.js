@@ -14,16 +14,15 @@ const routes = [
         exact: false,                                       
         routes: [
             {
-                path: "/admin/",
-                component: AdminSignIn,
-                exact: true
-            },
-            {
-                path: "/admin/profile/",
+                path: "/admin/profile",
                 component: AdminProfile,
                 exact: true  
             }
-        ]
+        ],
+
+        path: "/admin/login",
+        component: AdminSignIn,
+        exact: true
     }
 ];
 

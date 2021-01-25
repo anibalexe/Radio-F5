@@ -1,23 +1,23 @@
 import { basePath, apiVersion } from "./config";
 
 export function signInApi(data) {
-  const url = `${basePath}/${apiVersion}/admin/signIn`;
+  const url = `${basePath}/${apiVersion}/signIn`;
   const params = {
     method: "POST",
     body: JSON.stringify(data),
     headers: {
-      "Content-Type": "application/json",
-    },
+      "Content-Type": "application/json"
+    }
   };
 
   fetch(url, params)
-    .then((response) => {
+    .then(response => {
       return response.json();
     })
-    .then((result) => {
+    .then(result => {
       return result;
     })
-    .catch((err) => {
+    .catch(err => {
       return err.message;
     });
 }
