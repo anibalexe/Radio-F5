@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Form, Input } from "antd";
+import { Form, Input, notification } from "antd";
 import { Button } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { signInApi } from "../../../api/admin";
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../../utils/constants";
 
 //import "./LoginForm.scss";
 
@@ -20,15 +21,33 @@ export default function LoginForm() {
     });
   };
 
-  const login = (/*e*/) => {
+  const login = async (e) => {
     //e.preventDefault();
     //console.log(inputs);
-    signInApi(inputs);
+    const result = await signInApi(inputs);
+
+    if (result.message) {
+      notification["error"]({
+        message: result.message,
+      });
+    } else {
+      const { accessToken, refreshToken } = result;
+      localStorage.setItem(ACCESS_TOKEN, accessToken);
+      localStorage.setItem(REFRESH_TOKEN, refreshToken);
+
+      notification["success"]({
+        message: "Login correcto.",
+      });
+
+      window.location.href = "/admin/profile";
+    }
+
+    console.log(result);
   };
 
   return (
     <Form className="login-form" onChange={changeForm} onFinish={login}>
-      <Form.Item> 
+      <Form.Item>
         <Input
           prefix={<UserOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
           type="email"

@@ -10,11 +10,13 @@ export function signInApi(data) {
     }
   };
 
-  fetch(url, params)
+  return fetch(url, params)
     .then(response => {
       return response.json();
     })
     .then(result => {
+      console.log(result);
+
       return result;
     })
     .catch(err => {
