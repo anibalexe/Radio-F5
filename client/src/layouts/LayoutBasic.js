@@ -2,41 +2,22 @@ import React from "react";
 import { Layout } from "antd";
 //Se importa 'LayoutAdmin.scss' que contiene las diversas
 //configuraciones de diseño del Layout de Admin.
-import "./LayoutAdmin.scss";
-//Se importa el modulo 'react-router-dom' que permite trabajar con las
+import "./LayoutBasic.scss";
+//Se importa el modulo 'react-router-dom' que permite trabajar con las 
 //rutas en React.
-import { Route, Redirect } from "react-router-dom";
-import AdminSignIn from "../pages/Admin/SignIn";
+import { Route } from "react-router-dom";
 
-export default function LayoutAdmin(props) {
+export default function LayoutBasic(props) {
   //Aplica destruturing a props para obtener las rutas.
   const { routes } = props;
   //Aplica destructuring a Layout para obtener Header, content y Footer.
-  const { Header, Content, Footer } = Layout;
-
-  //esto cambiara cuando ocupemos tokens
-  const user = "juan";
-
-  if (!user) {
-    return (
-      <>
-        <Route path="/admin/login" component={AdminSignIn} />
-        <Redirect to="/admin/login" />
-      </>
-    );
-  }
-
+  const { Content } = Layout;
   return (
     //Establece la estructura del Layout.
     <Layout>
-      <h2>Menu Sider Admin</h2>
-      <Layout>
-        <Header>Navbar</Header>
         <Content>
           <LoadRouters routes={routes} />
         </Content>
-        <Footer>Informacion de la pagina</Footer>
-      </Layout>
     </Layout>
   );
 }

@@ -46,7 +46,7 @@ function signIn(req, res) {
 }
 
 function userAdd(req, res) {
-  const admin = new Admin();
+  const user = new Admin();
 
   const { name, lastname, email, password, repeatPassword } = req.body;
   user.name = name;

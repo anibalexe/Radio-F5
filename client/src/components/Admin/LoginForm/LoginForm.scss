@@ -2,7 +2,14 @@
 
 .login-form {
 
+
+  text-align:left;
+  margin:0; 
+
+
   &__input {
+      font-size: 0em + 22px  $defaultFontSize
+
   }
 
   &__button {

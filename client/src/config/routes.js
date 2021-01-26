@@ -3,6 +3,7 @@ import AdminSignIn from "../pages/Admin";
 import AdminUserAdd from "../pages/Admin/UserAdd";
 
 import LayoutAdmin from "../layouts/LayoutAdmin";
+//import LayoutBasic from "../layouts/LayoutBasic";
 
 /*
     Se utiliza un arreglo para definir cada una de las rutas. 
@@ -31,6 +32,7 @@ const routes = [
       },
     ],
   },
+
 ];
 
 //Se exportan las rutas
