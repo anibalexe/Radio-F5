@@ -1,8 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import routes from "./config/routes";
-
-import "./App.css";
+import AuthProvider from "./providers/AuthProvider";
 
 /* 
   Se utiliza la función 'RouterWithSubRoutes()' para mostrar
@@ -10,13 +9,16 @@ import "./App.css";
 */
 function App() {
   return (
-    <Router>
-      <Switch>
-        {routes.map((route, index) => (
-          <RouterWithSubRoutes key={index} {...route} />
-        ))}
-      </Switch>
-    </Router>
+     //esto debe descomentarse para hacer uso de los tokens
+    <AuthProvider>
+      <Router>
+        <Switch>
+          {routes.map((route, index) => (
+            <RouterWithSubRoutes key={index} {...route} />
+          ))}
+        </Switch>
+      </Router>
+    </AuthProvider>
   );
 }
 

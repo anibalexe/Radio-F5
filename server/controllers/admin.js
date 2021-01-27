@@ -14,21 +14,13 @@ function signIn(req, res) {
       if (!adminStored) {
         res.status(404).send({ message: "Usuario no encontrado." });
       } else {
-        //Descomentar lo siguiente cuando tengamos listo el registro de usuarios.
-        // ||
-        // ||
-        //\  /
-        // \/
-        // bcrypt.compare(password, adminStored.password, (err, check) => {
-        /*if (err) {
+         bcrypt.compare(password, adminStored.password, (err, check) => {
+        if (err) {
             res.status(500).send({ message: "Error del servidor." });
-          } else*/ if (
-          password != adminStored.password /*!check*/
-        ) {
-          // lo mismo de arriba
+          } else if (!check){
           res.status(404).send({ message: "La contraseña es incorrecta." });
         } else {
-          if (!adminStored.active) {
+          if (adminStored.active==2) {
             res
               .status(200)
               .send({ code: 200, message: "El usuario no se ha activado." });
@@ -39,7 +31,7 @@ function signIn(req, res) {
             });
           }
         }
-        // });
+         });
       }
     }
   });
@@ -48,12 +40,12 @@ function signIn(req, res) {
 function userAdd(req, res) {
   const user = new Admin();
 
-  const { name, lastname, email, password, repeatPassword } = req.body;
+  const { name, lastname, email, password, repeatPassword, privilege, status } = req.body;
   user.name = name;
   user.lastname = lastname;
   user.email = email;
-  user.role = "admin";
-  user.activate = false;
+  user.privilege = privilege;
+  user.status = status;
 
   if (!password || !repeatPassword) {
     res.status(404).send({ message: "Las contraseñas son obligatorias." });

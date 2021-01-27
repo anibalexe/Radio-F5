@@ -7,7 +7,8 @@ const app = express();
 const { API_VERSION } = require("./config");
 
 //Cargar rutas...
-const AdminRoutes = require("./routers/admin");
+const authRoutes = require("./routers/auth");
+const adminRoutes = require("./routers/admin");
 
 //Configurar bodyParser 
 app.use(bodyParser.urlencoded({ extended: false}));
@@ -16,7 +17,8 @@ app.use(bodyParser.json());
 //Configurar Header HTTP
 
 //Router basic
-app.use(`/api/${API_VERSION}`, AdminRoutes);
+app.use(`/api/${API_VERSION}`, authRoutes);
+app.use(`/api/${API_VERSION}`, adminRoutes);
 
 /*Exporta la app*/
 module.exports = app;

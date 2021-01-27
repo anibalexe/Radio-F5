@@ -7,6 +7,7 @@ import "./LayoutAdmin.scss";
 //rutas en React.
 import { Route, Redirect } from "react-router-dom";
 import AdminSignIn from "../pages/Admin/SignIn";
+import useAuth from "../hooks/useAuth";
 
 export default function LayoutAdmin(props) {
   //Aplica destruturing a props para obtener las rutas.
@@ -14,10 +15,13 @@ export default function LayoutAdmin(props) {
   //Aplica destructuring a Layout para obtener Header, content y Footer.
   const { Header, Content, Footer } = Layout;
 
-  //esto cambiara cuando ocupemos tokens
-  const user = "juan";
+  //esto debe descomentarse para hacer uso de los tokens
+  const {user, isLoading} = useAuth();
 
-  if (!user) {
+  //esto es provisorio hasta el uso de tokens
+  //const user = "juan";
+
+  if (!user && !isLoading) {
     return (
       <>
         <Route path="/admin/login" component={AdminSignIn} />
@@ -26,19 +30,22 @@ export default function LayoutAdmin(props) {
     );
   }
 
-  return (
-    //Establece la estructura del Layout.
-    <Layout>
-      <h2>Menu Sider Admin</h2>
+  if (user && !isLoading) {
+    return (
+      //Establece la estructura del Layout.
       <Layout>
-        <Header>Navbar</Header>
-        <Content>
-          <LoadRouters routes={routes} />
-        </Content>
-        <Footer>Informacion de la pagina</Footer>
+        <h2>Menu Sider Admin</h2>
+        <Layout>
+          <Header>Navbar</Header>
+          <Content>
+            <LoadRouters routes={routes} />
+          </Content>
+          <Footer>Informacion de la pagina</Footer>
+        </Layout>
       </Layout>
-    </Layout>
-  );
+    );
+  }
+  return null;
 }
 
 //Observación: Aplica destructuring directamente a un objeto que pasa por parametro.

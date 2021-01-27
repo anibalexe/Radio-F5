@@ -5,7 +5,7 @@ import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { signInApi } from "../../../api/admin";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../../utils/constants";
 
-//import "./LoginForm.scss";
+import "./LoginForm.scss";
 
 export default function LoginForm() {
   const [inputs, setInputs] = useState({
@@ -14,7 +14,6 @@ export default function LoginForm() {
   });
 
   const changeForm = (e) => {
-    console.log(inputs);
     setInputs({
       ...inputs,
       [e.target.name]: e.target.value,
@@ -42,7 +41,6 @@ export default function LoginForm() {
       window.location.href = "/admin/profile";
     }
 
-    console.log(result);
   };
 
   return (
@@ -52,7 +50,7 @@ export default function LoginForm() {
           prefix={<UserOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
           type="email"
           name="email"
-          placeholder="Correo Electrónico"
+          placeholder="Ingresa tu Correo Electrónico"
           className="login-form__input"
         />
       </Form.Item>
@@ -61,7 +59,7 @@ export default function LoginForm() {
           prefix={<LockOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
           type="password"
           name="password"
-          placeholder="Contraseña"
+          placeholder="Ingresa tu Contraseña"
           className="login-form__input"
         />
       </Form.Item>

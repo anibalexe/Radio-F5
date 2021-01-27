@@ -11,8 +11,8 @@ const AdminSchema = Schema({
   },
   password: String,
   //date: String,
-  role: String,
-  active: Boolean,
+  privilege: String,
+  status: String,
 });
 
 module.exports = mongoose.model("Admin", AdminSchema);

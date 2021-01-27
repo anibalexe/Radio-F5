@@ -1,17 +1,54 @@
 @import "../../../scss/index.scss";
 
 .login-form {
+  text-align: center;
 
+  .ant-form-item {
+    &:nth-child(2),
+    &:last-of-type {
+      margin: 0;
 
-  text-align:left;
-  margin:0; 
+    }
 
+  }
 
   &__input {
-      font-size: 0em + 22px  $defaultFontSize
+    margin: 0;
+    border-color: $primary-color;
+    box-shadow: none;
+
+    input{
+      font-size: 0em + 17px /$defaultFontSize;
+      padding: 38px 30px 8px 500px !important;
+      &:focus{
+        border-color: $primary-color;
+        box-shadow: none;
+        
+      }
+
+    }
 
   }
 
   &__button {
+    width: 25%;
+    font-size: 0em + 22px / $defaultFontSize;
+    background-color: $primary-color;
+    color: $font-white;
+    height: 47px;
+
+        &:hover {
+          background-color: $primary-color-hover;
+          color: $font-light;
+          border: 0;
+        }
+        
+        &focus,
+        &:active {
+          background-color: $primary-color;
+          color: $font-light;
+          border: 0;
+        }
+
   }
 }
