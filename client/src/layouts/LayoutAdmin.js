@@ -9,6 +9,7 @@ import { Route, Redirect } from "react-router-dom";
 import AdminSignIn from "../pages/Admin/SignIn";
 import MenuTop from "../components/Admin/MenuTop";
 import useAuth from "../hooks/useAuth";
+import BarTop from "../components/Global/BarTop";
 
 
 
@@ -37,10 +38,13 @@ export default function LayoutAdmin(props) {
     return (
       //Establece la estructura del Layout.
       <Layout>
-        
         <Layout className="layout-admin">
-          <Header className="layout-admin__header">
-            <MenuTop/>
+          <div className="layout-admin__header">
+          <MenuTop/>
+          </div>
+          <Header className="layout-admin__bar-top">
+            
+            <BarTop/>
           </Header>   
           <Content className="layout-admin__content">
             <LoadRoutes routes={routes} />

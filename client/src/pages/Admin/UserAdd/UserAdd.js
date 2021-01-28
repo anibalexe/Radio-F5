@@ -14,7 +14,7 @@ export default function UserAdd() {
       <Content className="user-add__content">
         <div className="user-add__content-tabs">
           <Tabs type="card">
-            <TabPane tab={<span>Ingresar</span>}>
+            <TabPane>
               <RegisterForm />
             </TabPane>
           </Tabs>

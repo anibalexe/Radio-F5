@@ -2,8 +2,19 @@
 
 .menu-top {
   display: flex;
+  height: 100%;
+  width: 100%;
+  font-size: 100%;
+  
 
-  button {
+
+  &__item{ 
+  top: 0;
+  bottom: 0;
+  padding: 0;
+  }
+
+  /*button {
     color: $font-light;
 
     &:hover {
@@ -16,15 +27,19 @@
   }
 
   &__left {
-    &-logo {
-      width: 50px; 
-      height: 50px;
-      padding: 0 10px;
+    &-list{
+      padding-left: 10px;
+      margin: 0;
+      &-link{
+        padding-right: 10px;
+      display: inline;
+      }
     }
+
   }
 
   &__right {
     position: absolute;
     right: 0;
-  }
+  }*/
 }
