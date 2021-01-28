@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import routes from "./config/routes";
 import AuthProvider from "./providers/AuthProvider";
 
+import "./App.scss";
+
 /* 
   Se utiliza la función 'RouterWithSubRoutes()' para mostrar
   todas las rutas que importadas.
@@ -10,7 +12,7 @@ import AuthProvider from "./providers/AuthProvider";
 function App() {
   return (
      //esto debe descomentarse para hacer uso de los tokens
-    <AuthProvider>
+    //<AuthProvider>
       <Router>
         <Switch>
           {routes.map((route, index) => (
@@ -18,7 +20,7 @@ function App() {
           ))}
         </Switch>
       </Router>
-    </AuthProvider>
+    //</AuthProvider>
   );
 }
 

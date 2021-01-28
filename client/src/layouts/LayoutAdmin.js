@@ -7,7 +7,10 @@ import "./LayoutAdmin.scss";
 //rutas en React.
 import { Route, Redirect } from "react-router-dom";
 import AdminSignIn from "../pages/Admin/SignIn";
+import MenuTop from "../components/Admin/MenuTop";
 import useAuth from "../hooks/useAuth";
+
+
 
 export default function LayoutAdmin(props) {
   //Aplica destruturing a props para obtener las rutas.
@@ -16,12 +19,12 @@ export default function LayoutAdmin(props) {
   const { Header, Content, Footer } = Layout;
 
   //esto debe descomentarse para hacer uso de los tokens
-  const {user, isLoading} = useAuth();
+  //const {user, isLoading} = useAuth();
 
   //esto es provisorio hasta el uso de tokens
-  //const user = "juan";
+  const user = "juan";
 
-  if (!user && !isLoading) {
+  if (!user /*&& !isLoading*/) {
     return (
       <>
         <Route path="/admin/login" component={AdminSignIn} />
@@ -30,17 +33,19 @@ export default function LayoutAdmin(props) {
     );
   }
 
-  if (user && !isLoading) {
+  if (user /*&& !isLoading*/) {
     return (
       //Establece la estructura del Layout.
       <Layout>
-        <h2>Menu Sider Admin</h2>
-        <Layout>
-          <Header>Navbar</Header>
-          <Content>
-            <LoadRouters routes={routes} />
+        
+        <Layout className="layout-admin">
+          <Header className="layout-admin__header">
+            <MenuTop/>
+          </Header>   
+          <Content className="layout-admin__content">
+            <LoadRoutes routes={routes} />
           </Content>
-          <Footer>Informacion de la pagina</Footer>
+          <Footer className="layout-admin__footer">Informacion de la pagina</Footer>
         </Layout>
       </Layout>
     );
@@ -53,7 +58,7 @@ export default function LayoutAdmin(props) {
     La función LoadRouters() genera una ciclo y retorna todas las rutas encontradas 
     en una colección de tipo mapa.
 */
-function LoadRouters({ routes }) {
+function LoadRoutes({ routes }) {
   return routes.map((route, index) => (
     <Route
       key={index}
