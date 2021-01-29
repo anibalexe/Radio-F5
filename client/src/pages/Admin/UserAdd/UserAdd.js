@@ -1,5 +1,5 @@
 import React from "react";
-import { Layout, Tabs } from "antd";
+import { Layout, Tabs, Card } from "antd";
 import { Redirect } from "react-router-dom";
 import RegisterForm from "../../../components/Admin/RegisterForm";
 
@@ -12,13 +12,11 @@ export default function UserAdd() {
   return (
     <Layout className="user-add">
       <Content className="user-add__content">
-        <div className="user-add__content-tabs">
-          <Tabs type="card">
-            <TabPane>
+        
+            <Card className="user-add__card">
               <RegisterForm />
-            </TabPane>
-          </Tabs>
-        </div>
+            </Card>
+        
       </Content>
     </Layout>
   );

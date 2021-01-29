@@ -1,11 +1,10 @@
 @import "../scss/index.scss";
 .layout-admin {
-
   transition: margin-left 0.2s;
 
   &__bar-top {
-    background-color: grey;
-    position: fixed;
+    background-color: rgb(25, 12, 71);
+    //position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -16,7 +15,7 @@
 
   &__header {
     background-color: rgb(94, 93, 93);
-    position: fixed;
+    //position: fixed;
     top: 65px;
     left: 0;
     width: 100%;
@@ -26,11 +25,13 @@
   }
 
   &__content {
-    min-height: calc(100vh - 65px);
-    padding: 110px 25px 25px 25px;
+    min-height: calc(100vh - 110px);
+    padding: 10px 25px 25px 25px;
   }
 
   &__footer {
-    padding: 20px;
+    text-align: center;
+    color: white;
+    background-color: rgb(25, 12, 71);
   }
 }

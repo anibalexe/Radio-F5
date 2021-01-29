@@ -20,12 +20,12 @@ export default function LayoutAdmin(props) {
   const { Header, Content, Footer } = Layout;
 
   //esto debe descomentarse para hacer uso de los tokens
-  //const {user, isLoading} = useAuth();
+  const {user, isLoading} = useAuth();
 
   //esto es provisorio hasta el uso de tokens
-  const user = "juan";
+  //const user = "juan";
 
-  if (!user /*&& !isLoading*/) {
+  if (!user && !isLoading) {
     return (
       <>
         <Route path="/admin/login" component={AdminSignIn} />
@@ -34,23 +34,25 @@ export default function LayoutAdmin(props) {
     );
   }
 
-  if (user /*&& !isLoading*/) {
+  if (user && !isLoading) {
     return (
       //Establece la estructura del Layout.
       <Layout>
         <Layout className="layout-admin">
+        <Header className="layout-admin__bar-top">
+            <BarTop/>
+          </Header> 
           <div className="layout-admin__header">
           <MenuTop/>
-          </div>
-          <Header className="layout-admin__bar-top">
-            
-            <BarTop/>
-          </Header>   
+          </div>  
           <Content className="layout-admin__content">
             <LoadRoutes routes={routes} />
           </Content>
-          <Footer className="layout-admin__footer">Informacion de la pagina</Footer>
-        </Layout>
+          </Layout>
+          <Layout className="layout-admin">
+            <Footer className="layout-admin__footer">Radio F5 - Copyright 2021  |  By EDEX & Rodrigo Ordenes </Footer>
+          </Layout>
+        
       </Layout>
     );
   }

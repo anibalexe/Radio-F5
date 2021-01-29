@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Input, notification } from "antd";
+import { Form, Input, notification, Divider } from "antd";
 import { Button } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { signInApi } from "../../../api/admin";
@@ -46,7 +46,7 @@ export default function LoginForm() {
   return (
     <Form className="login-form" onChange={changeForm} onFinish={login}>
       <Form.Item>
-
+        <Divider orientation="center"> <h3> Correo electrónico </h3> </Divider>
         <Input
           prefix={<UserOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
           type="email"
@@ -56,6 +56,7 @@ export default function LoginForm() {
         />
       </Form.Item>
       <Form.Item>
+      <Divider orientation="center"> <h3> Contraseña</h3> </Divider>
         <Input
           prefix={<LockOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
           type="password"

@@ -11,18 +11,33 @@
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
+    padding-bottom: 40px;
+    align-items: center;
 
+    
     &-logo {
-      padding: 60px 20px;
-      img {
-        width: 100%;
+      position: relative;
+      bottom: -70px;
+      z-index: 2;
+
+      img{
+        height: 150px;
       }
     }
 
-    &-tabs {
-      background-color: $background-light;
+    &-card {
+    text-align: center;
+    width: 70vh;
+    border: hidden;
+    background-color: rgba(187, 181, 181, 0.397);
+    padding: 20px 10px 10px 10px;
 
-      .ant-tabs {
+    @media (max-width: $media-breackpoint-up-md){
+      width: 80%;
+    }
+
+
+      /*.ant-tabs {
         width: 90vw;
         @media (min-width: $media-breackpoint-up-lg) {
           width: auto;
@@ -74,7 +89,9 @@
       .ant-tabs-content {
         padding: 0 16px 16px 16px;
         text-align: center;
-      }
+      }*/
+
+    
     }
   }
 }

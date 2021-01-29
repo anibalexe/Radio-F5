@@ -1,6 +1,10 @@
-import AdminProfile from "../pages/Admin/Profile";
+import AdminProfile from "../pages/Admin/Profile/";
 import AdminSignIn from "../pages/Admin";
 import AdminUserAdd from "../pages/Admin/UserAdd";
+import AdminUsers from "../pages/Admin/Users";
+import AdminPublications from "../pages/Admin/Publications";
+import AdminPrograms from "../pages/Admin/Programs";
+import AdminPublicitys from "../pages/Admin/Publicitys";
 
 import LayoutAdmin from "../layouts/LayoutAdmin";
 //import LayoutBasic from "../layouts/LayoutBasic";
@@ -21,7 +25,27 @@ const routes = [
         exact: true,
       },
       {
-        path: "/admin/user-add",
+        path: "/admin/publications",
+        component: AdminPublications,
+        exact: true,
+      },
+      {
+        path: "/admin/programs",
+        component: AdminPrograms,
+        exact: true,
+      },
+      {
+        path: "/admin/users",
+        component: AdminUsers,
+        exact: true,
+      },
+      {
+        path: "/admin/publicitys",
+        component: AdminPublicitys,
+        exact: true,
+      },
+      {
+        path: "/admin/users/user-add",
         component: AdminUserAdd,
         exact: true,
       },

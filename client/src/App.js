@@ -12,7 +12,7 @@ import "./App.scss";
 function App() {
   return (
      //esto debe descomentarse para hacer uso de los tokens
-    //<AuthProvider>
+    <AuthProvider>
       <Router>
         <Switch>
           {routes.map((route, index) => (
@@ -20,7 +20,7 @@ function App() {
           ))}
         </Switch>
       </Router>
-    //</AuthProvider>
+    </AuthProvider>
   );
 }
 
