@@ -55,23 +55,19 @@ export function getUsersApi(token){
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Athorization: token
+      Authorization: token
     }
   };
 
 
   return fetch(url, params)
     .then(response => {
-      console.log("primer then");
       return response.json();
     })
     .then(result => {
-      console.log("segundo then");
       return result;
     })
     .catch(err => {
-      console.log(url);
-      console.log("tercer then");
       return err.message;
     });
 }
