@@ -14,24 +14,24 @@ function signIn(req, res) {
       if (!adminStored) {
         res.status(404).send({ message: "Usuario no encontrado." });
       } else {
-         bcrypt.compare(password, adminStored.password, (err, check) => {
-        if (err) {
+        bcrypt.compare(password, adminStored.password, (err, check) => {
+          if (err) {
             res.status(500).send({ message: "Error del servidor." });
-          } else if (!check){
-          res.status(404).send({ message: "La contraseña es incorrecta." });
-        } else {
-          if (adminStored.active==2) {
-            res
-              .status(200)
-              .send({ code: 200, message: "El usuario no se ha activado." });
+          } else if (!check) {
+            res.status(404).send({ message: "La contraseña es incorrecta." });
           } else {
-            res.status(200).send({
-              accessToken: jwt.createAccessToken(adminStored),
-              refreshToken: jwt.createRefreshToken(adminStored),
-            });
+            if (adminStored.active == 2) {
+              res
+                .status(200)
+                .send({ code: 200, message: "El usuario no se ha activado." });
+            } else {
+              res.status(200).send({
+                accessToken: jwt.createAccessToken(adminStored),
+                refreshToken: jwt.createRefreshToken(adminStored),
+              });
+            }
           }
-        }
-         });
+        });
       }
     }
   });
@@ -40,7 +40,15 @@ function signIn(req, res) {
 function userAdd(req, res) {
   const user = new Admin();
 
-  const { name, lastname, email, password, repeatPassword, privilege, status } = req.body;
+  const {
+    name,
+    lastname,
+    email,
+    password,
+    repeatPassword,
+    privilege,
+    status,
+  } = req.body;
   user.name = name;
   user.lastname = lastname;
   user.email = email;
@@ -77,7 +85,18 @@ function userAdd(req, res) {
   }
 }
 
+function getUsers(req, res) {
+  Admin.find().then((users) => {
+    if (!users) {
+      res.status(400).send({ message: "No se encontro ningun usuario." });
+    } else {
+      res.status(200).send({ users });
+    }
+  });
+}
+
 module.exports = {
   signIn,
   userAdd,
+  getUsers,
 };

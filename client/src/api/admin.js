@@ -15,7 +15,7 @@ export function signInApi(data) {
       return response.json();
     })
     .then(result => {
-      console.log(result);
+      //console.log(result);
 
       return result;
     })
@@ -39,7 +39,7 @@ export function userAddApi(data){
       return response.json();
     })
     .then(result => {
-      console.log(result);
+      //console.log(result);
 
       return result;
     })
@@ -47,3 +47,31 @@ export function userAddApi(data){
       return err.message;
     });
 } 
+
+export function getUsersApi(token){
+  const url = `${basePath}/${apiVersion}/getUsers`;
+  
+  const params = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Athorization: token
+    }
+  };
+
+
+  return fetch(url, params)
+    .then(response => {
+      console.log("primer then");
+      return response.json();
+    })
+    .then(result => {
+      console.log("segundo then");
+      return result;
+    })
+    .catch(err => {
+      console.log(url);
+      console.log("tercer then");
+      return err.message;
+    });
+}

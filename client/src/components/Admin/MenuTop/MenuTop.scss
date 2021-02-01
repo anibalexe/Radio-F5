@@ -22,32 +22,12 @@
   //background-color: black;
   }
 
-  button {
-    color: $primary-color;
+  &__button-logout{
+    //display: block;
+    margin: auto;
+    margin-right: 0;
 
-    &:hover {
-      color: $primary-color;
-    }
-    &:focus,
-    &:active {
-      color: $font-light;
-    }
+    
   }
 
-  &__left {
-    &-list{
-      padding-left: 10px;
-      margin: 0;
-      &-link{
-        padding-right: 10px;
-      display: inline;
-      }
-    }
-
-  }
-
-  &__right {
-    position: absolute;
-    right: 0;
-  }
 }

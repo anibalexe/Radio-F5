@@ -184,7 +184,7 @@ export default function RegisterForm() {
                 </Form.Item>
               </Card>
 
-              <Card type="inner" size="small" title="Esto de la cuenta" className="register-form__card">
+              <Card type="inner" size="small" title="Estado de la cuenta" className="register-form__card">
               <Form.Item>
                 <RadioGroup name="status">
                   <Radio value={1}>Activo</Radio>
