@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button} from "antd";
 import { getAccessTokenApi } from "../../../api/auth";
 import { getUsersApi } from "../../../api/admin";
-import List from "../../../components/Admin/List";
+import ListUsers from "../../../components/Admin/ListUsers";
 
 import "./Users.scss";
 
@@ -12,19 +12,13 @@ export default function Users() {
 
   useEffect( () => {
     getUsersApi(token).then(response => {
-      setUsers(response);
+      setUsers(response.users);
     });
   }, [token]);
   
   return (
     <>
-      <Button className="button" type="primary" onClick={toUserAdd}>Agregar Usuario </Button>
-      <List users={users}/>
+      <ListUsers users={users}/>
     </>
   );
-}
-
-
-function toUserAdd(){
-    window.location.href="/admin/users/user-add";
 }

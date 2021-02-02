@@ -16,10 +16,7 @@ import { logout } from "../../../api/auth";
 function MenuTop(props) {
   const {location} = props;
 
-  function logoutAdmin(){
-    logout();
-    window.location.reload();
-  }
+
 
   return (
     <>
@@ -28,22 +25,24 @@ function MenuTop(props) {
       //theme="light"
       mode="horizontal" defaultSelectedKeys={[location.pathname]}
     >
-      <Menu.Item  className="menu-top__item" key="/admin/profile">
-        Perfil <Link to="/admin/profile" />
+      <Menu.Item  className="menu-top__item" key="/visitor/home">
+        Inicio <Link to="/visitor/home" />
       </Menu.Item>
-      <Menu.Item className="menu-top__item" key="/admin/publications">
-        Publicaciones <Link to="/admin/publications" />
+      <Menu.Item  className="menu-top__item" key="/visitor/national">
+        Nacional<Link to="/visitor/national" />
       </Menu.Item>
-      <Menu.Item className="menu-top__item" key="/admin/programs">
-        Programas <Link to="/admin/programs" />
+      <Menu.Item className="menu-top__item" key="/visitor/international">
+        Internacional<Link to="/visitor/international" />
       </Menu.Item>
-      <Menu.Item className="menu-top__item" key="/admin/users">
-        Usuarios <Link to="/admin/users" />
+      <Menu.Item className="menu-top__item" key="/visitor/sports">
+        Deportes <Link to="/visitor/sports" />
       </Menu.Item>
-      <Menu.Item className="menu-top__item" key="/admin/publicities">
-        Publicidad <Link to="/admin/publicities" />
+      <Menu.Item className="menu-top__item" key="/visitor/science">
+        Ciencia <Link to="/visitor/science" />
       </Menu.Item>
-         <Button type="link" className="menu-top__button-logout" onClick={logoutAdmin}><LogoutOutlined />Salir</Button>
+      <Menu.Item className="menu-top__item" key="/visitor/programs">
+        Programas <Link to="/visitor/programs" />
+      </Menu.Item>
     </Menu>
     </>
   );

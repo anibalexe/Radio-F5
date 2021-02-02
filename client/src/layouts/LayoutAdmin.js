@@ -11,8 +11,6 @@ import MenuTop from "../components/Admin/MenuTop";
 import useAuth from "../hooks/useAuth";
 import BarTop from "../components/Global/BarTop";
 
-
-
 export default function LayoutAdmin(props) {
   //Aplica destruturing a props para obtener las rutas.
   const { routes } = props;
@@ -20,7 +18,7 @@ export default function LayoutAdmin(props) {
   const { Header, Content, Footer } = Layout;
 
   //esto debe descomentarse para hacer uso de los tokens
-  const {user, isLoading} = useAuth();
+  const { user, isLoading } = useAuth();
 
   //esto es provisorio hasta el uso de tokens
   //const user = "juan";
@@ -39,20 +37,21 @@ export default function LayoutAdmin(props) {
       //Establece la estructura del Layout.
       <Layout>
         <Layout className="layout-admin">
-        <Header className="layout-admin__bar-top">
-            <BarTop/>
-          </Header> 
+          <Header className="layout-admin__bar-top">
+            <BarTop />
+          </Header>
           <div className="layout-admin__header">
-          <MenuTop/>
-          </div>  
+            <MenuTop />
+          </div>
           <Content className="layout-admin__content">
             <LoadRoutes routes={routes} />
           </Content>
-          </Layout>
-          <Layout className="layout-admin">
-            <Footer className="layout-admin__footer">Radio F5 - Copyright 2021  |  By EDEX & Rodrigo Ordenes </Footer>
-          </Layout>
-        
+        </Layout>
+        <Layout className="layout-admin">
+          <Footer className="layout-admin__footer">
+            Radio F5 - Copyright 2021 | By EDEX & Rodrigo Ordenes{" "}
+          </Footer>
+        </Layout>
       </Layout>
     );
   }

@@ -86,8 +86,6 @@ export default function RegisterForm() {
       }
     }
 
-    console.log(formValid);
-    console.log(inputs);
   };
 
   return (

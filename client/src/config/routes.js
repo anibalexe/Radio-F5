@@ -5,9 +5,12 @@ import AdminUsers from "../pages/Admin/Users";
 import AdminPublications from "../pages/Admin/Publications";
 import AdminPrograms from "../pages/Admin/Programs";
 import AdminPublicitys from "../pages/Admin/Publicitys";
+import AdminUserEdit from "../pages/Admin/UserEdit";
+
+import VisitorHome from "../pages/Visitor/Home";
 
 import LayoutAdmin from "../layouts/LayoutAdmin";
-//import LayoutBasic from "../layouts/LayoutBasic";
+import LayoutBasic from "../layouts/LayoutBasic";
 
 /*
     Se utiliza un arreglo para definir cada una de las rutas. 
@@ -50,13 +53,29 @@ const routes = [
         exact: true,
       },
       {
+        path: "/admin/users/user-edit",
+        component: AdminUserEdit,
+        exact: true,
+      },
+      {
         path: "/admin/login",
         component: AdminSignIn,
         exact: true,
       },
     ],
   },
-
+  {
+    path: "/",
+    component: LayoutBasic,
+    exact: false,
+    routes: [
+      {
+        path: "/home",
+        component: VisitorHome,
+        exact: true,
+      },
+    ],
+  },
 ];
 
 //Se exportan las rutas

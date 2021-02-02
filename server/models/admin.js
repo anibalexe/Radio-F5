@@ -13,6 +13,7 @@ const AdminSchema = Schema({
   //date: String,
   privilege: String,
   status: String,
+  
 });
 
 module.exports = mongoose.model("Admin", AdminSchema);

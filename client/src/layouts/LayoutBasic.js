@@ -1,5 +1,8 @@
 import React from "react";
 import { Layout } from "antd";
+import MenuTop from "../components/Visitor/MenuTop";
+import BarTop from "../components/Global/BarTop";
+
 //Se importa 'LayoutAdmin.scss' que contiene las diversas
 //configuraciones de diseño del Layout de Admin.
 import "./LayoutBasic.scss";
@@ -11,23 +14,36 @@ export default function LayoutBasic(props) {
   //Aplica destruturing a props para obtener las rutas.
   const { routes } = props;
   //Aplica destructuring a Layout para obtener Header, content y Footer.
-  const { Content } = Layout;
+  const { Header, Content, Footer } = Layout;
   return (
     //Establece la estructura del Layout.
     <Layout>
-        <Content>
-          <LoadRouters routes={routes} />
+      <Layout className="layout-basic">
+        <Header className="layout-basic__bar-top">
+          <BarTop />
+        </Header>
+        <div className="layout-basic__header">
+          <MenuTop/>
+        </div>
+        <Content className="layout-basic__content">
+          <LoadRoutes routes={routes} />
         </Content>
+      </Layout>
+      <Layout className="layout-basic">
+        <Footer className="layout-basic__footer">
+          Radio F5 - Copyright 2021 | By EDEX & Rodrigo Ordenes{" "}
+        </Footer>
+      </Layout>
     </Layout>
   );
-}
+  }
 
 //Observación: Aplica destructuring directamente a un objeto que pasa por parametro.
 /*
     La función LoadRouters() genera una ciclo y retorna todas las rutas encontradas 
     en una colección de tipo mapa.
 */
-function LoadRouters({ routes }) {
+function LoadRoutes({ routes }) {
   return routes.map((route, index) => (
     <Route
       key={index}
