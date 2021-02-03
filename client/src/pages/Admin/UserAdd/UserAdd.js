@@ -10,14 +10,8 @@ export default function UserAdd() {
   const { TabPane } = Tabs;
 
   return (
-    <Layout className="user-add">
-      <Content className="user-add__content">
-        
-            <Card className="user-add__card">
-              <RegisterForm />
-            </Card>
-        
-      </Content>
-    </Layout>
+    <Card className="user-add__card">
+      <RegisterForm />
+    </Card>
   );
 }

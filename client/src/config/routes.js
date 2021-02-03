@@ -4,7 +4,7 @@ import AdminUserAdd from "../pages/Admin/UserAdd";
 import AdminUsers from "../pages/Admin/Users";
 import AdminPublications from "../pages/Admin/Publications";
 import AdminPrograms from "../pages/Admin/Programs";
-import AdminPublicitys from "../pages/Admin/Publicitys";
+import AdminPublicities from "../pages/Admin/Publicities";
 import AdminUserEdit from "../pages/Admin/UserEdit";
 
 import VisitorHome from "../pages/Visitor/Home";
@@ -43,8 +43,8 @@ const routes = [
         exact: true,
       },
       {
-        path: "/admin/publicitys",
-        component: AdminPublicitys,
+        path: "/admin/publicities",
+        component: AdminPublicities,
         exact: true,
       },
       {

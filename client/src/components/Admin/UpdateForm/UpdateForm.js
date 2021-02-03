@@ -1,5 +1,11 @@
 import React, { useState } from "react";
 import {
+  ADMIN_NAME,
+  ADMIN_LASTNAME,
+  ADMIN_EMAIL,
+  ADMIN_PRIVILEGE,
+} from "../../../utils/constants";
+import {
   Form,
   Input,
   Button,
@@ -14,18 +20,17 @@ import {
   Card,
 } from "antd";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
-import { userAddApi } from "../../../api/admin";
-
-import "./RegisterForm.scss";
 import FormItem from "antd/lib/form/FormItem";
 import {
   emailValidation,
   minLengthValidation,
 } from "../../../utils/formValidation";
 
+import "./UpdateForm.scss";
+
 const RadioGroup = Radio.Group;
 
-export default function RegisterForm() {
+export default function UpdateForm() {
   const [inputs, setInputs] = useState({
     email: "",
     name: "",
@@ -33,8 +38,6 @@ export default function RegisterForm() {
     password: "",
     repeatPassword: "",
     privilege: "",
-    status: "",
-    privacyPolicy: false,
   });
 
   const [formValid, setFormValid] = useState({
@@ -44,23 +47,7 @@ export default function RegisterForm() {
     password: false,
     repeatPassword: false,
     privilege: false,
-    status: false,
-    privacyPolicy: false,
   });
-
-  const changeForm = (e) => {
-    if (e.target.name === "privacyPolicy") {
-      setInputs({
-        ...inputs,
-        [e.target.name]: e.target.checked,
-      });
-    } else {
-      setInputs({
-        ...inputs,
-        [e.target.name]: e.target.value,
-      });
-    }
-  };
 
   const inputValidation = (e) => {
     const { type, name } = e.target;
@@ -78,52 +65,45 @@ export default function RegisterForm() {
     }
   };
 
-  const register = (e) => {
-    const { email, password, repeatPassword, privacyPolicy } = formValid;
-    const emailVal = inputs.email;
-    const passwordVal = inputs.password;
-    const repeatPasswordVal = inputs.repeatPassword;
-    const privacyPolicyVal = inputs.privacyPolicy;
-
-    if (!emailVal || !passwordVal || !repeatPasswordVal || !privacyPolicyVal) {
-      notification["error"]({
-        message: "Todos los campos son obligatorios.",
-      });
-    } else {
-      if (passwordVal !== repeatPasswordVal) {
-        notification["error"]({
-          message: "Las contraseñas deben ser iguales.",
-        });
-      } else {
-        const result = userAddApi(inputs);
-      }
-    }
-  };
-
   return (
     <>
-      <Form className="register-form" onChange={changeForm} onFinish={register}>
+      <Form
+        className="update-form" /*onChange={changeForm} onFinish={register}*/
+      >
         <Divider orientation="center">
-          <h2>Formulario de nuevo usuario</h2>
+          <h2>Perfil de usuario</h2>
         </Divider>
-        <Row className="register-form__row" type="flex">
-          <Col flex={2}>
+        <Row className="update-form__row" type="flex">
+          <Col className="update-form__row-col" flex={2}>
             <Card
               type="inner"
               size="small"
               title="Foto de perfil"
-              className="register-form__card"
+              className="update-form__row-col-card"
             >
               <Image
+                className="update-form__row-col-card-image"
                 width={200}
                 src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
               />
               <Divider></Divider>
-              <Upload>
-                <Button className="register-form__card-button">
+              <Upload className="update-form__row-col-card-button">
+                <Button>
                   Seleccionar
                 </Button>
               </Upload>
+              <Divider>Información de perfil</Divider>
+              <ul className="update-form__row-col-card-list">
+                <li>Nombre: {localStorage.getItem(ADMIN_NAME)}</li>
+                <li>Apellido: {localStorage.getItem(ADMIN_LASTNAME)}</li>
+                <li>Correo electronico: {localStorage.getItem(ADMIN_EMAIL)}</li>
+                <li>
+                  Privilegio:{" "}
+                  {localStorage.getItem(ADMIN_PRIVILEGE) == 1
+                    ? "Admin"
+                    : "Gestor de contenido"}
+                </li>
+              </ul>
             </Card>
           </Col>
 
@@ -132,7 +112,7 @@ export default function RegisterForm() {
               type="inner"
               size="small"
               title="Datos personales"
-              className="register-form__card"
+              className="update-form__row-col-card"
             >
               <Form.Item>
                 <Input
@@ -140,7 +120,7 @@ export default function RegisterForm() {
                   type="email"
                   name="email"
                   placeholder="Correo electrónico"
-                  className="register-form__input"
+                  className="update-form__input"
                   onChange={inputValidation}
                   value={inputs.email}
                 />
@@ -152,8 +132,7 @@ export default function RegisterForm() {
                   type="text"
                   name="name"
                   placeholder="Nombre"
-                  className="register-form__input"
-                  onChange={inputValidation}
+                  className="update-form__input"
                   value={inputs.name}
                 />
               </Form.Item>
@@ -164,7 +143,7 @@ export default function RegisterForm() {
                   type="text"
                   name="lastname"
                   placeholder="Apellido"
-                  className="register-form__input"
+                  className="update-form__input"
                   value={inputs.lastname}
                 />
               </Form.Item>
@@ -175,7 +154,7 @@ export default function RegisterForm() {
                   type="password"
                   name="password"
                   placeholder="Contraseña"
-                  className="register-form__input"
+                  className="update-form__input"
                   onChange={inputValidation}
                   value={inputs.password}
                 />
@@ -187,56 +166,18 @@ export default function RegisterForm() {
                   type="password"
                   name="repeatPassword"
                   placeholder="Repetir contraseña"
-                  className="register-form__input"
+                  className="update-form__input"
                   onChange={inputValidation}
                   value={inputs.repeatPassword}
                 />
               </Form.Item>
-            </Card>
-
-            <Card
-              type="inner"
-              size="small"
-              title="Permisos de la cuenta"
-              className="register-form__card"
-            >
+              
               <Form.Item>
-                <RadioGroup name="privilege">
-                  <Radio value={1}>Administrador</Radio>
-                  <Radio value={2}>Gestor de contenido</Radio>
-                </RadioGroup>
+                <Button htmlType="submit" className="update-form__button">
+                  Actualizar datos
+                </Button>
               </Form.Item>
             </Card>
-
-            <Card
-              type="inner"
-              size="small"
-              title="Estado de la cuenta"
-              className="register-form__card"
-            >
-              <Form.Item>
-                <RadioGroup name="status">
-                  <Radio value={1}>Activo</Radio>
-                  <Radio value={2}>Inactivo</Radio>
-                </RadioGroup>
-              </Form.Item>
-            </Card>
-
-            <FormItem>
-              <Checkbox
-                name="privacyPolicy"
-                checked={inputs.privacyPolicy}
-                onChange={inputValidation}
-              >
-                He leído y acepto la política de privacidad.
-              </Checkbox>
-            </FormItem>
-
-            <Form.Item>
-              <Button htmlType="submit" className="register-form__button">
-                Agregar usuario
-              </Button>
-            </Form.Item>
           </Col>
         </Row>
       </Form>

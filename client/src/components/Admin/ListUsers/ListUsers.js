@@ -1,69 +1,121 @@
-import React from "react";
-import { Menu, Button, Table, Space } from "antd";
+import React, {useState} from "react";
+import { Menu, Button, List, Space, Card, Divider } from "antd";
+import Modal from "../../Modal"
+import EditUserForm from "../EditUserForm";
 
 import "./ListUsers.scss";
-import { ConsoleSqlOutlined, UserSwitchOutlined, DeleteOutlined, EditOutlined  } from "@ant-design/icons";
-import UserEdit from "../../../pages/Admin/UserEdit";
+import {
+  ConsoleSqlOutlined,
+  UserSwitchOutlined,
+  DeleteOutlined,
+  EditOutlined,
+  UserAddOutlined,
+} from "@ant-design/icons";
+//import UserEdit from "../../../pages/Admin/UserEdit";
 
-export default function List(props) {
+export default function ListUsers(props) {
+  const { users } = props;
+  const [ isVisibleModal, setIsVisibleModal ] = useState(false);
+  const [ modalTitle, setModalTitle] = useState(""); 
+  const [ modalContent, setModalContent ] = useState(null);
+
+  //console.log(users);
+
+  return (
+    <Card className="list-users__card">
+      <div className="list-users__card-header">
+        <Button className="button" type="primary" onClick={toUserAdd}>
+        <UserAddOutlined />Agregar Usuario{" "}
+        </Button>
+      </div>
+
+      <Users
+        setIsVisibleModal={setIsVisibleModal}
+        setModalTitle={setModalTitle}
+        setModalContent={setModalContent}
+        users={users}
+
+      />
+
+      <Modal
+        className="list-users__card-modal"
+        title={modalTitle}
+        isVisible={isVisibleModal}
+        setIsVisible={setIsVisibleModal}
+      >
+        {modalContent}
+      </Modal>
+    </Card>
+  );
+
+}
+
+function Users(props){
+
   const { users } = props;
 
-  console.log(users);
+  const {
+    setIsVisibleModal,
+    setModalTitle,
+    setModalContent,
+  } = props;
 
-  const columns = [
-    {
-      title: "Nombre",
-      dataIndex: "name",
-      key: "name",
-    },
-    {
-      title: "Apellido",
-      dataIndex: "lastname",
-      key: "lastname",
-    },
-    {
-      title: "Correo electrónico",
-      dataIndex: "email",
-      key: "email",
-    },
-    {
-      title: "Privilegio",
-      dataIndex: "privilege",
-      key: "privilege",
-    },
-    {
-      title: "Estado",
-      dataIndex: "status",
-      key: "status",
-    },
-    {
-      title: "Acción",
-      dataIndex: "action",
-      key: "action",
-      render: (text, record) => (
-        <Space size="middle">
-          <Button type="primary" >
-            <EditOutlined />
-          </Button>
-          <Button type="primary" danger>
-            <DeleteOutlined />
-          </Button>
-        </Space>
-      ),
-    },
-  ];
+  const editUser = user => {
+    setIsVisibleModal(true);
+    setModalTitle(
+      `Editar ${user.name ? user.name : "..."} ${
+        user.lastname ? user.lastname : "..."
+      }`
+    );
+    setModalContent(
+      <EditUserForm
+        user={user}
+        setIsVisibleModal={setIsVisibleModal}
+      />
+    );
+  };
+
+  return (
+    <List
+      className="users"
+      itemLayout="horizontal"
+      dataSource={users}
+      renderItem={user => (
+        <User
+          user={user}
+          editUser={editUser}
+          //setReloadUsers={setReloadUsers}
+        />
+      )}
+    />
+  );
+}
+
+function User(props) {
+  const { user, editUser } = props;
+
+  //console.log(user);
 
   return (
     <>
-      <Button className="button" type="primary" onClick={toUserAdd}>
-        Agregar Usuario{" "}
-      </Button>
-      <Table
-        className="table"
-        dataSource={users}
-        columns={columns}
-        
+    <List.Item
+      actions={[
+        <Button type="primary"  onClick={() => editUser(user)} ><EditOutlined/>Editar
+        </Button>,
+        <Button type="danger"><DeleteOutlined/>Eliminar
+        </Button>,
+      ]}
+    >
+      <List.Item.Meta
+        title={`
+                ${user.name ? user.name : "..."} 
+                ${user.lastname ? user.lastname : "..."}
+                ${user.privilege==1 ? " / Admin" : " / Gestor de Contenido"}
+                ${user.status==1 ? " / Activo" : " / Inactivo"}
+            `}
+        description={user.email}
       />
+    </List.Item>
     </>
   );
 }
@@ -71,4 +123,3 @@ export default function List(props) {
 function toUserAdd() {
   window.location.href = "/admin/users/user-add";
 }
-

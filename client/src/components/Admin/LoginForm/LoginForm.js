@@ -3,7 +3,7 @@ import { Form, Input, notification, Divider } from "antd";
 import { Button } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { signInApi } from "../../../api/admin";
-import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../../utils/constants";
+import { ACCESS_TOKEN, REFRESH_TOKEN, ADMIN_NAME, ADMIN_LASTNAME, ADMIN_EMAIL, ADMIN_PRIVILEGE } from "../../../utils/constants";
 
 import "./LoginForm.scss";
 
@@ -30,9 +30,13 @@ export default function LoginForm() {
         message: result.message,
       });
     } else {
-      const { accessToken, refreshToken } = result;
+      const { accessToken, refreshToken, name, lastname, email, privilege } = result;
       localStorage.setItem(ACCESS_TOKEN, accessToken);
       localStorage.setItem(REFRESH_TOKEN, refreshToken);
+      localStorage.setItem(ADMIN_NAME, name);
+      localStorage.setItem(ADMIN_LASTNAME, lastname);
+      localStorage.setItem(ADMIN_EMAIL, email);
+      localStorage.setItem(ADMIN_PRIVILEGE, privilege);
 
       notification["success"]({
         message: "Login correcto.",

@@ -1,5 +1,5 @@
 import { basePath, apiVersion } from "./config";
-import { ACCESS_TOKEN, REFRESH_TOKEN } from "../utils/constants";
+import { ACCESS_TOKEN,ADMIN_NAME, ADMIN_EMAIL, ADMIN_LASTNAME, ADMIN_PRIVILEGE, REFRESH_TOKEN } from "../utils/constants";
 import jwtDecode from "jwt-decode";
 
 export function getAccessTokenApi() {
@@ -56,6 +56,10 @@ export function refreshAccessTokenApi(refreshToken) {
 export function logout() {
   localStorage.removeItem(ACCESS_TOKEN);
   localStorage.removeItem(REFRESH_TOKEN);
+  localStorage.removeItem(ADMIN_NAME);
+  localStorage.removeItem(ADMIN_LASTNAME);
+  localStorage.removeItem(ADMIN_EMAIL);
+  localStorage.removeItem(ADMIN_PRIVILEGE);
 }
 
 function willExpireToken(token) {

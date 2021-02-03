@@ -1,6 +1,6 @@
 @import "../../../scss/index.scss";
 
-.register-form {
+.update-form {
   text-align: left;
 
   .ant-form-item {
@@ -12,10 +12,21 @@
 
   &__row {
     text-align: center;
-  }
+    &-col-card {
+      margin: 10px;
 
-  &__card {
-    margin: 10px;
+      &-image{
+        text-align: center;
+      }
+
+      &-button{
+        text-align: center;
+      }
+
+      &-list {
+        text-align: left;
+      }
+    }
   }
 
   &__input {
@@ -35,15 +46,11 @@
   }
 
   &__button {
-    margin-top: 20px;
+    margin: 5px 0 10px 0;
     border-radius: 5px;
-    width: 50%;
-    font-size: 0em + 22px / $defaultFontSize;
     background-color: $primary-color-dark;
     color: $font-light;
-    height: 50px;
     border: hidden;
-
 
     &:hover {
       background-color: $primary-color-hover;
@@ -55,5 +62,8 @@
       color: $font-light;
       border: 0;
     }
+  }
+  .table {
+    width: 100%;
   }
 }

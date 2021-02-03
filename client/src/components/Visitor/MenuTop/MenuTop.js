@@ -26,22 +26,22 @@ function MenuTop(props) {
       mode="horizontal" defaultSelectedKeys={[location.pathname]}
     >
       <Menu.Item  className="menu-top__item" key="/visitor/home">
-        Inicio <Link to="/visitor/home" />
+        Inicio <Link to="/home" />
       </Menu.Item>
       <Menu.Item  className="menu-top__item" key="/visitor/national">
-        Nacional<Link to="/visitor/national" />
+        Nacional<Link to="/national" />
       </Menu.Item>
       <Menu.Item className="menu-top__item" key="/visitor/international">
-        Internacional<Link to="/visitor/international" />
+        Internacional<Link to="/international" />
       </Menu.Item>
       <Menu.Item className="menu-top__item" key="/visitor/sports">
-        Deportes <Link to="/visitor/sports" />
+        Deportes <Link to="/sports" />
       </Menu.Item>
       <Menu.Item className="menu-top__item" key="/visitor/science">
-        Ciencia <Link to="/visitor/science" />
+        Ciencia <Link to="/science" />
       </Menu.Item>
       <Menu.Item className="menu-top__item" key="/visitor/programs">
-        Programas <Link to="/visitor/programs" />
+        Programas <Link to="/programs" />
       </Menu.Item>
     </Menu>
     </>

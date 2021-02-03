@@ -1,11 +1,9 @@
 import React from "react";
 import { Menu, Button, Table } from "antd";
 
-import "./Publicitys.scss";
+import "./Publicities.scss";
 
-const { SubMenu } = Menu;
-
-export default function Publicitys() {
+export default function Publicities() {
   const dataSource = [
     {
       key: "1",
@@ -53,5 +51,5 @@ export default function Publicitys() {
 
 
 function toPublicityAdd(){
-    window.location.href="/admin/publicity/publicity-add";
+    window.location.href="/admin/publicities/publicity-add";
 }

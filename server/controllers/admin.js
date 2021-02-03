@@ -28,6 +28,10 @@ function signIn(req, res) {
               res.status(200).send({
                 accessToken: jwt.createAccessToken(adminStored),
                 refreshToken: jwt.createRefreshToken(adminStored),
+                email: adminStored.email,
+                name: adminStored.name,
+                lastname: adminStored.lastname,
+                privilege: adminStored.privilege,
               });
             }
           }
@@ -95,8 +99,28 @@ function getUsers(req, res) {
   });
 }
 
+function updateAdmin(req, res){
+  const userData = req.body;
+  const params = req.params;
+
+  Admin.findByIdAndUpdate({_id: params.id}, userData, (err, adminUpdate) => {
+    if(err){
+      res.status(500).send({ message: "Error del servidor." })
+    }else{
+      if(!adminUpdate){
+        res
+          .status(404)
+          .send({ message: "No se ha encontrado ningún usuario."});
+      }else{
+        res.status(200).send({ message: "Usuario actualizado correctamente." });
+      }
+    }
+  }); 
+}
+
 module.exports = {
   signIn,
   userAdd,
   getUsers,
+  updateAdmin,
 };
