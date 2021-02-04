@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { userInfo } from "os";
 import { getAccessTokenApi } from "../../../api/auth";
 import { getUsersApi } from "../../../api/admin";
-import UpdateForm from "../../../components/Admin/UpdateForm";
+import EditProfileForm from "../../../components/Admin/EditProfileForm";
 import { Layout, Tabs, Card } from "antd";
 
 export default function Profile() {
@@ -16,8 +16,8 @@ export default function Profile() {
   }, [token]);
 
   return (
-    <Card className="user-update__card">
-      <UpdateForm />
+    <Card className="user-editprofile__card">
+      <EditProfileForm />
     </Card>
   );
 }

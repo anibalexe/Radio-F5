@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const AdminSchema = Schema({
   name: String,
   lastname: String,
-  //photo: String,
+  avatar: String,
   email: {
     type: String,
     unique: true

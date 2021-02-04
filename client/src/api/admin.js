@@ -72,8 +72,55 @@ export function getUsersApi(token){
     });
 }
 
+export function getUserApi(token, adminId){
+  const url = `${basePath}/${apiVersion}/getUser/${adminId}`;
+  
+  const params = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token
+    }
+  };
+
+  return fetch(url, params)
+    .then(response => {
+      return response.json();
+    })
+    .then(result => {
+      return result;
+    })
+    .catch(err => {
+      return err.message;
+    });
+}
+
 export function updateAdminApi(token, admin, adminId){
   const url = `${basePath}/${apiVersion}/updateAdmin/${adminId}`;
+  
+  const params = {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token
+    },
+    body: JSON.stringify(admin)
+  };
+
+  return fetch(url, params)
+    .then(response => {
+      return response.json();
+    })
+    .then(result => {
+      return result;
+    })
+    .catch(err => {
+      return err.message;
+    });
+}
+
+export function updateAdminPasswordApi(token, admin, adminId){
+  const url = `${basePath}/${apiVersion}/updateAdminPassword/${adminId}`;
   
   const params = {
     method: "PUT",

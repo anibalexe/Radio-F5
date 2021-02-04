@@ -14,7 +14,7 @@ import {
 //import UserEdit from "../../../pages/Admin/UserEdit";
 
 export default function ListUsers(props) {
-  const { users } = props;
+  const { users, setReloadUsers } = props;
   const [ isVisibleModal, setIsVisibleModal ] = useState(false);
   const [ modalTitle, setModalTitle] = useState(""); 
   const [ modalContent, setModalContent ] = useState(null);
@@ -34,6 +34,7 @@ export default function ListUsers(props) {
         setModalTitle={setModalTitle}
         setModalContent={setModalContent}
         users={users}
+        setReloadUsers={setReloadUsers}
 
       />
 
@@ -58,19 +59,20 @@ function Users(props){
     setIsVisibleModal,
     setModalTitle,
     setModalContent,
+    setReloadUsers,
   } = props;
 
   const editUser = user => {
     setIsVisibleModal(true);
     setModalTitle(
-      `Editar ${user.name ? user.name : "..."} ${
-        user.lastname ? user.lastname : "..."
-      }`
+      <h1>Editar {user.name ? user.name : "..."} {
+        user.lastname ? user.lastname : "..."}</h1>
     );
     setModalContent(
       <EditUserForm
         user={user}
         setIsVisibleModal={setIsVisibleModal}
+        setReloadUsers={setReloadUsers}
       />
     );
   };

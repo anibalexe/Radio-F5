@@ -81,7 +81,7 @@ export default function EditUserForm(props) {
         message: result.message,
       });
       setIsVisibleModal(false);
-      //setReloadUsers(true);
+      setReloadUsers(true);
     });
   };
 
@@ -101,9 +101,6 @@ function EditForm(props) {
 
   return (
     <Form className="register-form" onFinish={updateUser}>
-      <Divider orientation="center">
-        <h2>Formulario de nuevo usuario</h2>
-      </Divider>
       <Row className="register-form__row" type="flex">
         <Col flex={2}>
           <Card

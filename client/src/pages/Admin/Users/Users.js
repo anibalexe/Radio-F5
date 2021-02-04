@@ -8,17 +8,19 @@ import "./Users.scss";
 
 export default function Users() {
   const [ users, setUsers] = useState([]);
+  const [ reloadUsers, setReloadUsers ] = useState(false);
   const token = getAccessTokenApi();
 
   useEffect( () => {
     getUsersApi(token).then(response => {
       setUsers(response.users);
     });
-  }, [token]);
+    setReloadUsers(false);
+  }, [token, reloadUsers]);
   
   return (
     <>
-      <ListUsers users={users}/>
+      <ListUsers users={users} setReloadUsers={setReloadUsers} />
     </>
   );
 }

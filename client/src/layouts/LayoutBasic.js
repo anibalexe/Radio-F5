@@ -2,6 +2,7 @@ import React from "react";
 import { Layout } from "antd";
 import MenuTop from "../components/Visitor/MenuTop";
 import BarTop from "../components/Global/BarTop";
+import SocialBar from "../components/Visitor/SocialBar";
 
 //Se importa 'LayoutAdmin.scss' que contiene las diversas
 //configuraciones de diseño del Layout de Admin.
@@ -26,6 +27,7 @@ export default function LayoutBasic(props) {
           <MenuTop/>
         </div>
         <Content className="layout-basic__content">
+          <SocialBar/>
           <LoadRoutes routes={routes} />
         </Content>
       </Layout>

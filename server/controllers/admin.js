@@ -1,3 +1,5 @@
+const fs = require("fs");
+const path = require("path");
 const bcrypt = require("bcrypt-nodejs");
 const Admin = require("../models/admin");
 const jwt = require("../services/jwt");
@@ -28,10 +30,7 @@ function signIn(req, res) {
               res.status(200).send({
                 accessToken: jwt.createAccessToken(adminStored),
                 refreshToken: jwt.createRefreshToken(adminStored),
-                email: adminStored.email,
-                name: adminStored.name,
-                lastname: adminStored.lastname,
-                privilege: adminStored.privilege,
+                _id: adminStored._id,
               });
             }
           }
@@ -99,28 +98,135 @@ function getUsers(req, res) {
   });
 }
 
-function updateAdmin(req, res){
+function getUser(req, res) {
+  const params = req.params;
+
+  Admin.findById({ _id: params.id }, (err, userData) => {
+    if (err) {
+      res.status(500).send({ message: "Error del servidor." });
+    } else {
+      if (!userData) {
+        res
+          .status(404)
+          .send({ message: "No se ha encontrado ningún usuario." });
+      } else {
+        res.status(200).send({ userData });
+      }
+    }
+  });
+}
+
+function updateAdmin(req, res) {
   const userData = req.body;
   const params = req.params;
 
-  Admin.findByIdAndUpdate({_id: params.id}, userData, (err, adminUpdate) => {
-    if(err){
-      res.status(500).send({ message: "Error del servidor." })
-    }else{
-      if(!adminUpdate){
+  Admin.findByIdAndUpdate({ _id: params.id }, userData, (err, adminUpdate) => {
+    if (err) {
+      res.status(500).send({ message: "Error del servidor." });
+    } else {
+      if (!adminUpdate) {
         res
           .status(404)
-          .send({ message: "No se ha encontrado ningún usuario."});
-      }else{
+          .send({ message: "No se ha encontrado ningún usuario." });
+      } else {
         res.status(200).send({ message: "Usuario actualizado correctamente." });
       }
     }
-  }); 
+  });
+}
+
+function updateAdminPassword(req, res) {
+  const userData = req.body;
+  const params = req.params;
+
+  Admin.findByIdAndUpdate({ _id: params.id }, userData, (err, adminUpdate) => {
+    if (err) {
+      res.status(500).send({ message: "Error del servidor." });
+    } else {
+      if (!adminUpdate) {
+        res
+          .status(404)
+          .send({ message: "No se ha encontrado ningún usuario." });
+      } else {
+        if (userData.password !== userData.repeatPassword) {
+          res.status(404).send({ message: "Las contraseñas no son iguales" });
+        } else {
+          bcrypt.hash(userData.password, null, null, function (err, hash) {
+            if (err) {
+              res
+                .status(500)
+                .send({ message: "Error al encriptar la contraseña." });
+            } else {
+              res
+                .status(200)
+                .send({ message: "Usuario actualizado correctamente." });
+            }
+          });
+        }
+      }
+    }
+  });
+}
+
+function uploadAvatar(req, res) {
+  const params = req.params;
+
+  Admin.findById({ _id: params.id }, (err, userData) => {
+    if (err) {
+      res.status(500).send({ message: "Error del servidor." });
+    } else {
+      if (!userData) {
+        res
+          .status(404)
+          .send({ message: "No se ha encontrado ningún usuario." });
+      } else {
+        let user = userData;
+
+        if (req.files) {
+          let filePath = req.files.avatar.path;
+          let fileSplit = filePath.split("/");
+          let fileName = fileSplit[2];
+
+          let extSplit = fileName.split(".");
+          let fileExt = extSplit[1];
+
+          if (fileExt !== "png" && fileExt !== "jpg") {
+            res.status(400).send({
+              message:
+                "La extension de la imagen no es valida. (Extensiones permitidas: .png y .jpg)",
+            });
+          } else {
+            user.avatar = fileName;
+            User.findByIdAndUpdate(
+              { _id: params.id },
+              user,
+              (err, userResult) => {
+                if (err) {
+                  res.status(500).send({ message: "Error del servidor." });
+                } else {
+                  if (!userResult) {
+                    res
+                      .status(404)
+                      .send({ message: "No se ha encontrado ningun usuario." });
+                  } else {
+                    res.status(200).send({ avatarName: fileName });
+                  }
+                }
+              }
+            );
+          }
+        }
+      }
+    }
+  });
 }
 
 module.exports = {
   signIn,
   userAdd,
   getUsers,
+  getUser,
   updateAdmin,
+  updateAdminPassword,
+  uploadAvatar,
 };
