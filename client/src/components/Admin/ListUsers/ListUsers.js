@@ -1,9 +1,17 @@
-import React, {useState} from "react";
-import { Menu, Button, List, Space, Card, Divider } from "antd";
-import Modal from "../../Modal"
+import React, { useState, useEffect } from "react";
+import { Menu, Button, List, Avatar, Space, Card, Divider } from "antd";
+
+import NoAvatar from "../../../assets/img/png/no-avatar.png";
+import Modal from "../../Modal";
+
 import EditUserForm from "../EditUserForm";
 
-import "./ListUsers.scss";
+import {
+  updateAdminApi,
+  uploadAvatarApi,
+  getAvatarApi,
+} from "../../../api/admin";
+
 import {
   ConsoleSqlOutlined,
   UserSwitchOutlined,
@@ -11,13 +19,14 @@ import {
   EditOutlined,
   UserAddOutlined,
 } from "@ant-design/icons";
-//import UserEdit from "../../../pages/Admin/UserEdit";
+
+import "./ListUsers.scss";
 
 export default function ListUsers(props) {
   const { users, setReloadUsers } = props;
-  const [ isVisibleModal, setIsVisibleModal ] = useState(false);
-  const [ modalTitle, setModalTitle] = useState(""); 
-  const [ modalContent, setModalContent ] = useState(null);
+  const [isVisibleModal, setIsVisibleModal] = useState(false);
+  const [modalTitle, setModalTitle] = useState("");
+  const [modalContent, setModalContent] = useState(null);
 
   //console.log(users);
 
@@ -25,7 +34,8 @@ export default function ListUsers(props) {
     <Card className="list-users__card">
       <div className="list-users__card-header">
         <Button className="button" type="primary" onClick={toUserAdd}>
-        <UserAddOutlined />Agregar Usuario{" "}
+          <UserAddOutlined />
+          Agregar Usuario{" "}
         </Button>
       </div>
 
@@ -35,7 +45,6 @@ export default function ListUsers(props) {
         setModalContent={setModalContent}
         users={users}
         setReloadUsers={setReloadUsers}
-
       />
 
       <Modal
@@ -48,11 +57,9 @@ export default function ListUsers(props) {
       </Modal>
     </Card>
   );
-
 }
 
-function Users(props){
-
+function Users(props) {
   const { users } = props;
 
   const {
@@ -62,11 +69,13 @@ function Users(props){
     setReloadUsers,
   } = props;
 
-  const editUser = user => {
+  const editUser = (user) => {
     setIsVisibleModal(true);
     setModalTitle(
-      <h1>Editar {user.name ? user.name : "..."} {
-        user.lastname ? user.lastname : "..."}</h1>
+      <h1>
+        Editar {user.name ? user.name : "..."}{" "}
+        {user.lastname ? user.lastname : "..."}
+      </h1>
     );
     setModalContent(
       <EditUserForm
@@ -82,7 +91,7 @@ function Users(props){
       className="users"
       itemLayout="horizontal"
       dataSource={users}
-      renderItem={user => (
+      renderItem={(user) => (
         <User
           user={user}
           editUser={editUser}
@@ -95,29 +104,45 @@ function Users(props){
 
 function User(props) {
   const { user, editUser } = props;
+  const [avatar, setAvatar] = useState(null);
+
+  useEffect(() => {
+    if (user.avatar) {
+      getAvatarApi(user.avatar).then((response) => {
+        setAvatar(response);
+      });
+    } else {
+      setAvatar(null);
+    }
+  }, [user]);
 
   //console.log(user);
 
   return (
     <>
-    <List.Item
-      actions={[
-        <Button type="primary"  onClick={() => editUser(user)} ><EditOutlined/>Editar
-        </Button>,
-        <Button type="danger"><DeleteOutlined/>Eliminar
-        </Button>,
-      ]}
-    >
-      <List.Item.Meta
-        title={`
+      <List.Item
+        actions={[
+          <Button type="primary" onClick={() => editUser(user)}>
+            <EditOutlined />
+            Editar
+          </Button>,
+          <Button type="danger">
+            <DeleteOutlined />
+            Eliminar
+          </Button>,
+        ]}
+      >
+        <List.Item.Meta
+          avatar={<Avatar src={avatar ? avatar : NoAvatar} />}
+          title={`
                 ${user.name ? user.name : "..."} 
                 ${user.lastname ? user.lastname : "..."}
-                ${user.privilege==1 ? " / Admin" : " / Gestor de Contenido"}
-                ${user.status==1 ? " / Activo" : " / Inactivo"}
+                ${user.privilege == 1 ? " / Admin" : " / Gestor de Contenido"}
+                ${user.status == 1 ? " / Activo" : " / Inactivo"}
             `}
-        description={user.email}
-      />
-    </List.Item>
+          description={user.email}
+        />
+      </List.Item>
     </>
   );
 }

@@ -14,5 +14,6 @@ api.get("/getUser/:id", [md_auth.ensureAuth], AdminController.getUser);
 api.put("/updateAdmin/:id", [md_auth.ensureAuth], AdminController.updateAdmin);
 api.put("/updateAdminPassword/:id", [md_auth.ensureAuth], AdminController.updateAdminPassword);
 api.put("/uploadAvatar/:id", [md_auth.ensureAuth, md_upload_avatar], AdminController.uploadAvatar);
+api.get("/getAvatar/:avatarName", AdminController.getAvatar);
 
 module.exports = api;

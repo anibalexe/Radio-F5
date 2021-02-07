@@ -70,6 +70,11 @@ const routes = [
     exact: false,
     routes: [
       {
+        path: "/",
+        component: VisitorHome,
+        exact: true,
+      },
+      {
         path: "/home",
         component: VisitorHome,
         exact: true,

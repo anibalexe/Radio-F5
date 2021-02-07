@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import { useDropzone } from "react-dropzone";
 import {
   Form,
   Input,
   Button,
   Radio,
   Checkbox,
+  Avatar,
   notification,
   Row,
   Col,
@@ -15,21 +17,25 @@ import {
   Select,
 } from "antd";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
-import { updateAdminApi } from "../../../api/admin";
-
+import { getAccessTokenApi } from "../../../api/auth";
+import {
+  updateAdminApi,
+  uploadAvatarApi,
+  getAvatarApi,
+} from "../../../api/admin";
 import "./EditUserForm.scss";
 import FormItem from "antd/lib/form/FormItem";
 import {
   emailValidation,
   minLengthValidation,
 } from "../../../utils/formValidation";
-import { getAccessTokenApi } from "../../../api/auth";
+import NoAvatar from "../../../assets/img/png/no-avatar.png";
 
 const RadioGroup = Radio.Group;
 
 export default function EditUserForm(props) {
   const { user, setIsVisibleModal, setReloadUsers } = props;
-  //const [avatar, setAvatar] = useState(null);
+  const [avatar, setAvatar] = useState(null);
   const [userData, setUserData] = useState({});
 
   useEffect(() => {
@@ -39,16 +45,31 @@ export default function EditUserForm(props) {
       email: user.email,
       privilege: user.provilege,
       status: user.status,
-      //avatar: user.avatar
+      avatar: user.avatar,
     });
   }, [user]);
+
+  useEffect(() => {
+    if (user.avatar) {
+      getAvatarApi(user.avatar).then((response) => {
+        setAvatar(response);
+      });
+    } else {
+      setAvatar(null);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (avatar) {
+      setUserData({ ...userData, avatar: avatar.file });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [avatar]);
 
   const updateUser = (e) => {
     //e.preventDefault();
     const token = getAccessTokenApi();
     let userUpdate = userData;
-
-    console.log(userData);
 
     if (
       !userUpdate.name ||
@@ -63,10 +84,10 @@ export default function EditUserForm(props) {
       return;
     }
 
-    /*if (typeof userUpdate.avatar === "object") {
+    if (typeof userUpdate.avatar === "object") {
       uploadAvatarApi(token, userUpdate.avatar, user._id).then((response) => {
         userUpdate.avatar = response.avatarName;
-        updateUserApi(token, userUpdate, user._id).then((result) => {
+        updateAdminApi(token, userUpdate, user._id).then((result) => {
           notification["success"]({
             message: result.message,
           });
@@ -74,19 +95,20 @@ export default function EditUserForm(props) {
           setReloadUsers(true);
         });
       });
-    } else {*/
-
-    updateAdminApi(token, userUpdate, user._id).then((result) => {
-      notification["success"]({
-        message: result.message,
+    } else {
+      updateAdminApi(token, userUpdate, user._id).then((result) => {
+        notification["success"]({
+          message: result.message,
+        });
+        setIsVisibleModal(false);
+        setReloadUsers(true);
       });
-      setIsVisibleModal(false);
-      setReloadUsers(true);
-    });
+    }
   };
 
   return (
     <>
+      <UploadAvatar avatar={avatar} setAvatar={setAvatar} />
       <EditForm
         userData={userData}
         setUserData={setUserData}
@@ -96,33 +118,70 @@ export default function EditUserForm(props) {
   );
 }
 
+function UploadAvatar(props) {
+  const { avatar, setAvatar } = props;
+  const [avatarUrl, setAvatarUrl] = useState(null);
+
+  useEffect(() => {
+    if (avatar) {
+      if (avatar.preview) {
+        setAvatarUrl(avatar.preview);
+      } else {
+        setAvatarUrl(avatar);
+      }
+    } else {
+      setAvatarUrl(null);
+    }
+  }, [avatar]);
+
+  const onDrop = useCallback(
+    (acceptedFiles) => {
+      const file = acceptedFiles[0];
+      setAvatar({ file, preview: URL.createObjectURL(file) });
+    },
+    [setAvatar]
+  );
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    accept: "image/jpeg, image/png, image/jpg",
+    noKeyboard: true,
+    onDrop,
+  });
+
+  return (
+    <Row className="register-form__row" type="flex">
+      <Col flex={5}>
+        <Card
+          type="inner"
+          size="small"
+          title="Avatar"
+          className="register-form__card"
+        >
+          <div className="upload-avatar" {...getRootProps()}>
+            <input {...getInputProps()} />
+            {isDragActive ? (
+              <Avatar shape="square" size={150} src={NoAvatar} />
+            ) : (
+              <Avatar
+                shape="square"
+                size={150}
+                src={avatarUrl ? avatarUrl : NoAvatar}
+              />
+            )}
+          </div>
+        </Card>
+      </Col>
+    </Row>
+  );
+}
+
 function EditForm(props) {
   const { userData, setUserData, updateUser } = props;
 
   return (
     <Form className="register-form" onFinish={updateUser}>
       <Row className="register-form__row" type="flex">
-        <Col flex={2}>
-          <Card
-            type="inner"
-            size="small"
-            title="Foto de perfil"
-            className="register-form__card"
-          >
-            <Image
-              width={200}
-              src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-            />
-            <Divider></Divider>
-            <Upload>
-              <Button className="register-form__card-button">
-                Seleccionar
-              </Button>
-            </Upload>
-          </Card>
-        </Col>
-
-        <Col flex={3}>
+        <Col flex={5}>
           <Card
             type="inner"
             size="small"

@@ -39,8 +39,6 @@ export function userAddApi(data){
       return response.json();
     })
     .then(result => {
-      //console.log(result);
-
       return result;
     })
     .catch(err => {
@@ -137,6 +135,44 @@ export function updateAdminPasswordApi(token, admin, adminId){
     })
     .then(result => {
       return result;
+    })
+    .catch(err => {
+      return err.message;
+    });
+}
+
+export function uploadAvatarApi(token, avatar, userId){
+  const url = `${basePath}/${apiVersion}/upload-avatar/${userId}`;
+
+  const formData = new FormData();
+  formData.append("avatar", avatar, avatar.name);
+
+  const params = {
+    method: "PUT",
+    body: formData,
+    header: {
+      Authorization: token
+    }
+  }
+
+  return fetch(url, params).then(response => {
+    return response.json()
+  }).then(result => {
+    return result;
+  }).catch(err => {
+    return err.message;
+  })
+
+}
+
+
+
+export function getAvatarApi(avatarName){
+  const url = `${basePath}/${apiVersion}/getAvatar/${avatarName}`;
+
+  return fetch(url)
+    .then(response => {
+      return response.url;
     })
     .catch(err => {
       return err.message;

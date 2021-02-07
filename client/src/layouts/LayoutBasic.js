@@ -4,6 +4,8 @@ import MenuTop from "../components/Visitor/MenuTop";
 import BarTop from "../components/Global/BarTop";
 import SocialBar from "../components/Visitor/SocialBar";
 
+
+
 //Se importa 'LayoutAdmin.scss' que contiene las diversas
 //configuraciones de diseño del Layout de Admin.
 import "./LayoutBasic.scss";

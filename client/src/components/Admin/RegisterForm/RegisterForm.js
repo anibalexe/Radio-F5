@@ -34,6 +34,7 @@ export default function RegisterForm() {
     repeatPassword: "",
     privilege: "",
     status: "",
+    avatar: "",
     privacyPolicy: false,
   });
 
@@ -45,6 +46,7 @@ export default function RegisterForm() {
     repeatPassword: false,
     privilege: false,
     status: false,
+    avatar: false,
     privacyPolicy: false,
   });
 
@@ -96,6 +98,11 @@ export default function RegisterForm() {
         });
       } else {
         const result = userAddApi(inputs);
+        notification["success"]({
+          message: "Usuario registrado con exito.",
+        });
+
+        window.location.href="/admin/users";
       }
     }
   };

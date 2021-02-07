@@ -139,33 +139,36 @@ function updateAdminPassword(req, res) {
   const userData = req.body;
   const params = req.params;
 
-  Admin.findByIdAndUpdate({ _id: params.id }, userData, (err, adminUpdate) => {
-    if (err) {
-      res.status(500).send({ message: "Error del servidor." });
-    } else {
-      if (!adminUpdate) {
-        res
-          .status(404)
-          .send({ message: "No se ha encontrado ningún usuario." });
+  if (userData.password !== userData.repeatPassword) {
+    res.status(404).send({ message: "Las contraseñas no son iguales" });
+  } else {
+    bcrypt.hash(userData.password, null, null, function (err, hash) {
+      if (err) {
+        res.status(500).send({ message: "Error al encriptar la contraseña." });
       } else {
-        if (userData.password !== userData.repeatPassword) {
-          res.status(404).send({ message: "Las contraseñas no son iguales" });
-        } else {
-          bcrypt.hash(userData.password, null, null, function (err, hash) {
+        userData.password = hash;
+        Admin.findByIdAndUpdate(
+          { _id: params.id },
+          userData,
+          (err, adminUpdate) => {
             if (err) {
-              res
-                .status(500)
-                .send({ message: "Error al encriptar la contraseña." });
+              res.status(500).send({ message: "Error del servidor." });
             } else {
-              res
-                .status(200)
-                .send({ message: "Usuario actualizado correctamente." });
+              if (!adminUpdate) {
+                res
+                  .status(404)
+                  .send({ message: "No se ha encontrado ningún usuario." });
+              } else {
+                res
+                  .status(200)
+                  .send({ message: "Contraseña actualizada correctamente." });
+              }
             }
-          });
-        }
+          }
+        );
       }
-    }
-  });
+    });
+  }
 }
 
 function uploadAvatar(req, res) {
@@ -184,7 +187,7 @@ function uploadAvatar(req, res) {
 
         if (req.files) {
           let filePath = req.files.avatar.path;
-          let fileSplit = filePath.split("/");
+          let fileSplit = filePath.split("\\");
           let fileName = fileSplit[2];
 
           let extSplit = fileName.split(".");
@@ -197,7 +200,7 @@ function uploadAvatar(req, res) {
             });
           } else {
             user.avatar = fileName;
-            User.findByIdAndUpdate(
+            Admin.findByIdAndUpdate(
               { _id: params.id },
               user,
               (err, userResult) => {
@@ -221,6 +224,22 @@ function uploadAvatar(req, res) {
   });
 }
 
+function getAvatar(req, res){
+  
+  const avatarName = req.params.avatarName;
+  const filePath = "./uploads/avatar/" + avatarName;
+
+  //cambiamos exists por existsSync
+  fs.exists(filePath, exists => {
+    if(!exists) {
+      res.status(404).send({ message: "El avatar que buscas no existe."})
+    }else{
+      res.sendFile(path.resolve(filePath));
+    }
+  });
+
+}
+
 module.exports = {
   signIn,
   userAdd,
@@ -229,4 +248,5 @@ module.exports = {
   updateAdmin,
   updateAdminPassword,
   uploadAvatar,
+  getAvatar,
 };

@@ -145,8 +145,8 @@ function ProfileForm(props) {
   return (
     <Row className="row" type="flex">
       <Divider orientation="center">
-        <h2>Perfil de usuario</h2>
-      </Divider>
+          <h2>Perfil de usuario</h2>
+        </Divider>
       <Col className="row__col" flex={2}>
         <Card
           type="inner"

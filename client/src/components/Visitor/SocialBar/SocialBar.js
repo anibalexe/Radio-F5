@@ -14,7 +14,7 @@ export default function SocialBar() {
       <ul class="social-bar__list">
         <li class="social-bar__item">
           <a href="https://web.facebook.com/Actualizandoelmedio" target="_blank" class="social-bar__facebook">
-            <FacebookOutlined />
+            <FacebookOutlined/>
           </a>
         </li>
         <li class="social-bar__item">
