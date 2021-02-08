@@ -1,29 +1,26 @@
 import React from "react";
 import { Card } from "antd";
 import News from "../News";
-import "../../Visitor/News/"
+import "../../Visitor/News/";
 
-//import "./MostViewed.scss";
+import "./MostViewed.scss";
 
-export default function MostViewed(){
-
-
-    return(
-    
-        <>
-        <div classname="most-viewed">
-          <aside>
-        <Card classname="most-viewed__card" title="Noticias mas vistas" extra={<a href="#">More</a>}>
-         <p><News/></p>
-         <p><News/></p>
-         <p><News/></p> 
-        </Card>
-          </aside>
-        </div>
-      </>
-
-
-
-        
-    )
-} 
+export default function MostViewed() {
+  return (
+    <>
+      <div className="most-viewed">
+        <ul className="most-viewed__ul">
+          <li>
+            <News />
+          </li>
+          <li>
+            <News />
+          </li>
+          <li>
+            <News />
+          </li>
+        </ul>
+      </div>
+    </>
+  );
+}

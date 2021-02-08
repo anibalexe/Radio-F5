@@ -3,6 +3,10 @@
 .register-form {
   text-align: left;
 
+  &__title {
+    font-size: 110%;
+  }
+
   .ant-form-item {
     &:nth-child(0),
     &:last-of-type {
@@ -12,6 +16,9 @@
 
   &__row {
     text-align: center;
+    &__col {
+      margin-top: 10px;
+    }
   }
 
   &__card {
@@ -19,6 +26,7 @@
   }
 
   &__input {
+    font-size: 85%;
     .ant-input-prefix {
       i {
         font-size: 0em + 22px / $defaultFontSize;
@@ -35,15 +43,10 @@
   }
 
   &__button {
-    margin-top: 20px;
     border-radius: 5px;
-    width: 50%;
-    font-size: 0em + 22px / $defaultFontSize;
     background-color: $primary-color-dark;
     color: $font-light;
-    height: 50px;
     border: hidden;
-
 
     &:hover {
       background-color: $primary-color-hover;

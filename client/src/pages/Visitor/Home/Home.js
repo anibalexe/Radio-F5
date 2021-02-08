@@ -2,20 +2,23 @@ import React from "react";
 import "./Home.scss";
 import MostViewed from "../../../components/Visitor/MostViewed";
 import News from "../../../components/Visitor/News";
-import { Row, Col } from "antd";
+import { Row, Col, Card } from "antd";
 
 export default function Home() {
   return (
     <div className="home">
       <h1>Inicio de la pagina</h1>
-      <Row className="fila">
-        <Col className="columna-izq" flex={4}>
-          <div className="home__col">
+      <Row>
+        <Col className="home__col-left" flex={4}>
+          <Card className="home__card">
             <News className="home__news" />
-          </div>
+          </Card>
         </Col>
-        <Col className="columna-der" flex={1}>
-          <MostViewed className="home__mostviewed" />
+
+        <Col className="home__col-right" flex={1}>
+          <Card className="home__card" title="Noticias más vistas">
+            <MostViewed className="home__mostviewed" />
+          </Card>
         </Col>
       </Row>
     </div>

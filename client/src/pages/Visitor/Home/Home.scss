@@ -3,30 +3,28 @@
 
 .home{
 
-
-    &__div{
-        //padding: 50px;
-        //width:0%;
-    }
-
     &__news{
         //padding-right: 10px;
         //width:50%;
 
     }
 
-
+    &__card{
+        text-align: center;
+        width: 100%;
+    }
 
     &__mostviewed{
-        //width: 100px; //prueba
-
-
 
     }
 
-    .columna-izq{
-        margin-left: 60px;
-        margin-right: 60px;
+    &__col-left{
+        margin-left: 40px;
+        padding: 25px;
+    }
+
+    &__col-right{
+        padding: 25px;
     }
 
 }

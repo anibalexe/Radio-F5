@@ -1,47 +1,32 @@
 @import "../../../scss/index.scss";
 
-.row{
-  text-align: center;
-  &__col{
-    &__card{
-      margin: 10px;
-      &__image{
+.title {
+  font-size: 110%;
+}
 
-      }
-      &__button{
-        
-        margin: 5px 0 10px 0;
-        border-radius: 5px;
-        background-color: $primary-color-dark;
-        color: $font-light;
-        border: hidden;
-    
-        &:hover {
-          background-color: $primary-color-hover;
-          color: $font-light;
-        }
-        &:focus,
-        &:active {
-          background-color: $primary-color;
-          color: $font-light;
-          border: 0;
-        }
-      }
-      &__editprofile-form{
-        text-align: left;
+.row {
+  text-align: center;
+
+  &__col {
+    &__card {
+      margin: 10px;
+
+      &__editprofile-form {
+        text-align: center;
         .ant-form-item {
           &:nth-child(0),
           &:last-of-type {
             margin: 0;
           }
         }
-        &__input{
+        &__input {
+          font-size: 85%;
           .ant-input-prefix {
             i {
               font-size: 0em + 22px / $defaultFontSize;
             }
           }
-      
+
           input {
             font-size: 0em + 20px / $defaultFontSize;
             &:focus {
@@ -50,13 +35,13 @@
             }
           }
         }
-        &__button{
+        &__button {
           margin: 5px 0 10px 0;
           border-radius: 5px;
           background-color: $primary-color-dark;
           color: $font-light;
           border: hidden;
-      
+
           &:hover {
             background-color: $primary-color-hover;
             color: $font-light;

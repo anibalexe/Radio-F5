@@ -1,5 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Menu, Button, List, Avatar, Space, Card, Divider, Modal as ModalAntd, notification } from "antd";
+import {
+  Menu,
+  Button,
+  List,
+  Avatar,
+  Space,
+  Card,
+  Divider,
+  Modal as ModalAntd,
+  notification,
+} from "antd";
 
 import NoAvatar from "../../../assets/img/png/no-avatar.png";
 import Modal from "../../Modal";
@@ -97,11 +107,7 @@ function Users(props) {
       itemLayout="horizontal"
       dataSource={users}
       renderItem={(user) => (
-        <User
-          user={user}
-          editUser={editUser}
-          setReloadUsers={setReloadUsers}
-        />
+        <User user={user} editUser={editUser} setReloadUsers={setReloadUsers} />
       )}
     />
   );
@@ -125,7 +131,7 @@ function User(props) {
 
   const showDeleteConfirm = () => {
     const accesToken = getAccessTokenApi();
-  
+
     confirm({
       title: "Eliminando usuario",
       content: `¿Estás seguro de que quieres eliminar a ${user.email}?`,
@@ -134,18 +140,18 @@ function User(props) {
       cancelText: "Cancelar",
       onOk() {
         deleteUserApi(accesToken, user._id)
-          .then(response => {
+          .then((response) => {
             notification["success"]({
-              message: response
+              message: response,
             });
             setReloadUsers(true);
           })
-          .catch(err => {
+          .catch((err) => {
             notification["error"]({
-              message: err
+              message: err,
             });
           });
-      }
+      },
     });
   };
 

@@ -23,6 +23,11 @@ const routes = [
     exact: false,
     routes: [
       {
+        path: "/admin",
+        component: AdminProfile,
+        exact: true,
+      },
+      {
         path: "/admin/profile",
         component: AdminProfile,
         exact: true,

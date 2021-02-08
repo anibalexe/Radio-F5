@@ -13,7 +13,12 @@ import {
   Image,
   Card,
 } from "antd";
-import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
+import {
+  UserOutlined,
+  LockOutlined,
+  MailOutlined,
+  UserAddOutlined,
+} from "@ant-design/icons";
 import { userAddApi } from "../../../api/admin";
 
 import "./RegisterForm.scss";
@@ -102,7 +107,7 @@ export default function RegisterForm() {
           message: "Usuario registrado con exito.",
         });
 
-        window.location.href="/admin/users";
+        window.location.href = "/admin/users";
       }
     }
   };
@@ -111,29 +116,9 @@ export default function RegisterForm() {
     <>
       <Form className="register-form" onChange={changeForm} onFinish={register}>
         <Divider orientation="center">
-          <h2>Formulario de nuevo usuario</h2>
+          <h2 className="register-form__title">Formulario de nuevo usuario</h2>
         </Divider>
         <Row className="register-form__row" type="flex">
-          <Col flex={2}>
-            <Card
-              type="inner"
-              size="small"
-              title="Foto de perfil"
-              className="register-form__card"
-            >
-              <Image
-                width={200}
-                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-              />
-              <Divider></Divider>
-              <Upload>
-                <Button className="register-form__card-button">
-                  Seleccionar
-                </Button>
-              </Upload>
-            </Card>
-          </Col>
-
           <Col flex={3}>
             <Card
               type="inner"
@@ -199,9 +184,10 @@ export default function RegisterForm() {
                   value={inputs.repeatPassword}
                 />
               </Form.Item>
-
             </Card>
+          </Col>
 
+          <Col flex={2}>
             <Card
               type="inner"
               size="small"
@@ -229,7 +215,10 @@ export default function RegisterForm() {
                 </RadioGroup>
               </Form.Item>
             </Card>
-
+          </Col>
+        </Row>
+        <Row className="register-form__row" type="flex">
+          <Col className="register-form__row__col" flex={5}>
             <FormItem>
               <Checkbox
                 name="privacyPolicy"
@@ -242,6 +231,7 @@ export default function RegisterForm() {
 
             <Form.Item>
               <Button htmlType="submit" className="register-form__button">
+                <UserAddOutlined />
                 Agregar usuario
               </Button>
             </Form.Item>
