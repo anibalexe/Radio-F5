@@ -1,6 +1,7 @@
 import React from "react";
 import { Card } from "antd";
-
+import News from "../News";
+import "../../Visitor/News/"
 
 //import "./MostViewed.scss";
 
@@ -13,12 +14,9 @@ export default function MostViewed(){
         <div classname="most-viewed">
           <aside>
         <Card classname="most-viewed__card" title="Noticias mas vistas" extra={<a href="#">More</a>}>
-          <p>Noticia 1</p>
-          <p>Insertar foto</p>
-        </Card>
-        <Card classname="most-viewed__card" size="small" title="Noticia 2" extra={<a href="#">More</a>}>
-          <p> Noticia 2</p>
-          <p> Insertar foto</p>
+         <p><News/></p>
+         <p><News/></p>
+         <p><News/></p> 
         </Card>
           </aside>
         </div>

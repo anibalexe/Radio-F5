@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Menu, Button, List, Avatar, Space, Card, Divider } from "antd";
+import { Menu, Button, List, Avatar, Space, Card, Divider, Modal as ModalAntd, notification } from "antd";
 
 import NoAvatar from "../../../assets/img/png/no-avatar.png";
 import Modal from "../../Modal";
@@ -10,7 +10,10 @@ import {
   updateAdminApi,
   uploadAvatarApi,
   getAvatarApi,
+  deleteUserApi,
 } from "../../../api/admin";
+
+import { getAccessTokenApi } from "../../../api/auth";
 
 import {
   ConsoleSqlOutlined,
@@ -21,6 +24,8 @@ import {
 } from "@ant-design/icons";
 
 import "./ListUsers.scss";
+
+const { confirm } = ModalAntd;
 
 export default function ListUsers(props) {
   const { users, setReloadUsers } = props;
@@ -103,7 +108,7 @@ function Users(props) {
 }
 
 function User(props) {
-  const { user, editUser } = props;
+  const { user, editUser, setReloadUsers } = props;
   const [avatar, setAvatar] = useState(null);
 
   useEffect(() => {
@@ -118,6 +123,32 @@ function User(props) {
 
   //console.log(user);
 
+  const showDeleteConfirm = () => {
+    const accesToken = getAccessTokenApi();
+  
+    confirm({
+      title: "Eliminando usuario",
+      content: `¿Estás seguro de que quieres eliminar a ${user.email}?`,
+      okText: "Eliminar",
+      okType: "danger",
+      cancelText: "Cancelar",
+      onOk() {
+        deleteUserApi(accesToken, user._id)
+          .then(response => {
+            notification["success"]({
+              message: response
+            });
+            setReloadUsers(true);
+          })
+          .catch(err => {
+            notification["error"]({
+              message: err
+            });
+          });
+      }
+    });
+  };
+
   return (
     <>
       <List.Item
@@ -126,7 +157,7 @@ function User(props) {
             <EditOutlined />
             Editar
           </Button>,
-          <Button type="danger">
+          <Button type="danger" onClick={showDeleteConfirm}>
             <DeleteOutlined />
             Eliminar
           </Button>,

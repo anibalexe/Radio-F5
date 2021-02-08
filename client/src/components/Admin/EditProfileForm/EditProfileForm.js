@@ -8,6 +8,7 @@ import {
 } from "../../../utils/constants";
 import {
   Form,
+  Avatar,
   Input,
   Button,
   Radio,
@@ -28,10 +29,12 @@ import {
 } from "../../../utils/formValidation";
 
 import "./EditProfileForm.scss";
-import { getUserApi } from "../../../api/admin";
+import { getUserApi, getAvatarApi } from "../../../api/admin";
 import { updateAdminApi } from "../../../api/admin";
 import { updateAdminPasswordApi } from "../../../api/admin";
 import { getAccessTokenApi } from "../../../api/auth";
+
+import NoAvatar from "../../../assets/img/png/no-avatar.png";
 
 const RadioGroup = Radio.Group;
 
@@ -140,7 +143,25 @@ export default function EditProfileForm() {
 }
 
 function ProfileForm(props) {
-  const { userData, setUserData, updateUser, updateUserPassword } = props;
+  const { user, userData, setUserData, updateUser, updateUserPassword } = props;
+  const [avatar, setAvatar] = useState(null);
+
+  useEffect(() => {
+    if (userData.avatar) {
+      getAvatarApi(userData.avatar).then((response) => {
+        setAvatar(response);
+      });
+    } else {
+      setAvatar(null);
+    }
+  }, [userData]);
+
+  /*useEffect(() => {
+    if (avatar) {
+      setUserData({ ...userData, avatar: avatar.file });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [avatar]);*/
 
   return (
     <Row className="row" type="flex">
@@ -154,15 +175,11 @@ function ProfileForm(props) {
           title="Foto de perfil"
           className="row__col__card"
         >
-          <Image
-            className="row__col__card__image"
-            width={200}
-            src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-          />
+
+          <Avatar size={128} src={avatar ? avatar : NoAvatar} />
+
           <Divider></Divider>
-          <Upload className="row__col__card__button">
-            <Button>Seleccionar</Button>
-          </Upload>
+
           <Divider>
             Cargo:{" "}
             {userData.privilege == "1"
