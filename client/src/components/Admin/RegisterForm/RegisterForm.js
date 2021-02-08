@@ -200,18 +200,6 @@ export default function RegisterForm() {
                 />
               </Form.Item>
 
-              <Form.Item>
-                <Input
-                  prefix={<LockOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
-                  type="text"
-                  name="avatar"
-                  placeholder="Campo para tu avatar"
-                  className="register-form__input"
-                  onChange={inputValidation}
-                  value={inputs.repeatPassword}
-                />
-              </Form.Item>
-
             </Card>
 
             <Card

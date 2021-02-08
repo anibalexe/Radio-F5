@@ -150,21 +150,21 @@ export function uploadAvatarApi(token, avatar, userId){
   const params = {
     method: "PUT",
     body: formData,
-    header: {
+    headers: {
       Authorization: token
     }
-  }
+  };
 
   return fetch(url, params)
     .then(response => {
-      return response.json()
+      return response.json();
     })
-      .then(result => {
+    .then(result => {
       return result;
     })
-      .catch(err => {
+    .catch(err => {
       return err.message;
-    })
+    });
 
 }
 
