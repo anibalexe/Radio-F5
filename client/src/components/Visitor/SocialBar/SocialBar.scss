@@ -2,10 +2,10 @@
 
 .social-bar{
 
-	position: relative; 
-	left: -40px; 
-	top: 200px; 
-	z-index: 2000; 
+	position: fixed;
+	left: -40px;
+	top: 30%;
+	z-index: 1; 
 
     &__list{
         list-style: none;

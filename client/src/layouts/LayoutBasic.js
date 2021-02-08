@@ -20,8 +20,8 @@ export default function LayoutBasic(props) {
   const { Header, Content, Footer } = Layout;
   return (
     //Establece la estructura del Layout.
-    <Layout>
-      <Layout className="layout-basic">
+    <Layout className="layout-basic" >
+      <Layout >
         <Header className="layout-basic__bar-top">
           <BarTop />
         </Header>
@@ -29,11 +29,11 @@ export default function LayoutBasic(props) {
           <MenuTop/>
         </div>
         <Content className="layout-basic__content">
-          <SocialBar/>
+        <div className="layout-basic__socialbar"><SocialBar/></div>
           <LoadRoutes routes={routes} />
         </Content>
       </Layout>
-      <Layout className="layout-basic">
+      <Layout>
         <Footer className="layout-basic__footer">
           Radio F5 - Copyright 2021 | By EDEX & Rodrigo Ordenes{" "}
         </Footer>

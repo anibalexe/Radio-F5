@@ -95,7 +95,7 @@ function Users(props) {
         <User
           user={user}
           editUser={editUser}
-          //setReloadUsers={setReloadUsers}
+          setReloadUsers={setReloadUsers}
         />
       )}
     />

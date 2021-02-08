@@ -142,7 +142,7 @@ export function updateAdminPasswordApi(token, admin, adminId){
 }
 
 export function uploadAvatarApi(token, avatar, userId){
-  const url = `${basePath}/${apiVersion}/upload-avatar/${userId}`;
+  const url = `${basePath}/${apiVersion}/uploadAvatar/${userId}`;
 
   const formData = new FormData();
   formData.append("avatar", avatar, avatar.name);
@@ -155,13 +155,16 @@ export function uploadAvatarApi(token, avatar, userId){
     }
   }
 
-  return fetch(url, params).then(response => {
-    return response.json()
-  }).then(result => {
-    return result;
-  }).catch(err => {
-    return err.message;
-  })
+  return fetch(url, params)
+    .then(response => {
+      return response.json()
+    })
+      .then(result => {
+      return result;
+    })
+      .catch(err => {
+      return err.message;
+    })
 
 }
 

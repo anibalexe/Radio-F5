@@ -5,25 +5,28 @@
 
 
     &__div{
-        padding: 50px;
+        //padding: 50px;
         //width:0%;
     }
 
     &__news{
-        padding-right: 10px;
-        width:50%;
+        //padding-right: 10px;
+        //width:50%;
 
     }
 
 
 
     &__mostviewed{
-        width: 20%; //prueba
+        //width: 100px; //prueba
 
 
 
     }
 
-
+    .columna-izq{
+        margin-left: 60px;
+        margin-right: 60px;
+    }
 
 }

@@ -8,13 +8,13 @@ export default function Home() {
   return (
     <div className="home">
       <h1>Inicio de la pagina</h1>
-      <Row>
-        <Col flex={4}>
+      <Row className="fila">
+        <Col className="columna-izq" flex={4}>
           <div className="home__col">
             <News className="home__news" />
           </div>
         </Col>
-        <Col className="home__col" flex={1}>
+        <Col className="columna-der" flex={1}>
           <MostViewed className="home__mostviewed" />
         </Col>
       </Row>

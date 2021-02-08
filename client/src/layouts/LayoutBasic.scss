@@ -1,6 +1,12 @@
 @import "../scss/index.scss";
 
 .layout-basic {
+
+  &__content{
+    position: relative;
+
+  }
+  
   &__header {
 
   }
