@@ -6,6 +6,7 @@ import AdminPublications from "../pages/Admin/Publications";
 import AdminPrograms from "../pages/Admin/Programs";
 import AdminPublicities from "../pages/Admin/Publicities";
 import AdminUserEdit from "../pages/Admin/UserEdit";
+import AdminPublicationAdd from "../pages/Admin/PublicationAdd";
 
 import VisitorHome from "../pages/Visitor/Home";
 
@@ -35,6 +36,11 @@ const routes = [
       {
         path: "/admin/publications",
         component: AdminPublications,
+        exact: true,
+      },
+      {
+        path: "/admin/publications/publication-add",
+        component: AdminPublicationAdd,
         exact: true,
       },
       {
