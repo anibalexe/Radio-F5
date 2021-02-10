@@ -9,6 +9,7 @@ const { API_VERSION } = require("./config");
 //Cargar rutas...
 const authRoutes = require("./routers/auth");
 const adminRoutes = require("./routers/admin");
+const publicationRoutes = require("./routers/publication");
 
 //Configurar bodyParser 
 app.use(bodyParser.urlencoded({ extended: false}));
@@ -29,6 +30,7 @@ app.use((req, res, next) => {
 //Router basic
 app.use(`/api/${API_VERSION}`, authRoutes);
 app.use(`/api/${API_VERSION}`, adminRoutes);
+app.use(`/api/${API_VERSION}`, publicationRoutes);
 
 /*Exporta la app*/
 module.exports = app;
