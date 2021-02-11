@@ -1,10 +1,22 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import "./Home.scss";
 import MostViewed from "../../../components/Visitor/MostViewed";
 import News from "../../../components/Visitor/News";
 import { Row, Col, Card } from "antd";
+import { getPublicationsApi } from "../../../api/publication";
 
 export default function Home() {
+  const [ publications, setPublications] = useState([]);
+  const [ reloadPublications, setReloadPublications ] = useState(false);
+  const token = getAccessTokenApi();
+
+  useEffect( () => {
+    getPublicationsApi(token).then(response => {
+      setPublications(response.publications);
+    });
+    setReloadPublications(false);
+  }, [token, reloadPublications]);
+
   return (
     <div className="home">
       <h1>Inicio de la pagina</h1>

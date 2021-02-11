@@ -11,6 +11,9 @@ import AdminPublicationAdd from "../pages/Admin/PublicationAdd";
 //Componentes del Visitante
 import VisitorHome from "../pages/Visitor/Home";
 import VisitorNational from "../pages/Visitor/National";
+import VisitorInternational from "../pages/Visitor/International";
+import VisitorSports from "../pages/Visitor/Sports";
+import VisitorScience from "../pages/Visitor/Science";
 
 import LayoutAdmin from "../layouts/LayoutAdmin";
 import LayoutBasic from "../layouts/LayoutBasic";
@@ -90,6 +93,21 @@ const routes = [
       {
         path: "/national",
         component: VisitorNational,
+        exact: true,
+      },
+      {
+        path: "/international",
+        component: VisitorInternational,
+        exact: true,
+      },
+      {
+        path: "/sports",
+        component: VisitorSports,
+        exact: true,
+      },
+      {
+        path: "/science",
+        component: VisitorScience,
         exact: true,
       },
     ],

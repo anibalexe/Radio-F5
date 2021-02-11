@@ -48,9 +48,29 @@ function deletePublication(req, res) {
   });
 }
 
+function updatePublication(req, res) {
+  const publicationData = req.body;
+  const params = req.params;
+
+  Publication.findByIdAndUpdate({ _id: params.id }, publicationData, (err, publicationUpdate) => {
+    if (err) {
+      res.status(500).send({ message: "Error del servidor." });
+    } else {
+      if (!publicationUpdate) {
+        res
+          .status(404)
+          .send({ message: "No se ha encontrado ningún usuario." });
+      } else {
+        res.status(200).send({ message: "Usuario actualizado correctamente." });
+      }
+    }
+  });
+}
+
 module.exports = {
   publicationAdd,
   getPublications,
   deletePublication,
+  updatePublication,
 };
 

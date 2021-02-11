@@ -20,6 +20,8 @@ import {
   Card,
 } from "antd";
 
+import "./PublicationForm.scss";
+
 import {
   UserOutlined,
   LockOutlined,
@@ -28,6 +30,8 @@ import {
 } from "@ant-design/icons";
 import FormItem from "antd/lib/form/FormItem";
 import { getAccessTokenApi } from "../../../../api/auth";
+
+
 
 const RadioGroup = Radio.Group;
 
@@ -105,20 +109,20 @@ export default function PublicationForm() {
 
   return (
     <>
-      <Card type="inner" size="small" className="register-form__card">
-        <Form className="register-form" onChange={changeForm} onFinish={add}>
+      <Card>
+        <Form className="publication-form" onChange={changeForm} onFinish={add}>
           <Divider orientation="center">
-            <h2 className="register-form__title">
+            <h2 className="publication-form__title">
               Formulario de nueva publicación
             </h2>
           </Divider>
-          <Row className="register-form__row" type="flex">
-            <Col flex={3}>
+          <Row className="publication-form__row" type="flex">
+            <Col className="publication-form__row__col" flex={4}>
               <Card
                 type="inner"
                 size="small"
                 title="Datos de la noticia"
-                className="register-form__card"
+                className="publication-form__row__col__card"
               >
                 <Form.Item>
                   <Input
@@ -128,7 +132,7 @@ export default function PublicationForm() {
                     type="text"
                     name="title"
                     placeholder="Titular"
-                    className="register-form__input"
+                    className="publication-form__row__col__card__input"
                     value={inputs.title}
                   />
                 </Form.Item>
@@ -141,7 +145,7 @@ export default function PublicationForm() {
                     type="text"
                     name="image"
                     placeholder="Imagen"
-                    className="register-form__input"
+                    className="publication-form__row__col__card__input"
                     value={inputs.image}
                   />
                 </Form.Item>
@@ -154,11 +158,11 @@ export default function PublicationForm() {
                     type="text"
                     name="author"
                     placeholder="Autor"
-                    className="register-form__input"
+                    className="publication-form__row__col__card__input"
                     value={inputs.author}
                   />
                 </Form.Item>
-                <Card>
+                <Card className="publication-form__row__col__card__card" >
                   <Editor
                     wrapperClassName="wrapper-class"
                     editorClassName="editor-class"
@@ -169,12 +173,12 @@ export default function PublicationForm() {
               </Card>
             </Col>
 
-            <Col flex={2}>
+            <Col className="publication-form__row__col" flex={1}>
               <Card
                 type="inner"
                 size="small"
                 title="Visibilidad"
-                className="register-form__card"
+                className="publication-form__row__col__card"
               >
                 <Form.Item>
                   <RadioGroup name="visibility">
@@ -189,7 +193,7 @@ export default function PublicationForm() {
                 type="inner"
                 size="small"
                 title="Seccion"
-                className="register-form__card"
+                className="publication-form__row__col__card"
               >
                 <Form.Item>
                   <RadioGroup name="section">
@@ -202,16 +206,18 @@ export default function PublicationForm() {
               </Card>
             </Col>
           </Row>
-          <Row className="register-form__row" type="flex">
-            <Col className="register-form__row__col" flex={5}>
+
+          <Row className="publication-form__row" type="flex">
+            <Col className="publication-form__row__col" flex={5}>
               <Form.Item>
-                <Button htmlType="submit" className="register-form__button">
+                <Button htmlType="submit" className="publication-form__row__col__button">
                   <UserAddOutlined />
                   Agregar publicación
                 </Button>
               </Form.Item>
             </Col>
           </Row>
+
         </Form>
       </Card>
     </>

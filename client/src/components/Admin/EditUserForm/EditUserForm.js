@@ -248,7 +248,7 @@ function EditForm(props) {
                 onChange={(e) =>
                   setUserData({ ...userData, privilege: e.target.value })
                 }
-                value={userData.privilege=="1" ? "1" : "2"}
+                value={userData.privilege}
               >
                 <Radio value="1">Administrador</Radio>
                 <Radio value="2">Gestor de contenido</Radio>
@@ -268,7 +268,7 @@ function EditForm(props) {
                 onChange={(e) =>
                   setUserData({ ...userData, status: e.target.value })
                 }
-                value={userData.status=="1" ? "1" : "2"}
+                value={userData.status}
               >
                 <Radio value="1">Activo</Radio>
                 <Radio value="2">Inactivo</Radio>

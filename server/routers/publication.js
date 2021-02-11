@@ -9,6 +9,7 @@ const api = express.Router();
 api.post("/publicationAdd", [md_auth.ensureAuth], PublicationController.publicationAdd);
 api.get("/getPublications", [md_auth.ensureAuth], PublicationController.getPublications);
 api.delete("/deletePublication/:id", [md_auth.ensureAuth], PublicationController.deletePublication);
+api.put("/updatePublication/:id", [md_auth.ensureAuth], PublicationController.updatePublication);
 
 module.exports = api;
 

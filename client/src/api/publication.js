@@ -69,4 +69,28 @@ export function publicationAddApi(token, data){
         return err.message;
       });
   }
+
+  export function updatePublicationApi(token, publication, publicationId){
+    const url = `${basePath}/${apiVersion}/updatePublication/${publicationId}`;
+    
+    const params = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token
+      },
+      body: JSON.stringify(publication)
+    };
+  
+    return fetch(url, params)
+      .then(response => {
+        return response.json();
+      })
+      .then(result => {
+        return result;
+      })
+      .catch(err => {
+        return err.message;
+      });
+  }
   

@@ -152,7 +152,7 @@ export default function EditProfileForm() {
             <UploadAvatar avatar={avatar} setAvatar={setAvatar} />
             <Divider>
               Cargo:{" "}
-              {userData.privilege == "1"
+              {user.privilege == "1"
                 ? "Administrador"
                 : "Gestor de contenido"}
             </Divider>

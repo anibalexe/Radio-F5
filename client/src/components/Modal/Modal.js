@@ -9,7 +9,7 @@ export default function Modal(props) {
       title={title}
       centered
       visible={isVisible}
-      onCancel={() => setIsVisible(false)}
+      onCancel={() => setIsVisible(false)}// para actualizar el editor en editpublicationform {() => setIsVisible(false), window.location.reload()}
       footer={false}
       {...other}
     >

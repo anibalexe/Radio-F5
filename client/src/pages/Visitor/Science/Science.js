@@ -1,10 +1,10 @@
 import React from "react";
-import "./National.scss";
+import "./Science.scss";
 import News from "../../../components/Visitor/News";
 import MostViewed from "../../../components/Visitor/MostViewed";
 import { Row, Col, Card } from "antd";
 
-export default function National() {
+export default function Science() {
   return (
     <>
       <Row>
@@ -59,3 +59,4 @@ export default function National() {
     </>
   );
 }
+
