@@ -30,6 +30,17 @@ function getPublications(req, res) {
   });
 }
 
+function getPublicationsVisitor(req, res) {
+  Publication.find().then((publications) => {
+    if (!publications) {
+      res.status(400).send({ message: "No se encontro ninguna publicación." });
+    } else {
+      res.status(200).send({ publications });
+    }
+  });
+}
+
+
 function deletePublication(req, res) {
   const { id } = req.params;
 
@@ -69,8 +80,9 @@ function updatePublication(req, res) {
 
 module.exports = {
   publicationAdd,
-  getPublications,
   deletePublication,
   updatePublication,
+  getPublications,
+  getPublicationsVisitor,
 };
 

@@ -47,6 +47,29 @@ export function publicationAddApi(token, data){
       });
   }
 
+  export function getPublicationsVisitorApi(){
+    const url = `${basePath}/${apiVersion}/getPublicationsVisitor`;
+    
+    const params = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    };
+    
+    return fetch(url, params)
+      .then(response => {
+        return response.json();
+      })
+      .then(result => {
+        return result;
+      })
+      .catch(err => {
+        return err.message;
+      });
+  }
+
+
   export function deletePublicationApi(token, publicationId) {
     const url = `${basePath}/${apiVersion}/deletePublication/${publicationId}`;
   

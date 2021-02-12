@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Menu, Button, List, Space, Card, Divider, notification } from "antd";
 
 import PublicationPreview from "../PublicationPreview";
+import PublicationPreviewHome from "../PublicationPreview";
 
 import "./ListPublications.scss";
 
@@ -46,16 +47,7 @@ function Publication(props) {
   return (
     <>
       <List.Item>
-        <List.Item.Meta
-          //avatar={<Avatar src={avatar ? avatar : NoAvatar} />}
-          title={`
-                ${publication.title ? publication.title : "..."} / 
-                ${publication.author ? publication.author : "..."} /
-                ${publication.visibility ? publication.visibility : "..."} /
-                ${publication.section ? publication.section : "..."} /
-            `}
-          description={publication.content}
-        />
+        <PublicationPreview publication={publication}/>
       </List.Item>
     </>
   );

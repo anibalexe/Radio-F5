@@ -1,0 +1,10 @@
+@import "../../../../scss/index.scss";
+
+.card{
+    margin: 0;
+    max-width: 1000px;
+    
+    &__image{
+       height: 300px;
+    }
+}
