@@ -20,11 +20,13 @@
 
     &__col-left{
         margin-left: 40px;
-        padding: 25px;
+        //padding: 25px;
     }
 
     &__col-right{
-        padding: 25px;
+        margin-left: 40px;
+        margin-right: 0;
+        //padding: 25px;
     }
 
 }

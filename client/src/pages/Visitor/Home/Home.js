@@ -1,37 +1,38 @@
-import React, {useState, useEffect} from "react";
-import "./Home.scss";
+import React, { useState, useEffect } from "react";
 import MostViewed from "../../../components/Visitor/MostViewed";
-import { Row, Col, Card } from "antd";
-import { getPublicationsVisitorApi } from "../../../api/publication";
+import { Row, Col, Card, List } from "antd";
 import PublicationsPreviewHome from "../../../components/Visitor/Publications/PublicationsPreviewHome";
 
+import { getPublicationsVisitorApi } from "../../../api/publication";
+
+//import "./Home.scss";
 
 export default function Home() {
-  const [ publications, setPublications] = useState([]);
+  const [publications, setPublications] = useState([]);
 
-  useEffect( () => {
-    getPublicationsVisitorApi().then(response => {
+  useEffect(() => {
+    getPublicationsVisitorApi().then((response) => {
       setPublications(response.publications);
     });
   });
 
-  console.log(publications);
+
 
   return (
-    <div className="home">
+<>
       <Row>
-        <Col className="home__col-left" flex={4}>
+        <Col className="home__col-left" span={16}>
           <Card className="home__card">
-            <PublicationsPreviewHome publications={publications}/>
+            <PublicationsPreviewHome publications={publications} />
           </Card>
         </Col>
 
-        <Col className="home__col-right" flex={1}>
+        <Col className="home__col-right" span={6}>
           <Card className="home__card" title="Noticias más vistas">
             <MostViewed className="home__mostviewed" />
           </Card>
         </Col>
       </Row>
-    </div>
+    </>
   );
 }

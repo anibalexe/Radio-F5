@@ -1,7 +1,7 @@
 import React from "react";
 import { Space, Card } from "antd";
 
-import "./PublicationPreviewPrincipal.scss";
+//import "./PublicationPreviewPrincipal.scss";
 const { Meta } = Card;
 
 export default function PublicationPreviewPrincipal(props) {
@@ -13,7 +13,6 @@ export default function PublicationPreviewPrincipal(props) {
 
   return (
     <>
-      <Space direction="vertical">
         <Card
           hoverable
           className="card"
@@ -30,7 +29,6 @@ export default function PublicationPreviewPrincipal(props) {
             description={publications[size-1].author}
           />
         </Card>
-      </Space>
     </>
   );
 }
