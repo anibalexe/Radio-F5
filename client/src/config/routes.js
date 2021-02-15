@@ -11,12 +11,15 @@ import AdminPublicationAdd from "../pages/Admin/PublicationAdd";
 //Componentes del Visitante
 import VisitorHome from "../pages/Visitor/Home";
 import VisitorNational from "../pages/Visitor/National";
+import VisitorNationalPublication from "../pages/Visitor/NationalPublication";
 import VisitorInternational from "../pages/Visitor/International";
 import VisitorSports from "../pages/Visitor/Sports";
 import VisitorScience from "../pages/Visitor/Science";
 
 import LayoutAdmin from "../layouts/LayoutAdmin";
 import LayoutBasic from "../layouts/LayoutBasic";
+
+import {PUBLICATION_ID} from "../utils/constants";
 
 /*
     Se utiliza un arreglo para definir cada una de las rutas. 
@@ -94,6 +97,11 @@ const routes = [
         path: "/national",
         component: VisitorNational,
         exact: true,
+      },
+      {
+        path: `/national/${localStorage.getItem(PUBLICATION_ID)}`,
+        component: VisitorNationalPublication,
+        exact: false,
       },
       {
         path: "/international",

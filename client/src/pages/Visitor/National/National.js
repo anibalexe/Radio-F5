@@ -1,44 +1,27 @@
-import React from "react";
+import React, { useEffect, useState} from "react";
 import "./National.scss";
 import News from "../../../components/Visitor/News";
 import MostViewed from "../../../components/Visitor/MostViewed";
+import ListSections from "../../../components/Visitor/Sections/ListSections";
+import {getPublicationsNationalVisitorApi} from "../../../api/publication";
+
 import { Row, Col, Card } from "antd";
 
 export default function National() {
+  const [publications, setPublications] = useState([]);
+
+  useEffect(() => {
+    getPublicationsNationalVisitorApi().then((response) => {
+      setPublications(response);
+    });
+  });
+
+  //console.log(publications);
   return (
     <>
       <Row>
         <Col flex={4}>
-          <Card className="card">
-            <Row>
-              <Col flex={2}>
-                <h1>Foto</h1>
-              </Col>
-              <Col flex={3}>
-                <h1>La empresa </h1>
-              </Col>
-            </Row>
-          </Card>
-          <Card className="card">
-            <Row>
-              <Col flex={2}>
-                <h1>Foto 2</h1>
-              </Col>
-              <Col flex={3}>
-                <h1>Parrafo 2</h1>
-              </Col>
-            </Row>
-          </Card>
-          <Card className="card">
-            <Row>
-              <Col flex={2}>
-                <h1>Foto 3</h1>
-              </Col>
-              <Col flex={3}>
-                <h1>Parrafo 3</h1>
-              </Col>
-            </Row>
-          </Card>
+          <ListSections publications={publications}/>
         </Col>
         <Col flex={1}>
           <Card className="card">

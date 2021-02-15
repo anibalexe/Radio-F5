@@ -11,6 +11,7 @@ api.get("/getPublications", [md_auth.ensureAuth], PublicationController.getPubli
 api.get("/getPublicationsVisitor", PublicationController.getPublicationsVisitor);
 api.delete("/deletePublication/:id", [md_auth.ensureAuth], PublicationController.deletePublication);
 api.put("/updatePublication/:id", [md_auth.ensureAuth], PublicationController.updatePublication);
+api.get("/getPublicationVisitor/:id", PublicationController.getPublicationVisitor);
 
 module.exports = api;
 

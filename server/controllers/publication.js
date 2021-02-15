@@ -78,11 +78,30 @@ function updatePublication(req, res) {
   });
 }
 
+function getPublicationVisitor(req, res) {
+  const params = req.params;
+
+  Publication.findById({ _id: params.id }, (err, publicationData) => {
+    if (err) {
+      res.status(500).send({ message: "Error del servidor." });
+    } else {
+      if (!publicationData) {
+        res
+          .status(404)
+          .send({ message: "No se ha encontrado ningún usuario." });
+      } else {
+        res.status(200).send({ publicationData });
+      }
+    }
+  });
+}
+
 module.exports = {
   publicationAdd,
   deletePublication,
   updatePublication,
   getPublications,
   getPublicationsVisitor,
+  getPublicationVisitor,
 };
 

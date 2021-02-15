@@ -69,6 +69,49 @@ export function publicationAddApi(token, data){
       });
   }
 
+  export function getPublicationVisitorApi(publicationId){
+    const url = `${basePath}/${apiVersion}/getPublicationVisitor/${publicationId}`;
+    
+    const params = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    };
+    
+    return fetch(url, params)
+      .then(response => {
+        return response.json();
+      })
+      .then(result => {
+        return result;
+      })
+      .catch(err => {
+        return err.message;
+      });
+  }
+
+  export function getPublicationsNationalVisitorApi(){
+    const url = `${basePath}/${apiVersion}/getPublicationsVisitor`;
+    
+    const params = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    };
+    
+    return fetch(url, params)
+      .then(response => {
+        return response.json();
+      })
+      .then(result => {
+        return getPublicationBySection(result, 1);
+      })
+      .catch(err => {
+        return err.message;
+      });
+  }
 
   export function deletePublicationApi(token, publicationId) {
     const url = `${basePath}/${apiVersion}/deletePublication/${publicationId}`;
@@ -115,5 +158,10 @@ export function publicationAddApi(token, data){
       .catch(err => {
         return err.message;
       });
+  }
+
+  function getPublicationBySection(result, section){
+    const result2 = result.publications.filter(publicationsNational => publicationsNational.section==section);
+    return result2;
   }
   
