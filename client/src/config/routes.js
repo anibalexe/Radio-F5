@@ -13,6 +13,7 @@ import VisitorHome from "../pages/Visitor/Home";
 import VisitorNational from "../pages/Visitor/National";
 import VisitorNationalPublication from "../pages/Visitor/NationalPublication";
 import VisitorInternational from "../pages/Visitor/International";
+import VisitorInternationalPublication from "../pages/Visitor/InternationalPublication";
 import VisitorSports from "../pages/Visitor/Sports";
 import VisitorScience from "../pages/Visitor/Science";
 
@@ -107,6 +108,11 @@ const routes = [
         path: "/international",
         component: VisitorInternational,
         exact: true,
+      },
+      {
+        path: `/international/${localStorage.getItem(PUBLICATION_ID)}`,
+        component: VisitorInternationalPublication,
+        exact: false,
       },
       {
         path: "/sports",

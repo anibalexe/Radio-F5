@@ -10,11 +10,11 @@ export default function PublicationPreview(props) {
     <Card 
     hoverable
     onClick={()=> {
-            localStorage.setItem(PUBLICATION_ID, publication._id);
-            publication.section==1?window.location.href=`/national/${publication._id}`:
-            publication.section==2?window.location.href="/international":
-            publication.section==3?window.location.href="/international":
-            publication.section==4?window.location.href="/international":window.location.reload()
+      localStorage.setItem(PUBLICATION_ID, publication._id);
+      publication.section==1?window.location.href=`/national/${publication._id}`:
+      publication.section==2?window.location.href=`/international/${publication._id}`:
+      publication.section==3?window.location.href="/sports":
+      publication.section==4?window.location.href="/science":window.location.reload()
     }}>
      <List.Item
       key={publication.title}
@@ -37,11 +37,5 @@ export default function PublicationPreview(props) {
       </Card>
     </>
   );
-}
-
-function goTo(publication){
-    if(publication.section==2){
-        window.location.href="/international";
-    }
 }
 
