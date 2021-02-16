@@ -181,7 +181,7 @@ function Publication(props) {
               publication.section==3 ? "Ciencia" : 
               publication.section==4 ? "Deportes" :"..." } | 
               Creado ${publication.creationDate ? moment(publication.creationDate).calendar() : "..."} -
-              Modificado ${publication.creationDate ? moment(publication.modificationDate).calendar() : "..."}  
+              Modificado ${publication.modificationDate ? moment(publication.modificationDate).calendar() : "..."}  
             `}
         />
       </List.Item>

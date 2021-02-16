@@ -1,4 +1,6 @@
 const Publication = require("../models/publication");
+const fs = require("fs");
+const path = require("path");
 
 function publicationAdd(req, res) {
   const publication = new Publication();
@@ -98,6 +100,59 @@ function getPublicationVisitor(req, res) {
   });
 }
 
+function uploadImage(req, res) {
+  const params = req.params;
+
+  Publication.findById({ _id: params.id }, (err, publicationData) => {
+    if (err) {
+      res.status(500).send({ message: "Error del servidor." });
+    } else {
+      if (!publicationData) {
+        res
+          .status(404)
+          .send({ message: "No se ha encontrado ningún usuario." });
+      } else {
+        let publication = publicationData;
+
+        if (req.files) {
+          let filePath = req.files.image.path;
+          let fileSplit = filePath.split("\\");
+          let fileName = fileSplit[2];
+
+          let extSplit = fileName.split(".");
+          let fileExt = extSplit[1];
+
+          if (fileExt !== "png" && fileExt !== "jpg") {
+            res.status(400).send({
+              message:
+                "La extension de la imagen no es valida. (Extensiones permitidas: .png y .jpg)",
+            });
+          } else {
+            publication.image = fileName;
+            Publication.findByIdAndUpdate(
+              { _id: params.id },
+              publication,
+              (err, publicationResult) => {
+                if (err) {
+                  res.status(500).send({ message: "Error del servidor." });
+                } else {
+                  if (!publicationResult) {
+                    res
+                      .status(404)
+                      .send({ message: "No se ha encontrado ningun usuario." });
+                  } else {
+                    res.status(200).send({ publicationName: fileName });
+                  }
+                }
+              }
+            );
+          }
+        }
+      }
+    }
+  });
+}
+
 module.exports = {
   publicationAdd,
   deletePublication,
@@ -105,5 +160,6 @@ module.exports = {
   getPublications,
   getPublicationsVisitor,
   getPublicationVisitor,
+  uploadImage,
 };
 

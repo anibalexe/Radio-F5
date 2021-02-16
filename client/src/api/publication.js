@@ -62,7 +62,8 @@ export function publicationAddApi(token, data){
         return response.json();
       })
       .then(result => {
-        return result;
+     
+     return result;
       })
       .catch(err => {
         return err.message;
@@ -159,6 +160,34 @@ export function publicationAddApi(token, data){
         return err.message;
       });
   }
+
+  
+export function uploadImageApi(token, image, publicationId){
+  const url = `${basePath}/${apiVersion}/uploadImage/${publicationId}`;
+
+  const formData = new FormData();
+  formData.append("image", image, image.name);
+
+  const params = {
+    method: "PUT",
+    body: formData,
+    headers: {
+      Authorization: token
+    }
+  };
+
+  return fetch(url, params)
+    .then(response => {
+      return response.json();
+    })
+    .then(result => {
+      return result;
+    })
+    .catch(err => {
+      return err.message;
+    });
+
+}
 
   function getPublicationBySection(result, section){
     const result2 = result.publications.filter(publications => publications.section==section);

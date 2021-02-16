@@ -22,7 +22,7 @@ export default function PublicationPreview(props) {
      <List.Item
       key={publication.title}
       actions={[
-        moment(publication.modificationDate).calendar()+` por `+
+        moment(publication.creationDate).calendar()+` por `+
         publication.author
       ]}
       extra=
@@ -30,7 +30,7 @@ export default function PublicationPreview(props) {
         <img
           width={272}
           alt="logo"
-          src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+          src={"https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"}
         />
       }
       >

@@ -18,7 +18,7 @@ export default function PublicationPreview(props) {
             <img
               className="card__image"
               alt="example"
-              src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+              src={"https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"}
             />
           }
         >
