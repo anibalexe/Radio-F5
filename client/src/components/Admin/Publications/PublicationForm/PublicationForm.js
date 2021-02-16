@@ -38,20 +38,24 @@ const RadioGroup = Radio.Group;
 export default function PublicationForm() {
   const [inputs, setInputs] = useState({
     title: "",
+    subtitle: "",
     image: "",
     content: "",
     author: "",
     visibility: "",
     section: "",
+    creationDate: "",
   });
 
   const [formValid, setFormValid] = useState({
     title: false,
+    subtitle: false,
     image: false,
     content: false,
     author: false,
     visibility: false,
     section: false,
+    creationDate: false,
   });
 
   const [stateEditor, setStateEditor] = useState({
@@ -77,18 +81,19 @@ export default function PublicationForm() {
   const add = () => {
     const token = getAccessTokenApi();
     //setInputs({...inputs, content: draftToHtml(convertToRaw(stateEditor.content.getCurrentContent()))});
-    const { title, image, content, author, visibility, section } = formValid;
+    const { title, subtitle, image, content, author, visibility, section } = formValid;
     const titleVal = inputs.title;
+    const subtitleVal = inputs.subtitle;
     const imageVal = inputs.image;
     const contentVal = inputs.content;
     const authorVal = inputs.author;
     const visibilityVal = inputs.visibility;
     const sectionVal = inputs.section;
-
-    console.log(inputs);
+    inputs.creationDate = new Date;
 
     if (
       !titleVal ||
+      !subtitleVal ||
       !imageVal ||
       !contentVal ||
       !authorVal ||
@@ -134,6 +139,19 @@ export default function PublicationForm() {
                     placeholder="Titular"
                     className="publication-form__row__col__card__input"
                     value={inputs.title}
+                  />
+                </Form.Item>
+
+                <Form.Item>
+                  <Input
+                    prefix={
+                      <MailOutlined style={{ color: "rgba(0,0,0,.25)" }} />
+                    }
+                    type="text"
+                    name="subtitle"
+                    placeholder="Bajada"
+                    className="publication-form__row__col__card__input"
+                    value={inputs.subtitle}
                   />
                 </Form.Item>
 

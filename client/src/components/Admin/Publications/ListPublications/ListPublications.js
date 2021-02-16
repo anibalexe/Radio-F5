@@ -11,6 +11,8 @@ import {
 } from "antd";
 
 import Modal from "../../../Modal";
+import moment from "moment";
+import "moment/locale/es";
 
 import EditPublicationForm from "../EditPublicationForm";
 
@@ -167,12 +169,20 @@ function Publication(props) {
         <List.Item.Meta
           //avatar={<Avatar src={avatar ? avatar : NoAvatar} />}
           title={`
-                ${publication.title ? publication.title : "..."} / 
-                ${publication.author ? publication.author : "..."} /
-                ${publication.visibility ? publication.visibility : "..."} /
-                ${publication.section ? publication.section : "..."} /
+                ${publication.title ? publication.title : "..."} |
+                ${publication.author ? publication.author : "..."}  
             `}
-          description={publication.content}
+            description={`
+              ${publication.visibility==1 ? "Publico" : 
+              publication.visibility==2 ? "Privado" :
+              publication.visibility==3 ? "Oculto" :"..."} / 
+              ${publication.section==1 ? "Nacional" : 
+              publication.section==2 ? "Internacional" : 
+              publication.section==3 ? "Ciencia" : 
+              publication.section==4 ? "Deportes" :"..." } | 
+              Creado ${publication.creationDate ? moment(publication.creationDate).calendar() : "..."} -
+              Modificado ${publication.creationDate ? moment(publication.modificationDate).calendar() : "..."}  
+            `}
         />
       </List.Item>
     </>

@@ -3,12 +3,15 @@ const Schema = mongoose.Schema;
 
 const PublicationSchema = Schema({
     title: String,
+    subtitle: String,
     image: String,
     author: String,
     content: String,
     visibility: String,
     section: String,
-    //fecha de publicacion (la fecha de modificacion y creacion van en la tabla intermedia)
+    creationDate: Date,
+    modificationDate: Date,
+    //publicationDate: Date,
 })
 
 

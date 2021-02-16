@@ -3,7 +3,7 @@ import "./International.scss";
 import News from "../../../components/Visitor/News";
 import MostViewed from "../../../components/Visitor/MostViewed";
 import ListSections from "../../../components/Visitor/Sections/ListSections";
-import {getPublicationsInternationalVisitorApi} from "../../../api/publication";
+import {getPublicationsSectionVisitorApi} from "../../../api/publication";
 
 
 import { Row, Col, Card } from "antd";
@@ -12,7 +12,7 @@ export default function International() {
   const [publications, setPublications] = useState([]);
 
   useEffect(() => {
-    getPublicationsInternationalVisitorApi().then((response) => {
+    getPublicationsSectionVisitorApi(2).then((response) => {
       setPublications(response);
     });
   });

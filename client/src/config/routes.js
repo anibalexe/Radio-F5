@@ -15,7 +15,9 @@ import VisitorNationalPublication from "../pages/Visitor/NationalPublication";
 import VisitorInternational from "../pages/Visitor/International";
 import VisitorInternationalPublication from "../pages/Visitor/InternationalPublication";
 import VisitorSports from "../pages/Visitor/Sports";
+import VisitorSportsPublication from "../pages/Visitor/SportsPublication";
 import VisitorScience from "../pages/Visitor/Science";
+import VisitorSciencePublication from "../pages/Visitor/SciencePublication";
 
 import LayoutAdmin from "../layouts/LayoutAdmin";
 import LayoutBasic from "../layouts/LayoutBasic";
@@ -120,8 +122,18 @@ const routes = [
         exact: true,
       },
       {
+        path: `/sports/${localStorage.getItem(PUBLICATION_ID)}`,
+        component: VisitorSportsPublication,
+        exact: false,
+      },
+      {
         path: "/science",
         component: VisitorScience,
+        exact: true,
+      },
+      {
+        path: `/science/${localStorage.getItem(PUBLICATION_ID)}`,
+        component: VisitorSciencePublication,
         exact: true,
       },
     ],

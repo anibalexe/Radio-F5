@@ -91,7 +91,7 @@ export function publicationAddApi(token, data){
       });
   }
 
-  export function getPublicationsNationalVisitorApi(){
+  export function getPublicationsSectionVisitorApi(section){
     const url = `${basePath}/${apiVersion}/getPublicationsVisitor`;
     
     const params = {
@@ -106,29 +106,7 @@ export function publicationAddApi(token, data){
         return response.json();
       })
       .then(result => {
-        return getPublicationBySection(result, 1);
-      })
-      .catch(err => {
-        return err.message;
-      });
-  }
-
-  export function getPublicationsInternationalVisitorApi(){
-    const url = `${basePath}/${apiVersion}/getPublicationsVisitor`;
-    
-    const params = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      }
-    };
-    
-    return fetch(url, params)
-      .then(response => {
-        return response.json();
-      })
-      .then(result => {
-        return getPublicationBySection(result, 2);
+        return getPublicationBySection(result, section);
       })
       .catch(err => {
         return err.message;

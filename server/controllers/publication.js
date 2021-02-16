@@ -3,13 +3,15 @@ const Publication = require("../models/publication");
 function publicationAdd(req, res) {
   const publication = new Publication();
 
-  const { title, image, content, author, visibility, section } = req.body;
+  const { title, subtitle, image, content, author, visibility, section, creationDate } = req.body;
   publication.title = title;
+  publication.subtitle = subtitle;
   publication.image = image;
   publication.content = content;
   publication.author = author;
   publication.visibility = visibility;
   publication.section = section;
+  publication.creationDate = creationDate;
 
   publication.save((err, publicationStored) => {
     if (!publicationStored) {

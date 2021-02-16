@@ -26,11 +26,8 @@ function Publications(props) {
         pageSize: 3,
       }}
       dataSource={publications}
-      footer={
-        <div>
-          <b>ant design</b> footer part
-        </div>
-      }
+      /*footer={
+      }*/
       renderItem={(publication) => (
        <Publication publication={publication}/>
       )}

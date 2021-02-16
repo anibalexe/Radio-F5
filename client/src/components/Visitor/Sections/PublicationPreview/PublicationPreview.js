@@ -3,6 +3,9 @@ import { PUBLICATION_ID } from "../../../../utils/constants";
 import { List, Card } from "antd"
 import { StarOutlined, LikeOutlined, MessageOutlined} from "@ant-design/icons";
 
+import moment from "moment";
+import "moment/locale/es";
+
 export default function PublicationPreview(props) {
   const { publication } = props;
   return (
@@ -13,11 +16,15 @@ export default function PublicationPreview(props) {
       localStorage.setItem(PUBLICATION_ID, publication._id);
       publication.section==1?window.location.href=`/national/${publication._id}`:
       publication.section==2?window.location.href=`/international/${publication._id}`:
-      publication.section==3?window.location.href="/sports":
-      publication.section==4?window.location.href="/science":window.location.reload()
+      publication.section==3?window.location.href=`/science/${publication._id}`:
+      publication.section==4?window.location.href=`/sports/${publication._id}`:window.location.reload()
     }}>
      <List.Item
       key={publication.title}
+      actions={[
+        moment(publication.modificationDate).calendar()+` por `+
+        publication.author
+      ]}
       extra=
       {
         <img
@@ -32,7 +39,7 @@ export default function PublicationPreview(props) {
         title={publication.title}//title={<a href={publication.href}>{publication.title}</a>}
         //description={publication.description}
       />
-      <div dangerouslySetInnerHTML={{__html: publication.content}} />
+      {publication.subtitle}
       </List.Item>
       </Card>
     </>

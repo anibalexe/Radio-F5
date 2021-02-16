@@ -3,7 +3,7 @@ import "./National.scss";
 import News from "../../../components/Visitor/News";
 import MostViewed from "../../../components/Visitor/MostViewed";
 import ListSections from "../../../components/Visitor/Sections/ListSections";
-import {getPublicationsNationalVisitorApi} from "../../../api/publication";
+import {getPublicationsSectionVisitorApi} from "../../../api/publication";
 
 import { Row, Col, Card } from "antd";
 
@@ -11,7 +11,7 @@ export default function National() {
   const [publications, setPublications] = useState([]);
 
   useEffect(() => {
-    getPublicationsNationalVisitorApi().then((response) => {
+    getPublicationsSectionVisitorApi(1).then((response) => {
       setPublications(response);
     });
   });
@@ -20,7 +20,7 @@ export default function National() {
   return (
     <>
       <Row>
-        <Col flex={4}>
+        <Col className="left-news" flex={4}>
           <ListSections publications={publications}/>
         </Col>
         <Col flex={1}>

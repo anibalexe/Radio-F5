@@ -165,10 +165,9 @@ function UploadAvatar(props) {
           <div className="upload-avatar" {...getRootProps()}>
             <input {...getInputProps()} />
             {isDragActive ? (
-              <Avatar shape="square" size={150} src={NoAvatar} />
+              <Avatar  size={150} src={NoAvatar} />
             ) : (
               <Avatar
-                shape="square"
                 size={150}
                 src={avatarUrl ? avatarUrl : NoAvatar}
               />

@@ -51,14 +51,18 @@ export default function EditPublicationForm(props) {
     content: EditorState.createWithContent(state),
   });
 
+  const cDate = new Date;
+
   useEffect(() => {
     setPublicationData({
       title: publication.title,
+      subtitle: publication.subtitle,
       image: publication.image,
       content: publication.content,
       author: publication.author,
       visibility: publication.visibility,
       section: publication.section,
+      modificationDate: cDate,
     });
   }, [publication]);
 
@@ -68,6 +72,7 @@ export default function EditPublicationForm(props) {
 
     if (
       !publicationUpdate.title ||
+      !publicationUpdate.subtitle ||
       !publicationUpdate.image ||
       !publicationUpdate.content ||
       !publicationUpdate.author ||
@@ -152,6 +157,23 @@ function EditForm(props) {
                   })
                 }
                 value={publicationData.title}
+              />
+            </Form.Item>
+
+            <Form.Item>
+              <Input
+                prefix={<MailOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
+                type="text"
+                name="subtitle"
+                placeholder="Bajada"
+                className="publication-form__row__col__card__input"
+                onChange={(e) =>
+                  setPublicationData({
+                    ...publicationData,
+                    subtitle: e.target.value,
+                  })
+                }
+                value={publicationData.subtitle}
               />
             </Form.Item>
 
