@@ -5,7 +5,7 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import draftToHtml from "draftjs-to-html";
 import { publicationAddApi, uploadImageApi } from "../../../../api/publication";
 import { useDropzone } from "react-dropzone";
-import NoImage from "../../../../assets/img/png/no-avatar.png";
+import NoImage from "../../../../assets/img/png/no-image.png";
 
 import {
   Form,

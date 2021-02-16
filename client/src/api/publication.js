@@ -189,6 +189,18 @@ export function uploadImageApi(token, image, publicationId){
 
 }
 
+export function getImageApi(imageName){
+  const url = `${basePath}/${apiVersion}/getImage/${imageName}`;
+
+  return fetch(url)
+    .then(response => {
+      return response.url;
+    })
+    .catch(err => {
+      return err.message;
+    });
+}
+
   function getPublicationBySection(result, section){
     const result2 = result.publications.filter(publications => publications.section==section);
     return result2;

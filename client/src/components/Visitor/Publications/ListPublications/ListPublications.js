@@ -47,6 +47,7 @@ function Publication(props) {
   return (
     <>
       <List.Item>
+        
         <PublicationPreview publication={publication}/>
       </List.Item>
     </>

@@ -44,6 +44,22 @@ function getPublicationsVisitor(req, res) {
   });
 }
 
+function getImage(req, res){
+  
+  const imageName = req.params.imageName;
+  const filePath = "./uploads/image/" + imageName;
+
+  //cambiamos exists por existsSync
+  fs.exists(filePath, exists => {
+    if(!exists) {
+      res.status(404).send({ message: "La imagen que buscas no existe."})
+    }else{
+      res.sendFile(path.resolve(filePath));
+    }
+  });
+
+}
+
 
 function deletePublication(req, res) {
   const { id } = req.params;
@@ -161,5 +177,6 @@ module.exports = {
   getPublicationsVisitor,
   getPublicationVisitor,
   uploadImage,
+  getImage,
 };
 

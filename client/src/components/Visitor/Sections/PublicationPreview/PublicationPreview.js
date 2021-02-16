@@ -1,13 +1,33 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { PUBLICATION_ID } from "../../../../utils/constants";
-import { List, Card } from "antd"
+import { List, Card, Image, Avatar } from "antd"
 import { StarOutlined, LikeOutlined, MessageOutlined} from "@ant-design/icons";
 
 import moment from "moment";
 import "moment/locale/es";
 
+import {
+  getImageApi,
+} from "../../../../api/publication";
+
+import NoImage from "../../../../assets/img/png/no-image.png";
+
 export default function PublicationPreview(props) {
   const { publication } = props;
+  const [image, setImage] = useState(null);
+
+  useEffect(() => {
+    if (publication.image) {
+      getImageApi(publication.image).then((response) => {
+        setImage(response);
+      });
+    } else {
+      setImage(null);
+    }
+  }, [publication]);
+
+  console.log(image);
+
   return (
     <>
     <Card 
@@ -30,12 +50,13 @@ export default function PublicationPreview(props) {
         <img
           width={272}
           alt="logo"
-          src={"https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"}
+          src={image ? image : NoImage}
         />
       }
       >
       <List.Item.Meta
-        image={publication.image}//avatar={<Avatar src={publication.avatar} />}
+        //image={<Avatar src={image ? image : NoImage} />}
+        //image={publication.image}//avatar={<Avatar src={publication.avatar} />}
         title={publication.title}//title={<a href={publication.href}>{publication.title}</a>}
         //description={publication.description}
       />
