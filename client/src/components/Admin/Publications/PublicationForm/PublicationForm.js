@@ -90,14 +90,7 @@ export default function PublicationForm() {
     const token = getAccessTokenApi();
 
     //setInputs({...inputs, content: draftToHtml(convertToRaw(stateEditor.content.getCurrentContent()))});
-    const {
-      title,
-      subtitle,
-      content,
-      author,
-      visibility,
-      section,
-    } = formValid;
+    const { title, subtitle, content, author, visibility, section } = formValid;
     const titleVal = inputs.title;
     const subtitleVal = inputs.subtitle;
     const contentVal = inputs.content;
@@ -109,6 +102,7 @@ export default function PublicationForm() {
     if (
       !titleVal ||
       !subtitleVal ||
+      image==null ||
       !contentVal ||
       !authorVal ||
       !visibilityVal ||
@@ -117,18 +111,19 @@ export default function PublicationForm() {
       notification["error"]({
         message: "Todos los campos son obligatorios.",
       });
-    } 
-    
-   publicationAddApi(token, inputs).then((result)=>{
-    console.log(result.publication);
-     if (typeof image.file === "object") {
-      uploadImageApi(token, image.file, result.publication._id).then(() => {
-        notification["success"]({
-          message: "Publicación agregada con exito.",
-        });
+    }else{
+      publicationAddApi(token, inputs).then((result) => {
+        if (typeof image.file === "object") {
+          uploadImageApi(token, image.file, result.publication._id).then(() => {
+            notification["success"]({
+              message: "Publicación agregada con exito.",
+            });
+            window.location.href="/admin/publications";
+          });
+        }
       });
     }
-   })
+
   };
 
   return (
@@ -191,12 +186,9 @@ function UploadImage(props) {
           <div className="upload-image" {...getRootProps()}>
             <input {...getInputProps()} />
             {isDragActive ? (
-              <Avatar  size={150} src={NoImage} />
+              <Avatar size={150} src={NoImage} />
             ) : (
-              <Avatar
-                size={150}
-                src={imageUrl ? imageUrl : NoImage}
-              />
+              <Avatar size={150} src={imageUrl ? imageUrl : NoImage} />
             )}
           </div>
         </Card>

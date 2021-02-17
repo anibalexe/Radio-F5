@@ -1,9 +1,9 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import "./National.scss";
 import News from "../../../components/Visitor/News";
-import MostViewed from "../../../components/Visitor/MostViewed";
+import ListMostViewed from "../../../components/Visitor/MostViewed/ListMostViewed";
 import ListSections from "../../../components/Visitor/Sections/ListSections";
-import {getPublicationsSectionVisitorApi} from "../../../api/publication";
+import { getPublicationsSectionVisitorApi } from "../../../api/publication";
 
 import { Row, Col, Card } from "antd";
 
@@ -16,29 +16,28 @@ export default function National() {
     });
   });
 
-  //console.log(publications);
   return (
     <>
-      <Row>
-        <Col className="left-news" flex={4}>
-          <ListSections publications={publications}/>
-        </Col>
-        <Col flex={1}>
-          <Card className="card">
-            <h1>Patrocinadores</h1>
-          </Card>
-          <Card className="card">
-            <h1>Anuncios</h1>
-          </Card>
-          <Card className="card">
-          <h1>Relacionadas</h1>
-            <MostViewed ClassName="mostviewed" />
-          </Card>
+      
+        <Row className="row">
+          <Col className="row__left-news" flex={4}>
+            <ListSections publications={publications} />
           </Col>
-      </Row>
-      <Card className="patrocinadores">
-        <h1>Patrocinadores</h1>
-      </Card>
+          <Col className="row__right-news" flex={1}>
+            <Card className="row__right-news__ads">
+              <h1>Anuncios</h1>
+            </Card>
+            <Card className="row__right-news__related" title="Noticias relacionadas" >
+              <ListMostViewed publications={publications}/>
+            </Card>
+          </Col>
+        </Row>
+        <Row>
+            <Card className="sponsors">
+              <h1>Patrocinadores</h1>
+            </Card>
+        </Row>
+      
     </>
   );
 }

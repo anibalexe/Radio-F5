@@ -12,6 +12,8 @@ import {
 
 import NoImage from "../../../../assets/img/png/no-image.png";
 
+import "./PublicationPreview.scss";
+
 export default function PublicationPreview(props) {
   const { publication } = props;
   const [image, setImage] = useState(null);
@@ -26,12 +28,12 @@ export default function PublicationPreview(props) {
     }
   }, [publication]);
 
-  console.log(image);
 
   return (
     <>
     <Card 
     hoverable
+    className="card-publication"
     onClick={()=> {
       localStorage.setItem(PUBLICATION_ID, publication._id);
       publication.section==1?window.location.href=`/national/${publication._id}`:

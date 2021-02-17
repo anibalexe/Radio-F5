@@ -43,13 +43,11 @@ function Publications(props) {
 
 function Publication(props) {
   const { publication, setReloadPublications } = props;
-
-  return (
-    <>
-      <List.Item>
-        
-        <PublicationPreview publication={publication}/>
-      </List.Item>
-    </>
-  );
+    return (
+      <>
+        <List.Item>
+          <PublicationPreview publication={publication} />
+        </List.Item>
+      </>
+    );
 }

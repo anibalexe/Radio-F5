@@ -28,18 +28,18 @@ function Publications(props) {
       dataSource={publications}
       /*footer={
       }*/
-      renderItem={(publication) => (
-       <Publication publication={publication}/>
-      )}
+      renderItem={(publication) => 
+          <Publication publication={publication}/>
+       }
     />
   );
 }
 
-function Publication(props){
-    const {publication} = props;
-    return(
-       <>
-       <PublicationPreview publication={publication}/>
-     </>
-    )
+function Publication(props) {
+  const { publication } = props;
+  return (
+    <>
+      {publication.visibility==1?<PublicationPreview publication={publication} />: <></>}
+    </>
+  );
 }

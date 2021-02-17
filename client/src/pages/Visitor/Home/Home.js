@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import MostViewed from "../../../components/Visitor/MostViewed";
+import ListMostViewed from "../../../components/Visitor/MostViewed/ListMostViewed";
 import { Row, Col, Card, List } from "antd";
 import PublicationsPreviewHome from "../../../components/Visitor/Publications/PublicationsPreviewHome";
 
@@ -27,7 +27,7 @@ export default function Home() {
 
         <Col className="home__col-right" span={6}>
           <Card className="home__card" title="Noticias más vistas">
-            <MostViewed className="home__mostviewed" />
+            <ListMostViewed className="home__mostviewed" />
           </Card>
         </Col>
       </Row>

@@ -22,7 +22,7 @@ function MenuTop(props) {
     <>
     <Menu
       className="menu-top"
-      //theme="light"
+      theme="dark"
       mode="horizontal" defaultSelectedKeys={[location.pathname]}
     >
       <Menu.Item  className="menu-top__item" key="/visitor/home">

@@ -109,6 +109,7 @@ export default function ProgramForm() {
     if (
       !titleVal ||
       !subtitleVal ||
+      image==null||
       !contentVal ||
       !authorVal ||
       !visibilityVal ||
@@ -119,13 +120,14 @@ export default function ProgramForm() {
       });
     } 
 
+
     programAddApi(token, inputs).then((result)=>{
-      console.log(result.program);
       if (typeof image.file === "object") {
        uploadImageApi(token, image.file, result.program._id).then(() => {
          notification["success"]({
            message: "Publicación agregada con exito.",
          });
+         window.location.href="/admin/programs";
        });
      }
     })

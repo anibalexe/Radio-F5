@@ -21,6 +21,7 @@ import VisitorSportsPublication from "../pages/Visitor/SportsPublication";
 import VisitorScience from "../pages/Visitor/Science";
 import VisitorSciencePublication from "../pages/Visitor/SciencePublication";
 import VisitorPrograms from "../pages/Visitor/Programs";
+import VisitorProgramsPublication from "../pages/Visitor/ProgramsPublication";
 
 import LayoutAdmin from "../layouts/LayoutAdmin";
 import LayoutBasic from "../layouts/LayoutBasic";
@@ -152,7 +153,7 @@ const routes = [
       },
       {
         path: `/programs/${localStorage.getItem(PROGRAM_ID)}`,
-        component: VisitorPrograms,
+        component: VisitorProgramsPublication,
         exact: true,
       },
     ],

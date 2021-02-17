@@ -1,0 +1,15 @@
+.bottom-programs{
+    margin-left: 40px;
+}
+
+.top-sponsor{
+    //background-color: red;
+    &__div{
+        margin-top: 20px;
+        margin-left: 100px;
+    }
+    &__card{
+        width: 100%;
+        background-color: red;
+    }
+}

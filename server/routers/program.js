@@ -13,7 +13,7 @@ api.get("/getProgramsVisitor", ProgramController.getProgramsVisitor);
 api.delete("/deleteProgram/:id", [md_auth.ensureAuth], ProgramController.deleteProgram);
 api.put("/updateProgram/:id", [md_auth.ensureAuth], ProgramController.updateProgram);
 api.get("/getProgramVisitor/:id", ProgramController.getProgramVisitor);
-api.put("/uploadImage/:id", [md_auth.ensureAuth, md_upload_image], ProgramController.uploadImage);
+api.put("/uploadImageProgram/:id", [md_auth.ensureAuth, md_upload_image], ProgramController.uploadImage);
 api.get("/getImage/:imageName", ProgramController.getImage);
 
 

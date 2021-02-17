@@ -1,7 +1,7 @@
 import React, { useEffect, useState} from "react";
 import "./Sports.scss";
 import News from "../../../components/Visitor/News";
-import MostViewed from "../../../components/Visitor/MostViewed";
+import ListMostViewed from "../../../components/Visitor/MostViewed/ListMostViewed";
 import ListSections from "../../../components/Visitor/Sections/ListSections";
 import {getPublicationsSectionVisitorApi} from "../../../api/publication";
 
@@ -19,24 +19,20 @@ export default function Sports() {
   console.log(publications);
   return (
     <>
-      <Row>
-        <Col className="left-news" flex={4}>
+      <Row className="row">
+        <Col className="row__left-news" flex={4}>
           <ListSections publications={publications}/>
         </Col>
-        <Col flex={1}>
-          <Card className="card">
-            <h1>Patrocinadores</h1>
-          </Card>
-          <Card className="card">
+        <Col className="row__right-news" flex={1}>
+          <Card className="row__right-news__ads">
             <h1>Anuncios</h1>
           </Card>
-          <Card className="card">
-          <h1>Relacionadas</h1>
-            <MostViewed ClassName="mostviewed" />
+          <Card className="row__right-news__related" title="Noticias relacionadas">
+            <ListMostViewed publications={publications}/>
           </Card>
           </Col>
       </Row>
-      <Card className="patrocinadores">
+      <Card className="sponsors">
         <h1>Patrocinadores</h1>
       </Card>
     </>

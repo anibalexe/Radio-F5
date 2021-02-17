@@ -1,43 +1,27 @@
-import React, { useEffect, useState} from "react";
+import React, {useState, useEffect} from "react";
+import { Menu, Button, Card, Row } from "antd";
+import ListPrograms from "../../../components/Visitor/ProgramsSections/ListSections";
+import { getProgramsVisitorApi } from "../../../api/program";
+
+import { getAccessTokenApi } from "../../../api/auth";
+
 import "./Programs.scss";
-import News from "../../../components/Visitor/News";
-import MostViewed from "../../../components/Visitor/MostViewed";
-import ListSections from "../../../components/Visitor/Sections/ListSections";
-import {getProgramsSectionVisitorApi} from "../../../api/program";
-import { Row, Col, Card } from "antd";
 
 export default function Programs() {
-  const [programs, setPrograms] = useState([]);
+  const [ programs, setPrograms] = useState([]);
+  const [ reloadPrograms, setReloadPrograms ] = useState(false);
+  const token = getAccessTokenApi();
 
-  useEffect(() => {
-    getProgramsSectionVisitorApi(1).then((response) => {
-      setPrograms(response);
+  useEffect( () => {
+    getProgramsVisitorApi().then(response => {
+      setPrograms(response.programs);
     });
-  });
-
+  },);
+  
   return (
     <>
-    <Row>
-    <Col className="left-news" flex={4}>
-      <ListSections programs={programs}/>
-    </Col>
-    <Col flex={1}>
-      <Card className="card">
-        <h1>Patrocinadores</h1>
-      </Card>
-      <Card className="card">
-        <h1>Anuncios</h1>
-      </Card>
-      <Card className="card">
-      <h1>Relacionadas</h1>
-        <MostViewed ClassName="mostviewed" />
-      </Card>
-      </Col>
-  </Row>
-  <Card className="patrocinadores">
-    <h1>Patrocinadores</h1>
-  </Card>
-</>
+      <Row className="top-sponsor" > <div className="top-sponsor__div" > <Card className="top-sponsor__card"> Patrocinadores </Card> </div></Row>
+      <Row className="bottom-programs"><ListPrograms programs={programs} /></Row>
+    </>
   );
 }
-

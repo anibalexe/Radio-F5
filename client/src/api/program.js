@@ -163,7 +163,7 @@ export function programAddApi(token, data){
 
   
 export function uploadImageApi(token, image, programId){
-  const url = `${basePath}/${apiVersion}/uploadImage/${programId}`;
+  const url = `${basePath}/${apiVersion}/uploadImageProgram/${programId}`;
 
   const formData = new FormData();
   formData.append("image", image, image.name);

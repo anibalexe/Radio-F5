@@ -14,10 +14,8 @@ export default function Publications(props) {
   return(
     <>    
     <h1>{publication.title}</h1>
-
     <div dangerouslySetInnerHTML={{__html: publication.content}} />
     <h1>{publication.author}</h1>
-
     </>
   );
 
