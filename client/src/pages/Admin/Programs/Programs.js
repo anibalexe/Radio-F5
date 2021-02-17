@@ -1,67 +1,27 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { Menu, Button, Table } from "antd";
+import ListPrograms from "../../../components/Admin/Programs/ListPrograms";
+import { getProgramsApi } from "../../../api/program";
+
+import { getAccessTokenApi } from "../../../api/auth";
 
 import "./Programs.scss";
 
-const { SubMenu } = Menu;
-
 export default function Programs() {
-  const dataSource = [
-    {
-      key: "1",
-      name: "Mike",
-      age: 32,
-      address: "10 Downing Street",
-    },
-    {
-      key: "2",
-      name: "John",
-      age: 42,
-      address: "10 Downing Street",
-    },
-  ];
+  const [ programs, setPrograms] = useState([]);
+  const [ reloadPrograms, setReloadPrograms ] = useState(false);
+  const token = getAccessTokenApi();
 
-  const columns = [
-    {
-      title: "Titular",
-      dataIndex: "headline",
-      key: "headline",
-    },
-    {
-      title: "Fecha",
-      dataIndex: "date",
-      key: "date",
-    },
-    {
-        title: "Publico",
-        dataIndex: "public",
-        key: "public",
-    },
-    {
-        title: "Privado",
-        dataIndex: "private",
-        key: "private",
-    },
-    {
-        title: "Oculto",
-        dataIndex: "hidden",
-        key: "hidden",
-    },
-    {
-      title: "Acción",
-      dataIndex: "action",
-      key: "action",
-    },
-  ];
+  useEffect( () => {
+    getProgramsApi(token).then(response => {
+      setPrograms(response.programs);
+    });
+    setReloadPrograms(false);
+  }, [token, reloadPrograms]);
+  
   return (
     <>
-      <Button className="button" type="primary" onClick={toProgramAdd}>Agregar Programa </Button>
-      <Table className="table" dataSource={dataSource} columns={columns} />
+      <ListPrograms programs={programs} setReloadPrograms={setReloadPrograms} />
     </>
   );
-}
-
-
-function toProgramAdd(){
-    window.location.href="/admin/programs/program-add";
 }

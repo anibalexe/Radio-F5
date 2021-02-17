@@ -4,9 +4,11 @@ import AdminSignIn from "../pages/Admin";
 import AdminUserAdd from "../pages/Admin/UserAdd";
 import AdminUsers from "../pages/Admin/Users";
 import AdminPublications from "../pages/Admin/Publications";
-import AdminPrograms from "../pages/Admin/Programs";
-import AdminPublicities from "../pages/Admin/Publicities";
 import AdminPublicationAdd from "../pages/Admin/PublicationAdd";
+import AdminPrograms from "../pages/Admin/Programs";
+import AdminProgramAdd from "../pages/Admin/ProgramAdd";
+import AdminPublicities from "../pages/Admin/Publicities";
+
 
 //Componentes del Visitante
 import VisitorHome from "../pages/Visitor/Home";
@@ -18,11 +20,13 @@ import VisitorSports from "../pages/Visitor/Sports";
 import VisitorSportsPublication from "../pages/Visitor/SportsPublication";
 import VisitorScience from "../pages/Visitor/Science";
 import VisitorSciencePublication from "../pages/Visitor/SciencePublication";
+import VisitorPrograms from "../pages/Visitor/Programs";
 
 import LayoutAdmin from "../layouts/LayoutAdmin";
 import LayoutBasic from "../layouts/LayoutBasic";
 
 import {PUBLICATION_ID} from "../utils/constants";
+import {PROGRAM_ID} from "../utils/constants";
 
 /*
     Se utiliza un arreglo para definir cada una de las rutas. 
@@ -57,6 +61,11 @@ const routes = [
       {
         path: "/admin/programs",
         component: AdminPrograms,
+        exact: true,
+      },
+      {
+        path: "/admin/programs/program-add",
+        component: AdminProgramAdd,
         exact: true,
       },
       {
@@ -134,6 +143,16 @@ const routes = [
       {
         path: `/science/${localStorage.getItem(PUBLICATION_ID)}`,
         component: VisitorSciencePublication,
+        exact: true,
+      },
+      {
+        path: "/programs",
+        component: VisitorPrograms,
+        exact: true,
+      },
+      {
+        path: `/programs/${localStorage.getItem(PROGRAM_ID)}`,
+        component: VisitorPrograms,
         exact: true,
       },
     ],

@@ -3,7 +3,7 @@ import { Editor } from "react-draft-wysiwyg";
 import { EditorState, convertToRaw } from "draft-js";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import draftToHtml from "draftjs-to-html";
-import { publicationAddApi, uploadImageApi } from "../../../../api/publication";
+import { programAddApi, uploadImageApi } from "../../../../api/program";
 import { useDropzone } from "react-dropzone";
 import NoImage from "../../../../assets/img/png/no-image.png";
 
@@ -23,7 +23,7 @@ import {
   Card,
 } from "antd";
 
-import "./PublicationForm.scss";
+import "./ProgramForm.scss";
 
 import {
   UserOutlined,
@@ -36,9 +36,9 @@ import { getAccessTokenApi } from "../../../../api/auth";
 
 const RadioGroup = Radio.Group;
 
-export default function PublicationForm() {
+export default function ProgramForm() {
   const [image, setImage] = useState(null);
-  const [userData, setUserData] = useState({});
+  const [programData, setProgramData] = useState({});
 
   const [inputs, setInputs] = useState({
     title: "",
@@ -118,23 +118,23 @@ export default function PublicationForm() {
         message: "Todos los campos son obligatorios.",
       });
     } 
-    
-   publicationAddApi(token, inputs).then((result)=>{
-    console.log(result.publication);
-     if (typeof image.file === "object") {
-      uploadImageApi(token, image.file, result.publication._id).then(() => {
-        notification["success"]({
-          message: "Publicación agregada con exito.",
-        });
-      });
-    }
-   })
-  };
+
+    programAddApi(token, inputs).then((result)=>{
+      console.log(result.program);
+      if (typeof image.file === "object") {
+       uploadImageApi(token, image.file, result.program._id).then(() => {
+         notification["success"]({
+           message: "Publicación agregada con exito.",
+         });
+       });
+     }
+    })
+   };
 
   return (
     <Card>
       <Divider orientation="center">
-        <h2 className="publication-form__title">
+        <h2 className="program-form__title">
           Formulario de nueva publicación
         </h2>
       </Divider>
@@ -208,14 +208,14 @@ function UploadImage(props) {
 function AddForm(props) {
   const { inputs, setInputs, changeForm, add, onEditorStateChange } = props;
   return (
-    <Form className="publication-form" onChange={changeForm} onFinish={add}>
-      <Row className="publication-form__row" type="flex">
-        <Col className="publication-form__row__col" flex={4}>
+    <Form className="program-form" onChange={changeForm} onFinish={add}>
+      <Row className="program-form__row" type="flex">
+        <Col className="program-form__row__col" flex={4}>
           <Card
             type="inner"
             size="small"
             title="Datos de la noticia"
-            className="publication-form__row__col__card"
+            className="program-form__row__col__card"
           >
             <Form.Item>
               <Input
@@ -223,7 +223,7 @@ function AddForm(props) {
                 type="text"
                 name="title"
                 placeholder="Titular"
-                className="publication-form__row__col__card__input"
+                className="program-form__row__col__card__input"
                 value={inputs.title}
               />
             </Form.Item>
@@ -234,7 +234,7 @@ function AddForm(props) {
                 type="text"
                 name="subtitle"
                 placeholder="Bajada"
-                className="publication-form__row__col__card__input"
+                className="program-form__row__col__card__input"
                 value={inputs.subtitle}
               />
             </Form.Item>
@@ -245,11 +245,11 @@ function AddForm(props) {
                 type="text"
                 name="author"
                 placeholder="Autor"
-                className="publication-form__row__col__card__input"
+                className="program-form__row__col__card__input"
                 value={inputs.author}
               />
             </Form.Item>
-            <Card className="publication-form__row__col__card__card">
+            <Card className="program-form__row__col__card__card">
               <Editor
                 wrapperClassName="wrapper-class"
                 editorClassName="editor-class"
@@ -260,12 +260,12 @@ function AddForm(props) {
           </Card>
         </Col>
 
-        <Col className="publication-form__row__col" flex={1}>
+        <Col className="program-form__row__col" flex={1}>
           <Card
             type="inner"
             size="small"
             title="Visibilidad"
-            className="publication-form__row__col__card"
+            className="program-form__row__col__card"
           >
             <Form.Item>
               <RadioGroup name="visibility">
@@ -280,7 +280,7 @@ function AddForm(props) {
             type="inner"
             size="small"
             title="Seccion"
-            className="publication-form__row__col__card"
+            className="program-form__row__col__card"
           >
             <Form.Item>
               <RadioGroup name="section">
@@ -294,15 +294,15 @@ function AddForm(props) {
         </Col>
       </Row>
 
-      <Row className="publication-form__row" type="flex">
-        <Col className="publication-form__row__col" flex={5}>
+      <Row className="program-form__row" type="flex">
+        <Col className="program-form__row__col" flex={5}>
           <Form.Item>
             <Button
               htmlType="submit"
-              className="publication-form__row__col__button"
+              className="program-form__row__col__button"
             >
               <UserAddOutlined />
-              Agregar publicación
+              Agregar programa
             </Button>
           </Form.Item>
         </Col>
