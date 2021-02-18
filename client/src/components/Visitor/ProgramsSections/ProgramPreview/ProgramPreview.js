@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { PROGRAM_ID } from "../../../../utils/constants";
-import { List, Card, Image, Avatar } from "antd"
+import { List, Card, Image, Avatar, Divider } from "antd"
 import { StarOutlined, LikeOutlined, MessageOutlined} from "@ant-design/icons";
 
 import moment from "moment";
@@ -30,7 +30,7 @@ export default function ProgramPreview(props) {
     }
   }, [program]);
 
-  console.log(image);
+  //console.log(image);
 
   return (
     <>
@@ -43,26 +43,27 @@ export default function ProgramPreview(props) {
     }}>
      <List.Item
       key={program.title}
-      actions={[
-        moment(program.creationDate).calendar()+` por `+
-        program.author
-      ]}
       extra=
       {
+        <>
+        <Divider orientation="center" ></Divider>
         <img
           width={100}
           alt="logo"
           src={image ? image : NoImage}
         />
+        <h1><i>{program.subtitle}</i></h1>
+        <Divider orientation="center" ><h5>{ ` Con: `+program.author}</h5></Divider>
+        </>
       }
       >
       <List.Item.Meta
         //image={<Avatar src={image ? image : NoImage} />}
         //image={program.image}//avatar={<Avatar src={program.avatar} />}
-        title={program.title}//title={<a href={program.href}>{program.title}</a>}
+        title={<div className="card-program__title" ><b>{program.title}</b></div>}
+        //title={program.title}
         //description={program.description}
       />
-      {program.subtitle}
       </List.Item>
       </Card>
     </>
