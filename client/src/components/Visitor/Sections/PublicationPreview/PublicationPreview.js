@@ -59,7 +59,7 @@ export default function PublicationPreview(props) {
       <List.Item.Meta
         //image={<Avatar src={image ? image : NoImage} />}
         //image={publication.image}//avatar={<Avatar src={publication.avatar} />}
-        title={publication.title}//title={<a href={publication.href}>{publication.title}</a>}
+        title={<h3><b>{publication.title}</b></h3>}//title={<a href={publication.href}>{publication.title}</a>}
         //description={publication.description}
       />
       {publication.subtitle}

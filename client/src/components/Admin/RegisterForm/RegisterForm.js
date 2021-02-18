@@ -9,8 +9,6 @@ import {
   Row,
   Col,
   Divider,
-  Upload,
-  Image,
   Card,
 } from "antd";
 import {
@@ -106,7 +104,6 @@ export default function RegisterForm() {
         notification["success"]({
           message: "Usuario registrado con exito.",
         });
-
         window.location.href = "/admin/users";
       }
     }

@@ -5,7 +5,7 @@ import PublicationsPreviewHome from "../../../components/Visitor/Publications/Pu
 
 import { getSecondaryPublicationsVisitorApi, getPrincipalPublicationVisitorApi } from "../../../api/publication";
 
-//import "./Home.scss";
+import "./Home.scss";
 
 export default function Home() {
   const [publications, setPublications] = useState([]);
@@ -22,16 +22,14 @@ export default function Home() {
 
   return (
 <>
-      <Row>
-        <Col className="home__col-left" span={16}>
-          <Card className="home__card">
+      <Row className="row">
+        <Col className="row__col-left" span={16}>
             <PublicationsPreviewHome publicationPrincipal={publicationPrincipal} publications={publications}/>
-          </Card>
         </Col>
 
-        <Col className="home__col-right" span={6}>
-          <Card className="home__card" title="Noticias más vistas">
-            <ListMostViewed className="home__mostviewed" />
+        <Col className="row__col-right" span={6}>
+          <Card className="row__col-right__mostviewed" title="Noticias más vistas">
+            <ListMostViewed />
           </Card>
         </Col>
       </Row>

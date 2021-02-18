@@ -1,32 +1,25 @@
 @import "../../../scss/index.scss";
 
+.row {
+  &__col-left {
+    text-align: left;
+    justify-content: center;
+    margin-left: 40px;
 
-.home{
-
-    &__news{
-        //padding-right: 10px;
-        //width:50%;
-
+    &__principal {
     }
+  }
 
-    &__card{
-        text-align: center;
-        width: 100%;
+  &__col-right {
+    max-width: 300px;
+    margin: 0 0 0 50px;
+
+    &__mostviewed {
+      .ant-card-head {
+        background-color: rgb(25, 12, 71);
+        color: white;
+      }
+      margin-top: 10px;
     }
-
-    &__mostviewed{
-
-    }
-
-    &__col-left{
-        margin-left: 40px;
-        //padding: 25px;
-    }
-
-    &__col-right{
-        margin-left: 40px;
-        margin-right: 0;
-        //padding: 25px;
-    }
-
+  }
 }

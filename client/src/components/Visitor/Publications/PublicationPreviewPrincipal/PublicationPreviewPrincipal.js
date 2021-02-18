@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from "react";
 import { Space, Card } from "antd";
+import { PUBLICATION_ID } from "../../../../utils/constants";
 import NoImage from "../../../../assets/img/png/no-image.png";
 import {
   getImageApi,
 } from "../../../../api/publication";
 
-//import "./PublicationPreviewPrincipal.scss";
+import "./PublicationPreviewPrincipal.scss";
 const { Meta } = Card;
 
 export default function PublicationPreviewPrincipal(props) {
@@ -26,10 +27,17 @@ export default function PublicationPreviewPrincipal(props) {
     <>
         <Card
           hoverable
-          className="card"
+          className="card-principal"
+          onClick={()=> {
+            localStorage.setItem(PUBLICATION_ID, publicationPrincipal._id);
+            publicationPrincipal.section==1?window.location.href=`/national/${publicationPrincipal._id}`:
+            publicationPrincipal.section==2?window.location.href=`/international/${publicationPrincipal._id}`:
+            publicationPrincipal.section==3?window.location.href=`/science/${publicationPrincipal._id}`:
+            publicationPrincipal.section==4?window.location.href=`/sports/${publicationPrincipal._id}`:window.location.reload()
+          }}
           cover={
             <img
-              className="card__image"
+              className="card-principal__image"
               alt="Portada"
               src={image ? image : NoImage}
             />

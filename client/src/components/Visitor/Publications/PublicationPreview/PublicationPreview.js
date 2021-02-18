@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from "react";
 import { Space, Card } from "antd";
+import { PUBLICATION_ID } from "../../../../utils/constants";
 import NoImage from "../../../../assets/img/png/no-image.png";
 import {
   getImageApi,
 } from "../../../../api/publication";
+
 import "./PublicationPreview.scss";
 
 const { Meta } = Card;
@@ -26,10 +28,17 @@ export default function PublicationPreview(props) {
     <>
         <Card
           hoverable
-          className="card"
+          className="card-secondary"
+          onClick={()=> {
+            localStorage.setItem(PUBLICATION_ID, publication._id);
+            publication.section==1?window.location.href=`/national/${publication._id}`:
+            publication.section==2?window.location.href=`/international/${publication._id}`:
+            publication.section==3?window.location.href=`/science/${publication._id}`:
+            publication.section==4?window.location.href=`/sports/${publication._id}`:window.location.reload()
+          }}
           cover={
             <img
-              className="card__image"
+              className="card-secondary__image"
               alt="example"
               src={image ? image : NoImage}
             />
@@ -37,7 +46,10 @@ export default function PublicationPreview(props) {
         >
           <Meta
             title={publication.title}
-            description={publication.author}
+            description={
+              publication.subtitle,
+              <h5>por <i>{publication.author}</i></h5>
+            }
           />
         </Card>
  

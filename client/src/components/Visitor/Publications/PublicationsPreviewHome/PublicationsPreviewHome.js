@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, List } from "antd";
+import { Card, List, Row } from "antd";
 
 import "./PublicationsPreviewHome.scss";
 
@@ -11,19 +11,25 @@ export default function PublicationsPreviewHome(props) {
   const { publicationPrincipal, publications } = props;
 
   return (
-    <div>
-      <PublicationPreviewPrincipal
-        publicationPrincipal={publicationPrincipal}
-      />
-      <List
-        grid={{ gutter: 8, column: 2 }}
-        dataSource={publications}
-        renderItem={(publication) => (
-          <List.Item>
-            <PublicationPreview publication={publication} />
-          </List.Item>
-        )}
-      />
-    </div>
+    <>
+      <Row className="row-principal" >
+        <PublicationPreviewPrincipal
+          publicationPrincipal={publicationPrincipal}
+        />
+      </Row>
+
+      <Row className="row-secondary">
+        <List
+          grid={{ gutter: 8, column: 2 }}
+          dataSource={publications}
+          renderItem={(publication) => (
+            <List.Item>
+              <PublicationPreview publication={publication} />
+            </List.Item>
+          )}
+        />
+      </Row>
+
+    </>
   );
 }
