@@ -5,13 +5,9 @@
   .row {
     &__left-news {
         text-align: left;
-
-        justify-content: center;
-    }
-
     &__right-news {
       max-width: 300px;
-      margin: 10px 0 0 50px;
+      margin: 10px 0 0 0;
       &__ads {
       }
       &__related {
@@ -23,10 +19,8 @@
       }
     }
   }
-/*}*/
+}
 
 .sponsors {
   margin-top: 40px;
-  text-align: center;
-  width: 100%;
 }

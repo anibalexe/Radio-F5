@@ -10,6 +10,8 @@ const api = express.Router();
 api.post("/publicationAdd", [md_auth.ensureAuth], PublicationController.publicationAdd);
 api.get("/getPublications", [md_auth.ensureAuth], PublicationController.getPublications);
 api.get("/getPublicationsVisitor", PublicationController.getPublicationsVisitor);
+api.get("/getPrincipalPublicationVisitor", PublicationController.getPrincipalPublicationVisitor);
+api.get("/getSecondaryPublicationsVisitor", PublicationController.getSecondaryPublicationsVisitor);
 api.delete("/deletePublication/:id", [md_auth.ensureAuth], PublicationController.deletePublication);
 api.put("/updatePublication/:id", [md_auth.ensureAuth], PublicationController.updatePublication);
 api.get("/getPublicationVisitor/:id", PublicationController.getPublicationVisitor);

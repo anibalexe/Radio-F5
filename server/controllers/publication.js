@@ -1,6 +1,7 @@
 const Publication = require("../models/publication");
 const fs = require("fs");
 const path = require("path");
+const publication = require("../models/publication");
 
 function publicationAdd(req, res) {
   const publication = new Publication();
@@ -40,6 +41,28 @@ function getPublicationsVisitor(req, res) {
       res.status(400).send({ message: "No se encontro ninguna publicación." });
     } else {
       res.status(200).send({ publications });
+    }
+  });
+}
+
+function getPrincipalPublicationVisitor(req, res) {
+  Publication.find().then((publications) => {
+    if (!publications) {
+      res.status(400).send({ message: "No se encontro ninguna publicación." });
+    } else {
+      const publication = publications[publications.length-1]
+      res.status(200).send({ publication });
+    }
+  });
+}
+
+function getSecondaryPublicationsVisitor(req, res) {
+  Publication.find().then((publications) => {
+    if (!publications) {
+      res.status(400).send({ message: "No se encontro ninguna publicación." });
+    } else {
+      const secondaryPublications = [publications[publications.length-2], publications[publications.length-3], publications[publications.length-4], publications[publications.length-5]]
+      res.status(200).send({ secondaryPublications });
     }
   });
 }
@@ -176,6 +199,8 @@ module.exports = {
   getPublications,
   getPublicationsVisitor,
   getPublicationVisitor,
+  getPrincipalPublicationVisitor,
+  getSecondaryPublicationsVisitor,
   uploadImage,
   getImage,
 };

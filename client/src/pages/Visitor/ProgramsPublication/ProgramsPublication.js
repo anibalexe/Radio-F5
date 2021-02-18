@@ -3,8 +3,10 @@ import Program from "../../../components/Visitor/Programs/Program";
 import { PROGRAM_ID } from "../../../utils/constants";
 
 import {Card} from "antd";
+import "./ProgramPublication.scss";
 
 import { getProgramVisitorApi } from "../../../api/program";
+import { List } from "antd/lib/form/Form";
 
 export default function ScienceProgram() {
   const [program, setProgram] = useState([]);
@@ -19,9 +21,11 @@ export default function ScienceProgram() {
 
   return (
     <>
-    <Card>
+   <div className="program-publication" >
+    <Card className="program-publication__card" >
       <Program program={program} />
     </Card>
+    </div> 
     </>
   );
 }

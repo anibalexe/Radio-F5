@@ -8,20 +8,14 @@ import PublicationPreviewPrincipal from "../PublicationPreviewPrincipal";
 import Publications from "../../../../pages/Admin/Publications/Publications";
 
 export default function PublicationsPreviewHome(props) {
-  const { publications } = props;
+  const { publicationPrincipal, publications } = props;
 
   return (
     <div>
-      <List
-        grid={{ gutter: 8, column: 1 }}
-        dataSource={publications}
-        renderItem={(publication) => (
-          <List.Item>
-            <PublicationPreviewPrincipal publication={publication} publications={publications} />
-          </List.Item>
-        )}
+      <PublicationPreviewPrincipal
+        publicationPrincipal={publicationPrincipal}
       />
-        <List
+      <List
         grid={{ gutter: 8, column: 2 }}
         dataSource={publications}
         renderItem={(publication) => (

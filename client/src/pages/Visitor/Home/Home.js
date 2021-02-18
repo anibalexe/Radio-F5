@@ -3,16 +3,20 @@ import ListMostViewed from "../../../components/Visitor/MostViewed/ListMostViewe
 import { Row, Col, Card, List } from "antd";
 import PublicationsPreviewHome from "../../../components/Visitor/Publications/PublicationsPreviewHome";
 
-import { getPublicationsVisitorApi } from "../../../api/publication";
+import { getSecondaryPublicationsVisitorApi, getPrincipalPublicationVisitorApi } from "../../../api/publication";
 
 //import "./Home.scss";
 
 export default function Home() {
   const [publications, setPublications] = useState([]);
+  const [publicationPrincipal, setPublicationPrincipal] = useState([]);
 
   useEffect(() => {
-    getPublicationsVisitorApi().then((response) => {
-      setPublications(response.publications);
+    getSecondaryPublicationsVisitorApi().then((response) => {
+      setPublications(response.secondaryPublications);
+    });
+    getPrincipalPublicationVisitorApi().then((response)=>{
+      setPublicationPrincipal(response.publication);
     });
   });
 
@@ -21,7 +25,7 @@ export default function Home() {
       <Row>
         <Col className="home__col-left" span={16}>
           <Card className="home__card">
-            <PublicationsPreviewHome publications={publications} />
+            <PublicationsPreviewHome publicationPrincipal={publicationPrincipal} publications={publications}/>
           </Card>
         </Col>
 

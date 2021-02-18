@@ -1,15 +1,26 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { Space, Card } from "antd";
+import NoImage from "../../../../assets/img/png/no-image.png";
+import {
+  getImageApi,
+} from "../../../../api/publication";
 
 //import "./PublicationPreviewPrincipal.scss";
 const { Meta } = Card;
 
 export default function PublicationPreviewPrincipal(props) {
-  const { publications } = props;
+  const { publicationPrincipal } = props;
+  const [image, setImage] = useState(null);
 
-  const size = publications.length;
-  /*console.log(publications);
-  console.log(publications[size-1]);*/
+  useEffect(() => {
+    if (publicationPrincipal.image) {
+      getImageApi(publicationPrincipal.image).then((response) => {
+        setImage(response);
+      });
+    } else {
+      setImage(null);
+    }
+  }, [publicationPrincipal]);
 
   return (
     <>
@@ -19,14 +30,14 @@ export default function PublicationPreviewPrincipal(props) {
           cover={
             <img
               className="card__image"
-              alt="example"
-              src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+              alt="Portada"
+              src={image ? image : NoImage}
             />
           }
         >
           <Meta
-            title={publications[size-1].title}
-            description={publications[size-1].author}
+            title={publicationPrincipal.title}
+            description={publicationPrincipal.subtitle}
           />
         </Card>
     </>

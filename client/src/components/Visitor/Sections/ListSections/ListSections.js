@@ -7,7 +7,7 @@ import "./ListSections.scss";
 export default function ListSections(props) {
   const { publications } = props;
   return (
-    <div>
+    <div className="list-sections">
       <Publications publications={publications} />
     </div>
   );
