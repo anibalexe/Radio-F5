@@ -8,7 +8,8 @@ export default function Modal(props) {
 
   return (
     <ModalAntd
-      title={title}
+      title={<div className="title" >{title}</div>}
+      width={1000}
       centered
       visible={isVisible}
       onCancel={() => setIsVisible(false)}// para actualizar el editor en editpublicationform {() => setIsVisible(false), window.location.reload()}

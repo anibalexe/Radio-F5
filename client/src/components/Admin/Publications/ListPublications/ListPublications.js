@@ -29,6 +29,7 @@ import {
   DeleteOutlined,
   EditOutlined,
   UserAddOutlined,
+  FileTextOutlined,
 } from "@ant-design/icons";
 
 import "./ListPublications.scss";
@@ -47,7 +48,7 @@ export default function ListPublication(props) {
     <Card className="list-publications__card">
       <div className="list-publications__card-header">
         <Button className="button" type="primary" onClick={toPublicationAdd}>
-          <UserAddOutlined />
+        <FileTextOutlined />
           Agregar Publicación{" "}
         </Button>
       </div>

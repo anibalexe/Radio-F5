@@ -61,8 +61,26 @@ function getSecondaryPublicationsVisitor(req, res) {
     if (!publications) {
       res.status(400).send({ message: "No se encontro ninguna publicación." });
     } else {
-      const secondaryPublications = [publications[publications.length-2], publications[publications.length-3], publications[publications.length-4], publications[publications.length-5]]
-      res.status(200).send({ secondaryPublications });
+      if(publications.length==0){
+        res.status(400).send({ message: "No se encontro ninguna publicación." });
+      }
+      if(publications.length==2){
+        const secondaryPublications = [publications[publications.length-2]]
+        res.status(200).send({ secondaryPublications });
+      }
+      if(publications.length==3){
+        const secondaryPublications = [publications[publications.length-2],  publications[publications.length-3]]
+        res.status(200).send({ secondaryPublications });
+      }
+      if(publications.length==4){
+        const secondaryPublications = [publications[publications.length-2],  publications[publications.length-3], publications[publications.length-4] ]
+        res.status(200).send({ secondaryPublications });
+      }
+      if(publications.length>=5){
+        const secondaryPublications = [publications[publications.length-2],  publications[publications.length-3], publications[publications.length-4], publications[publications.length-5] ]
+        res.status(200).send({ secondaryPublications });
+      }
+      //res.status(200).send({ secondaryPublications });
     }
   });
 }
@@ -82,7 +100,6 @@ function getImage(req, res){
   });
 
 }
-
 
 function deletePublication(req, res) {
   const { id } = req.params;
@@ -115,7 +132,7 @@ function updatePublication(req, res) {
           .status(404)
           .send({ message: "No se ha encontrado ningún usuario." });
       } else {
-        res.status(200).send({ message: "Usuario actualizado correctamente." });
+        res.status(200).send({ message: "Publicación actualizada correctamente." });
       }
     }
   });
@@ -192,6 +209,34 @@ function uploadImage(req, res) {
   });
 }
 
+function addViewToPublication(req, res){
+  const publicationData = req.body;
+  const params = req.params;
+
+  publicationData.views = 1;
+
+  console.log(publicationData);
+  console.log(params);
+  console.log(params.id);
+
+  Publication.findByIdAndUpdate({ _id: params.id }, publicationData, (err, publicationUpdate) => {
+    console.log(publicationUpdate);
+    if (err) {
+      res.status(500).send({ message: "Error del servidor." });
+    } else {
+      if (!publicationUpdate) {
+        res
+          .status(404)
+          .send({ message: "No se ha encontrado ningúna publicacion." });
+      } else {
+        res.status(200).send({ message: "Publicacion actualizada correctamente." });
+      }
+    }
+  });
+}
+
+//}
+
 module.exports = {
   publicationAdd,
   deletePublication,
@@ -203,5 +248,6 @@ module.exports = {
   getSecondaryPublicationsVisitor,
   uploadImage,
   getImage,
+  addViewToPublication,
 };
 

@@ -3,25 +3,26 @@ import {List} from "antd";
 import MostViewPreview from "../MostViewedPreview";
 
 export default function ListMostViewed(props){
-    const { publications } = props;
+    const { lastPublications } = props;
+
     return (
       <div>
-        <Publications publications={publications} />
+        <Publications lastPublications={lastPublications} />
       </div>
     );
   }
   
   function Publications(props) {
-    const { publications } = props;
+    const { lastPublications } = props;
     return (
       <List
         itemLayout="vertical"
         size="large"
-        dataSource={publications}
+        dataSource={lastPublications}
         /*footer={
         }*/
         renderItem={(publication) => 
-            <Publication publication={publication}/>
+           <Publication publication={publication}/>
          }
       />
     );

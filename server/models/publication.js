@@ -12,6 +12,7 @@ const PublicationSchema = Schema({
     creationDate: Date,
     modificationDate: Date,
     //publicationDate: Date,
+    views: Number,
 })
 
 

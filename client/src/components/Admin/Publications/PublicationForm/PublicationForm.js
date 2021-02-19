@@ -30,6 +30,7 @@ import {
   LockOutlined,
   MailOutlined,
   UserAddOutlined,
+  FileAddOutlined,
 } from "@ant-design/icons";
 import FormItem from "antd/lib/form/FormItem";
 import { getAccessTokenApi } from "../../../../api/auth";
@@ -98,7 +99,7 @@ export default function PublicationForm() {
     const visibilityVal = inputs.visibility;
     const sectionVal = inputs.section;
     inputs.creationDate = new Date();
-
+    
     if (
       !titleVal ||
       !subtitleVal ||
@@ -186,9 +187,9 @@ function UploadImage(props) {
           <div className="upload-image" {...getRootProps()}>
             <input {...getInputProps()} />
             {isDragActive ? (
-              <Avatar size={150} src={NoImage} />
+              <Avatar shape="square" size={200} src={NoImage} />
             ) : (
-              <Avatar size={150} src={imageUrl ? imageUrl : NoImage} />
+              <Avatar shape="square" size={200} src={imageUrl ? imageUrl : NoImage} />
             )}
           </div>
         </Card>
@@ -253,7 +254,7 @@ function AddForm(props) {
         </Col>
 
         <Col className="publication-form__row__col" flex={1}>
-          <Card
+          <Row><Col flex={2}>          <Card
             type="inner"
             size="small"
             title="Visibilidad"
@@ -267,6 +268,8 @@ function AddForm(props) {
               </RadioGroup>
             </Form.Item>
           </Card>
+          </Col>
+          <Col flex={3}>
 
           <Card
             type="inner"
@@ -282,7 +285,8 @@ function AddForm(props) {
                 <Radio value={4}>Deporte</Radio>
               </RadioGroup>
             </Form.Item>
-          </Card>
+          </Card></Col></Row>
+
         </Col>
       </Row>
 
@@ -293,7 +297,7 @@ function AddForm(props) {
               htmlType="submit"
               className="publication-form__row__col__button"
             >
-              <UserAddOutlined />
+             <FileAddOutlined />
               Agregar publicación
             </Button>
           </Form.Item>

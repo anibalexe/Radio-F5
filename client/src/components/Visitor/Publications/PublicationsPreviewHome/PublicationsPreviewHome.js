@@ -12,7 +12,7 @@ export default function PublicationsPreviewHome(props) {
 
   return (
     <>
-      <Row className="row-principal" >
+      <Row className="row-principal">
         <PublicationPreviewPrincipal
           publicationPrincipal={publicationPrincipal}
         />
@@ -20,16 +20,26 @@ export default function PublicationsPreviewHome(props) {
 
       <Row className="row-secondary">
         <List
-          grid={{ gutter: 8, column: 2 }}
+          size="small"
+          //grid={{ gutter: 8, column: 2 }}
+          grid={{
+            gutter: 16,
+            xs: 1,
+            sm: 1,
+            md: 2,
+            lg: 2,
+            xl: 2,
+            xxl: 2,
+            column: 2
+          }}
           dataSource={publications}
           renderItem={(publication) => (
             <List.Item>
-              <PublicationPreview publication={publication} />
+             <div className="row-secondary__item" ><PublicationPreview publication={publication} /></div>
             </List.Item>
           )}
         />
       </Row>
-
     </>
   );
 }

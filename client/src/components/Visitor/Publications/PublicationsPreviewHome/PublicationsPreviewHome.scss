@@ -6,4 +6,9 @@
 
 .row-secondary{
     margin-top: 10px;
+    &__item{
+        //text-align: center;
+        //background-color: yellow;
+        max-width: 400px;
+    }
 }

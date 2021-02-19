@@ -41,9 +41,10 @@ export default function MostViewedPreview(props) {
         <List.Item
           key={publication.title}
           actions={[
-            moment(publication.creationDate).calendar() +
-              ` por ` +
-              publication.author,
+            publication.section==1?<i>{"Nacional"}</i>:
+            publication.section==2?<i>{"Internacional"}</i>:
+            publication.section==3?<i>{"Ciencia"}</i>:
+            publication.section==4?<i>{"Deportes"}</i>:"Otros"
           ]}
           //extra={<img width={272} alt="logo" src={image ? image : NoImage} />}
         >

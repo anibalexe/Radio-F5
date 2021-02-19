@@ -40,6 +40,7 @@ export default function PublicationPreview(props) {
       publication.section==2?window.location.href=`/international/${publication._id}`:
       publication.section==3?window.location.href=`/science/${publication._id}`:
       publication.section==4?window.location.href=`/sports/${publication._id}`:window.location.reload()
+      //funcionIncrementar(publication._id);
     }}>
      <List.Item
       key={publication.title}
@@ -68,4 +69,10 @@ export default function PublicationPreview(props) {
     </>
   );
 }
+
+/*function funcionIncrementar(publication._id){
+  useEffect(()=>{
+    incrementarApi(publication._id);
+  })
+}*/
 

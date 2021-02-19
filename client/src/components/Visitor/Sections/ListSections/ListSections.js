@@ -39,7 +39,7 @@ function Publication(props) {
   const { publication } = props;
   return (
     <>
-      {publication.visibility==1?<PublicationPreview publication={publication} />: <></>}
+      {publication.visibility==1?<PublicationPreview publication={publication} />:<></>}
     </>
   );
 }

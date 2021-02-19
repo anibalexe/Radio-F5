@@ -134,6 +134,35 @@ export function getSecondaryPublicationsVisitorApi() {
     });
 }
 
+export function getMostViewedPublicationBySectionVisitorApi(section) {
+  const url = `${basePath}/${apiVersion}/getPublicationsVisitor`;
+
+  const params = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  return fetch(url, params)
+    .then((response) => {
+      return response.json();
+    })
+    .then((result) => {
+      return getLastPublicationBySection(result, section)
+    })
+    .catch((err) => {
+      return err.message;
+    });
+}
+
+function getLastPublicationBySection(result, section) {
+  const result2 = result.publications.filter(
+    (publications) => publications.section == section
+  );
+  return (result2[result2.length-1]);
+}
+
 export function getPublicationsSectionVisitorApi(section) {
   const url = `${basePath}/${apiVersion}/getPublicationsVisitor`;
 
@@ -241,9 +270,33 @@ export function getImageApi(imageName) {
     });
 }
 
+export function addViewToPublicationApi(publication, publicationId) {
+    const url = `${basePath}/${apiVersion}/addViewToPublication/${publicationId}`;
+    
+    const params = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(publication)
+    };
+  
+    return fetch(url, params)
+      .then(response => {
+        return response.json();
+      })
+      .then(result => {
+        return result;
+      })
+      .catch(err => {
+        return err.message;
+      });
+}
+
 function getPublicationBySection(result, section) {
   const result2 = result.publications.filter(
     (publications) => publications.section == section
   );
   return result2;
 }
+

@@ -17,6 +17,7 @@ api.put("/updatePublication/:id", [md_auth.ensureAuth], PublicationController.up
 api.get("/getPublicationVisitor/:id", PublicationController.getPublicationVisitor);
 api.put("/uploadImage/:id", [md_auth.ensureAuth, md_upload_image], PublicationController.uploadImage);
 api.get("/getImage/:imageName", PublicationController.getImage);
+api.put("/addViewToPublication/:id", PublicationController.addViewToPublication);
 
 module.exports = api;
 
