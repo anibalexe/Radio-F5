@@ -19,9 +19,7 @@ export default function SportsPublication() {
 
   return (
     <>
-    <Card>
       <Publication publication={publication} />
-    </Card>
     </>
   );
 }

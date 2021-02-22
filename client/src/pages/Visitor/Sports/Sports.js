@@ -16,7 +16,6 @@ export default function Sports() {
     });
   });
 
-  console.log(publications);
   return (
     <>
       <Row className="row">

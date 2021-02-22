@@ -2,7 +2,7 @@ import React from "react";
 import { Layout } from "antd";
 //Se importa 'LayoutAdmin.scss' que contiene las diversas
 //configuraciones de diseño del Layout de Admin.
-import "./LayoutAdmin.scss";
+import "./LayoutContentAdmin.scss";
 //Se importa el modulo 'react-router-dom' que permite trabajar con las
 //rutas en React.
 import { Route, Redirect } from "react-router-dom";
@@ -11,11 +11,7 @@ import MenuTop from "../components/Admin/MenuTop";
 import useAuth from "../hooks/useAuth";
 import BarTop from "../components/Global/BarTop";
 
-import {ADMIN_ID, ACCESS_TOKEN} from "../utils/constants";
-import { getUserApi } from "../api/admin";
-
-
-export default function LayoutAdmin(props) {
+export default function LayoutContentAdmin(props) {
   //Aplica destruturing a props para obtener las rutas.
   const { routes } = props;
   //Aplica destructuring a Layout para obtener Header, content y Footer.
@@ -26,9 +22,6 @@ export default function LayoutAdmin(props) {
 
   //esto es provisorio hasta el uso de tokens
   //const user = "juan";
-
-  //console.log(getUserApi(localStorage.getItem(ACCESS_TOKEN), localStorage.getItem(ADMIN_ID)));
-  
 
   if (!user && !isLoading) {
     return (

@@ -6,6 +6,7 @@ import draftToHtml from "draftjs-to-html";
 import { publicationAddApi, uploadImageApi } from "../../../../api/publication";
 import { useDropzone } from "react-dropzone";
 import NoImage from "../../../../assets/img/png/no-image.png";
+import { DatePicker,TimePicker } from 'antd';
 
 import {
   Form,
@@ -35,6 +36,9 @@ import {
 import FormItem from "antd/lib/form/FormItem";
 import { getAccessTokenApi } from "../../../../api/auth";
 
+import moment from "moment";
+import "moment/locale/es";
+
 const RadioGroup = Radio.Group;
 
 export default function PublicationForm() {
@@ -50,6 +54,7 @@ export default function PublicationForm() {
     visibility: "",
     section: "",
     creationDate: "",
+    views: "",
   });
 
   const [formValid, setFormValid] = useState({
@@ -99,11 +104,12 @@ export default function PublicationForm() {
     const visibilityVal = inputs.visibility;
     const sectionVal = inputs.section;
     inputs.creationDate = new Date();
-    
+    inputs.views = 0;
+
     if (
       !titleVal ||
       !subtitleVal ||
-      image==null ||
+      image == null ||
       !contentVal ||
       !authorVal ||
       !visibilityVal ||
@@ -112,19 +118,18 @@ export default function PublicationForm() {
       notification["error"]({
         message: "Todos los campos son obligatorios.",
       });
-    }else{
+    } else {
       publicationAddApi(token, inputs).then((result) => {
         if (typeof image.file === "object") {
           uploadImageApi(token, image.file, result.publication._id).then(() => {
             notification["success"]({
               message: "Publicación agregada con exito.",
             });
-            window.location.href="/admin/publications";
+            window.location.href = "/admin/publications";
           });
         }
       });
     }
-
   };
 
   return (
@@ -189,7 +194,11 @@ function UploadImage(props) {
             {isDragActive ? (
               <Avatar shape="square" size={200} src={NoImage} />
             ) : (
-              <Avatar shape="square" size={200} src={imageUrl ? imageUrl : NoImage} />
+              <Avatar
+                shape="square"
+                size={200}
+                src={imageUrl ? imageUrl : NoImage}
+              />
             )}
           </div>
         </Card>
@@ -254,39 +263,58 @@ function AddForm(props) {
         </Col>
 
         <Col className="publication-form__row__col" flex={1}>
-          <Row><Col flex={2}>          <Card
-            type="inner"
-            size="small"
-            title="Visibilidad"
-            className="publication-form__row__col__card"
-          >
-            <Form.Item>
-              <RadioGroup name="visibility">
-                <Radio value={1}>Publico</Radio>
-                <Radio value={2}>Privado</Radio>
-                <Radio value={3}>Oculto</Radio>
-              </RadioGroup>
-            </Form.Item>
-          </Card>
-          </Col>
-          <Col flex={3}>
+          <Row>
+            <Col flex={1}>
+              {" "}
+              <Card
+                type="inner"
+                size="small"
+                title="Visibilidad"
+                className="publication-form__row__col__card"
+              >
+                <Form.Item>
+                  <RadioGroup name="visibility">
+                    <Radio value={1}>Publico</Radio>
 
-          <Card
-            type="inner"
-            size="small"
-            title="Seccion"
-            className="publication-form__row__col__card"
-          >
-            <Form.Item>
-              <RadioGroup name="section">
-                <Radio value={1}>Nacional</Radio>
-                <Radio value={2}>Internacional</Radio>
-                <Radio value={3}>Ciencia</Radio>
-                <Radio value={4}>Deporte</Radio>
-              </RadioGroup>
-            </Form.Item>
-          </Card></Col></Row>
-
+                    <Radio value={3}>Oculto</Radio>
+                  </RadioGroup>
+                </Form.Item>
+              </Card>
+            </Col>
+            <Col flex={3}>
+              <Card
+                type="inner"
+                size="small"
+                title="Seccion"
+                className="publication-form__row__col__card"
+              >
+                <Form.Item>
+                  <RadioGroup name="section">
+                    <Radio value={1}>Nacional</Radio>
+                    <Radio value={2}>Internacional</Radio>
+                    <Radio value={3}>Ciencia</Radio>
+                    <Radio value={4}>Deporte</Radio>
+                  </RadioGroup>
+                </Form.Item>
+              </Card>
+            </Col>
+            <Col flex={1}>
+              {" "}
+              <Card
+                type="inner"
+                size="small"
+                title="Fecha de publicacion"
+                className="publication-form__row__col__card"
+              >
+                <Form.Item>
+                  <DatePicker/>
+                </Form.Item>
+                <Form.Item>
+                  <TimePicker defaultValue={moment('00:00', 'HH:mm:ss')} />
+                </Form.Item>
+              </Card>
+            </Col>
+          </Row>
         </Col>
       </Row>
 
@@ -297,7 +325,7 @@ function AddForm(props) {
               htmlType="submit"
               className="publication-form__row__col__button"
             >
-             <FileAddOutlined />
+              <FileAddOutlined />
               Agregar publicación
             </Button>
           </Form.Item>

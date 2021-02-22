@@ -92,7 +92,7 @@ function Publications(props) {
     );
     setModalContent(
       <EditPublicationForm
-      publication={publication}
+        publication={publication}
         setIsVisibleModal={setIsVisibleModal}
         setReloadPublications={setReloadPublications}
       />
@@ -104,6 +104,12 @@ function Publications(props) {
       className="publications"
       itemLayout="horizontal"
       dataSource={publications}
+      pagination={{
+        onChange: (page) => {
+          console.log(page);
+        },
+        pageSize: 10,
+      }}
       renderItem={(publication) => (
         <Publication publication={publication} editPublication={editPublication} setReloadPublications={setReloadPublications} />
       )}
@@ -182,7 +188,8 @@ function Publication(props) {
               publication.section==3 ? "Ciencia" : 
               publication.section==4 ? "Deportes" :"..." } | 
               Creado ${publication.creationDate ? moment(publication.creationDate).calendar() : "..."} -
-              Modificado ${publication.modificationDate ? moment(publication.modificationDate).calendar() : "..."}  
+              Modificado ${publication.modificationDate ? moment(publication.modificationDate).calendar() : "..."} |  
+              Vista ${publication.views} ${publication.views==1 ? "vez": "veces"} 
             `}
         />
       </List.Item>

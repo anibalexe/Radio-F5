@@ -6,7 +6,7 @@ const publication = require("../models/publication");
 function publicationAdd(req, res) {
   const publication = new Publication();
 
-  const { title, subtitle, image, content, author, visibility, section, creationDate } = req.body;
+  const { title, subtitle, image, content, author, visibility, section, creationDate, views } = req.body;
   publication.title = title;
   publication.subtitle = subtitle;
   publication.image = image;
@@ -15,6 +15,7 @@ function publicationAdd(req, res) {
   publication.visibility = visibility;
   publication.section = section;
   publication.creationDate = creationDate;
+  publication.views = views;
 
   publication.save((err, publicationStored) => {
     if (!publicationStored) {
@@ -212,15 +213,10 @@ function uploadImage(req, res) {
 function addViewToPublication(req, res){
   const publicationData = req.body;
   const params = req.params;
-
-  publicationData.views = 1;
-
-  console.log(publicationData);
-  console.log(params);
-  console.log(params.id);
+  const num = publicationData.views;
+  publicationData.views= num+1;
 
   Publication.findByIdAndUpdate({ _id: params.id }, publicationData, (err, publicationUpdate) => {
-    console.log(publicationUpdate);
     if (err) {
       res.status(500).send({ message: "Error del servidor." });
     } else {

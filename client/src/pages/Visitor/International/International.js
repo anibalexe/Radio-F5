@@ -17,7 +17,6 @@ export default function International() {
     });
   });
 
-  console.log(publications);
   return (
     <>
       <Row className="row">

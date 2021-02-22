@@ -38,28 +38,31 @@ export default function Home() {
       setLastSportsPublication(response);
     })
   })
-  
+
   const lastPublications = [];
   if(lastNationalPublication){
-    if(lastNationalPublication.visibility==1){
+    //if(lastNationalPublication.visibility==1){
       lastPublications.push(lastNationalPublication);
-    }
+    //}
   }
   if(lastInternationalPublication){
-    if(lastInternationalPublication.visibility==1){
+    //if(lastInternationalPublication.visibility==1){
      lastPublications.push(lastInternationalPublication);
-    }
+    //}
   }
   if(lastSciencePublication){
-    if(lastSciencePublication.visibility==1){
+    //if(lastSciencePublication.visibility==1){
      lastPublications.push(lastSciencePublication)
-    }
+    //}
   }
   if(lastSportsPublication){
-    if(lastSportsPublication.visibility==1){
+    //if(lastSportsPublication.visibility==1){
       lastPublications.push(lastSportsPublication);
-    }
+    //}
   }
+
+/*console.log(lastPublications);
+console.log(publicationPrincipal);*/
 
   return (
 <>

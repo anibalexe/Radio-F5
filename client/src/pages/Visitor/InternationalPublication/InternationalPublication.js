@@ -19,9 +19,7 @@ export default function InternationalPublication() {
 
   return (
     <>
-    <Card>
       <Publication publication={publication} />
-    </Card>
     </>
   );
 }

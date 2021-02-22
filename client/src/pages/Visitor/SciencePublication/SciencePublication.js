@@ -19,9 +19,7 @@ export default function SciencePublication() {
 
   return (
     <>
-    <Card>
       <Publication publication={publication} />
-    </Card>
     </>
   );
 }

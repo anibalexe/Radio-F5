@@ -22,7 +22,7 @@ function signIn(req, res) {
           } else if (!check) {
             res.status(404).send({ message: "La contraseña es incorrecta." });
           } else {
-            if (adminStored.active == 2) {
+            if (adminStored.status == 2) {
               res
                 .status(200)
                 .send({ code: 200, message: "El usuario no se ha activado." });

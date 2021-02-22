@@ -107,14 +107,14 @@ export default function EditPublicationForm(props) {
      updatePublicationApi(token, publicationUpdate, publication._id).then((result) => {
         if (typeof image.file === "object") {
           uploadImageApi(token, image.file, publication._id).then(() => {
-            notification["success"]({
-              message: "Publicación editada con exito.",
-            });
-            setIsVisibleModal(false);
-            setReloadPublications(true);
-            window.location.href="/admin/publications";
           });
         }
+        notification["success"]({
+          message: "Publicación editada con exito.",
+        });
+        setIsVisibleModal(false);
+        setReloadPublications(true);
+        window.location.href="/admin/publications";
       });
     }
   };
@@ -302,7 +302,7 @@ function EditForm(props) {
                     value={publicationData.visibility}
                   >
                     <Radio value="1">Publico</Radio>
-                    <Radio value="2">Privado</Radio>
+
                     <Radio value="3">Oculto</Radio>
                   </RadioGroup>
                 </Form.Item>

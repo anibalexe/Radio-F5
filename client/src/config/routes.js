@@ -9,6 +9,13 @@ import AdminPrograms from "../pages/Admin/Programs";
 import AdminProgramAdd from "../pages/Admin/ProgramAdd";
 import AdminPublicities from "../pages/Admin/Publicities";
 
+//Componentes del Gestor de Contenido
+import ContentAdminProfile from "../pages/Admin/Profile/";
+import ContentAdminSignIn from "../pages/Admin";
+import ContentAdminPublications from "../pages/Admin/Publications";
+import ContentAdminPublicationAdd from "../pages/Admin/PublicationAdd";
+import ContentAdminPrograms from "../pages/Admin/Programs";
+import ContentAdminProgramAdd from "../pages/Admin/ProgramAdd";
 
 //Componentes del Visitante
 import VisitorHome from "../pages/Visitor/Home";
@@ -25,14 +32,15 @@ import VisitorProgramsPublication from "../pages/Visitor/ProgramsPublication";
 
 import LayoutAdmin from "../layouts/LayoutAdmin";
 import LayoutBasic from "../layouts/LayoutBasic";
+import LayoutContentAdmin from "../layouts/LayoutContentAdmin";
 
-import {PUBLICATION_ID} from "../utils/constants";
-import {PROGRAM_ID} from "../utils/constants";
+import {PUBLICATION_ID, PROGRAM_ID, ADMIN_PRIVILEGE} from "../utils/constants";
 
 /*
     Se utiliza un arreglo para definir cada una de las rutas. 
     El arreglo tiene a su vez otro arreglo que contiene subrutas.
 */
+
 const routes = [
   {
     path: "/admin",

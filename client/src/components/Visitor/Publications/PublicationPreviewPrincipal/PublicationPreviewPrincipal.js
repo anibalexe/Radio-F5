@@ -3,7 +3,7 @@ import { Space, Card } from "antd";
 import { PUBLICATION_ID } from "../../../../utils/constants";
 import NoImage from "../../../../assets/img/png/no-image.png";
 import {
-  getImageApi,
+  getImageApi, addViewToPublicationApi,
 } from "../../../../api/publication";
 
 import "./PublicationPreviewPrincipal.scss";
@@ -23,6 +23,10 @@ export default function PublicationPreviewPrincipal(props) {
     }
   }, [publicationPrincipal]);
 
+  const addView = ()=> {
+    const result = addViewToPublicationApi(publicationPrincipal, publicationPrincipal._id);
+  }
+
   return (
     <>
         <Card
@@ -30,6 +34,7 @@ export default function PublicationPreviewPrincipal(props) {
           className="card-principal"
           onClick={()=> {
             localStorage.setItem(PUBLICATION_ID, publicationPrincipal._id);
+            addView();
             publicationPrincipal.section==1?window.location.href=`/national/${publicationPrincipal._id}`:
             publicationPrincipal.section==2?window.location.href=`/international/${publicationPrincipal._id}`:
             publicationPrincipal.section==3?window.location.href=`/science/${publicationPrincipal._id}`:

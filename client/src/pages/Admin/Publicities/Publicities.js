@@ -1,50 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Menu, Button, Table } from "antd";
+
+import { getAccessTokenApi } from "../../../api/auth";
+import { getUsersApi, getUserApi } from "../../../api/admin";
+import {ADMIN_ID} from "../../../utils/constants";
 
 import "./Publicities.scss";
 
 export default function Publicities() {
-  const dataSource = [
-    {
-      key: "1",
-      name: "Mike",
-      age: 32,
-      address: "10 Downing Street",
-    },
-    {
-      key: "2",
-      name: "John",
-      age: 42,
-      address: "10 Downing Street",
-    },
-  ];
+  const [ user, setUser] = useState([]);
+  const token = getAccessTokenApi();
 
-  const columns = [
-    {
-      title: "Titular",
-      dataIndex: "headline",
-      key: "headline",
-    },
-    {
-      title: "Fecha",
-      dataIndex: "date",
-      key: "date",
-    },
-    {
-      title: "Link",
-      dataIndex: "link",
-      key: "link",
-    },
-    {
-      title: "Acción",
-      dataIndex: "action",
-      key: "action",
-    },
-  ];
+  useEffect(()=>{
+    getUserApi(token, localStorage.getItem(ADMIN_ID)).then(response => {
+      setUser(response.userData);
+    })
+    if(user.privilege=="2"){
+     window.location.href = "/admin/profile";
+    }
+  });
+
   return (
     <>
-      <Button className="button" type="primary" onClick={toPublicityAdd}>Agregar Publicidad </Button>
-      <Table className="table" dataSource={dataSource} columns={columns} />
+      {user.privilege=="1" ? <></> : <></>}
     </>
   );
 }

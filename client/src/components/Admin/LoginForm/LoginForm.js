@@ -30,7 +30,7 @@ export default function LoginForm() {
         message: result.message,
       });
     } else {
-      const { accessToken, refreshToken, _id} = result;
+      const { accessToken, refreshToken, _id, privilege} = result;
       localStorage.setItem(ACCESS_TOKEN, accessToken);
       localStorage.setItem(REFRESH_TOKEN, refreshToken);
       localStorage.setItem(ADMIN_ID, _id);

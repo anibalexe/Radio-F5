@@ -7,7 +7,7 @@ import moment from "moment";
 import "moment/locale/es";
 
 import {
-  getImageApi,
+  getImageApi, addViewToPublicationApi,
 } from "../../../../api/publication";
 
 import NoImage from "../../../../assets/img/png/no-image.png";
@@ -28,6 +28,9 @@ export default function PublicationPreview(props) {
     }
   }, [publication]);
 
+const addView = ()=> {
+    const result = addViewToPublicationApi(publication, publication._id);
+}
 
   return (
     <>
@@ -36,11 +39,11 @@ export default function PublicationPreview(props) {
     className="card-publication"
     onClick={()=> {
       localStorage.setItem(PUBLICATION_ID, publication._id);
+      addView();
       publication.section==1?window.location.href=`/national/${publication._id}`:
       publication.section==2?window.location.href=`/international/${publication._id}`:
       publication.section==3?window.location.href=`/science/${publication._id}`:
       publication.section==4?window.location.href=`/sports/${publication._id}`:window.location.reload()
-      //funcionIncrementar(publication._id);
     }}>
      <List.Item
       key={publication.title}
@@ -70,9 +73,4 @@ export default function PublicationPreview(props) {
   );
 }
 
-/*function funcionIncrementar(publication._id){
-  useEffect(()=>{
-    incrementarApi(publication._id);
-  })
-}*/
 
