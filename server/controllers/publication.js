@@ -6,7 +6,7 @@ const publication = require("../models/publication");
 function publicationAdd(req, res) {
   const publication = new Publication();
 
-  const { title, subtitle, image, content, author, visibility, section, creationDate, views } = req.body;
+  const { title, subtitle, image, content, author, visibility, section, creationDate, publicationDate, publicationTime, views } = req.body;
   publication.title = title;
   publication.subtitle = subtitle;
   publication.image = image;
@@ -15,6 +15,8 @@ function publicationAdd(req, res) {
   publication.visibility = visibility;
   publication.section = section;
   publication.creationDate = creationDate;
+  publication.publicationDate = publicationDate;
+  publication.publicationTime = publicationTime;
   publication.views = views;
 
   publication.save((err, publicationStored) => {
@@ -231,6 +233,26 @@ function addViewToPublication(req, res){
   });
 }
 
+function setPublicPublication(req, res){
+  const publicationData = req.body;
+  const params = req.params;
+  publicationData.visibility="1";
+
+  Publication.findByIdAndUpdate({ _id: params.id }, publicationData, (err, publicationUpdate) => {
+    if (err) {
+      res.status(500).send({ message: "Error del servidor." });
+    } else {
+      if (!publicationUpdate) {
+        res
+          .status(404)
+          .send({ message: "No se ha encontrado ningúna publicacion." });
+      } else {
+        res.status(200).send({ message: "Publicacion actualizada correctamente." });
+      }
+    }
+  });
+}
+
 //}
 
 module.exports = {
@@ -245,5 +267,6 @@ module.exports = {
   uploadImage,
   getImage,
   addViewToPublication,
+  setPublicPublication,
 };
 

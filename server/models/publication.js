@@ -11,7 +11,7 @@ const PublicationSchema = Schema({
     section: String,
     creationDate: Date,
     modificationDate: Date,
-    //publicationDate: Date,
+    publicationDate: Date,
     views: Number,
 })
 

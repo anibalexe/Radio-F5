@@ -6,7 +6,11 @@ import draftToHtml from "draftjs-to-html";
 import { publicationAddApi, uploadImageApi } from "../../../../api/publication";
 import { useDropzone } from "react-dropzone";
 import NoImage from "../../../../assets/img/png/no-image.png";
-import { DatePicker,TimePicker } from 'antd';
+import { TimePicker } from 'antd';
+
+import DatePicker from "react-datepicker";
+
+import { registerLocale, setDefaultLocale } from  "react-datepicker";
 
 import {
   Form,
@@ -25,6 +29,7 @@ import {
 } from "antd";
 
 import "./PublicationForm.scss";
+import "react-datepicker/dist/react-datepicker.css";
 
 import {
   UserOutlined,
@@ -38,12 +43,15 @@ import { getAccessTokenApi } from "../../../../api/auth";
 
 import moment from "moment";
 import "moment/locale/es";
+import es from 'date-fns/locale/es';
+registerLocale('es', es);
 
 const RadioGroup = Radio.Group;
 
 export default function PublicationForm() {
   const [image, setImage] = useState(null);
   const [userData, setUserData] = useState({});
+  const [date, setDate] = useState(new Date());
 
   const [inputs, setInputs] = useState({
     title: "",
@@ -54,6 +62,7 @@ export default function PublicationForm() {
     visibility: "",
     section: "",
     creationDate: "",
+    publicationDate: "",
     views: "",
   });
 
@@ -65,6 +74,7 @@ export default function PublicationForm() {
     visibility: false,
     section: false,
     creationDate: false,
+    publicationDate: false,
   });
 
   const [stateEditor, setStateEditor] = useState({
@@ -103,7 +113,9 @@ export default function PublicationForm() {
     const authorVal = inputs.author;
     const visibilityVal = inputs.visibility;
     const sectionVal = inputs.section;
+    //Fecha de creacion y fecha de publicacion separada en fecha y hora.
     inputs.creationDate = new Date();
+    inputs.publicationDate=date;
     inputs.views = 0;
 
     if (
@@ -118,7 +130,7 @@ export default function PublicationForm() {
       notification["error"]({
         message: "Todos los campos son obligatorios.",
       });
-    } else {
+    }else {
       publicationAddApi(token, inputs).then((result) => {
         if (typeof image.file === "object") {
           uploadImageApi(token, image.file, result.publication._id).then(() => {
@@ -145,6 +157,8 @@ export default function PublicationForm() {
         changeForm={changeForm}
         add={add}
         onEditorStateChange={onEditorStateChange}
+        date={date}
+        setDate={setDate}
       />
     </Card>
   );
@@ -208,7 +222,9 @@ function UploadImage(props) {
 }
 
 function AddForm(props) {
-  const { inputs, setInputs, changeForm, add, onEditorStateChange } = props;
+  const {date, setDate, inputs, setInputs, changeForm, add, onEditorStateChange } = props;
+  
+
   return (
     <Form className="publication-form" onChange={changeForm} onFinish={add}>
       <Row className="publication-form__row" type="flex">
@@ -307,10 +323,16 @@ function AddForm(props) {
                 className="publication-form__row__col__card"
               >
                 <Form.Item>
-                  <DatePicker/>
-                </Form.Item>
-                <Form.Item>
-                  <TimePicker defaultValue={moment('00:00', 'HH:mm:ss')} />
+                  <DatePicker
+                  locale="es" 
+                  selected={date} 
+                  showTimeSelect
+                  timeFormat="HH:mm"
+                  injectTimes={[moment().hours(23).minutes(59)]}
+                  dateFormat="MMMM d, yyyy h:mm aa"
+                  onChange={date=>{
+                    setDate(date)
+                  }}/>
                 </Form.Item>
               </Card>
             </Col>

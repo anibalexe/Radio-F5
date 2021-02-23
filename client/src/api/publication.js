@@ -293,6 +293,29 @@ export function addViewToPublicationApi(publication, publicationId) {
       });
 }
 
+export function setPublicPublicationApi(publication, publicationId) {
+  const url = `${basePath}/${apiVersion}/setPublicPublication/${publicationId}`;
+  
+  const params = {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(publication)
+  };
+
+  return fetch(url, params)
+    .then(response => {
+      return response.json();
+    })
+    .then(result => {
+      return result;
+    })
+    .catch(err => {
+      return err.message;
+    });
+}
+
 function getPublicationBySection(result, section) {
   const result2 = result.publications.filter(
     (publications) => publications.section == section
